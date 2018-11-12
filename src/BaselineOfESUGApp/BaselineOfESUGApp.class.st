@@ -10,9 +10,13 @@ BaselineOfESUGApp >> baseline: spec [
 	spec
 		for: #common
 		do: [ self setUpDependencies: spec.
-			spec package: 'ESUGApp-Example' with: [ spec requires: #('Parasol') ];
+			spec package: 'ESUGApp-DB' with: [ spec requires: #('Parasol') ];
+			package: 'ESUGApp-Library' with: [ spec requires: #('Parasol') ];			
+			package: 'ESUGApp-Models' with: [ spec requires: #('Parasol') ];
+			package: 'ESUGApp-Session' with: [ spec requires: #('Parasol') ];
+			package: 'ESUGApp-Session' with: [ spec requires: #('Parasol') ];
 			package: 'ESUGApp-Test' with: [ spec requires: #('Parasol') ]
-				 ].
+			]
 ]
 
 { #category : #baselines }

@@ -10,7 +10,7 @@ Class {
 
 { #category : #accessing }
 ESUGAppTest >> baseURL [
-	^ 'http://localhost:8080/webcounter'
+	^ 'http://localhost:8080/ESUG'
 ]
 
 { #category : #accessing }
