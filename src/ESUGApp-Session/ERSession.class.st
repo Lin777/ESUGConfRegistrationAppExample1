@@ -29,7 +29,7 @@ ERSession >> findUserByEmail: anEmail [
 ERSession >> initialize [
  
  super initialize.
- self database: ERRelationalDatabase new.
+ self database: ERSandstoneDatabase new.
 
 ]
 

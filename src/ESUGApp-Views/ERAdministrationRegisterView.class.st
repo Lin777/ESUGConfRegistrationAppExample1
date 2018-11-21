@@ -1,43 +1,61 @@
 Class {
 	#name : #ERAdministrationRegisterView,
 	#superclass : #WAComponent,
+	#instVars : [
+		'step1',
+		'step2',
+		'step4',
+		'registerButton',
+		'daysAssist',
+		'checkboxFood'
+	],
 	#category : #'ESUGApp-Views'
 }
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> checkboxFood [
+	^ checkboxFood
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> checkboxFood: anObject [
+	checkboxFood := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> daysAssist [
+	^ daysAssist
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> daysAssist: anObject [
+	daysAssist := anObject
+]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> food: html [
 	html div class: 'form-group'; with: [ 
 		html label: 'Food: '.
-		html div class: 'form-check form-check-inline'; with: [ 
-			"(WAHtmlCanvas brush: WAFormInputTag new) class: 'form-check-input'; type: 'checkbox'; attributeAt: 'value' put: 'option1'."
-			html label class: 'form-check-label'; with: 'Vegetarian'
+		html render: self checkboxFood.
+		].
+	"
+html div class: 'form-check form-check-inline'; with: [ 
+			html checkbox class: 'form-check-input'; attributeAt: 'value' put: 'option1'.
+			html label class: 'form-check-label'; with: '  Vegetarian'
 			 ].
 		html div class: 'form-check form-check-inline'; with: [ 
-			"(WAHtmlCanvas brush: WAFormInputTag new) class: 'form-check-input'; type: 'checkbox'; attributeAt: 'value' put: 'option1'."
-			html label class: 'form-check-label'; with: 'Vegan'
-			 ].
-		 ]
-]
-
-{ #category : #rendering }
-ERAdministrationRegisterView >> formGroup: html label: aLabel type: aType [
-	html div class: 'form-group'; with: [ 
-				html label: aLabel,':' .
-					html textInput type: aType ; class: 'form-control'; name: 'username'; attributeAt: 'placeholder' put: aLabel; attributeAt: 'required' put: ''; attributeAt: 'autofocus' put: '' ].
+			html checkbox class: 'form-check-input'; attributeAt: 'value' put: 'option1'.
+			html label class: 'form-check-label'; with: '  Vegan'
+			 ]."
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> formStep1: html [
 	html div class: 'tab-pane active'; attributeAt: 'role' put: 'tabpanel'; id: 'step1'; with: [
-		html break .
-		self formGroup: html label: 'First Name' type: 'text'.
-		self formGroup: html label: 'Last Name' type: 'text'.
-		self formGroup: html label: 'Email' type: 'text'.
-		self formGroup: html label: 'Password' type: 'password'.
-		self formGroup: html label: 'Confirm password' type: 'password'.
+		html render: self step1.
 		html unorderedList class: 'list-inline pull-right'; with: [ 
 			html listItem: [ 
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Save and continue' ] ]
+				html render: (ERButtonRegisterNextStep new id: 'next1'; yourself ) ]]
 			]
 ]
 
@@ -45,18 +63,12 @@ ERAdministrationRegisterView >> formStep1: html [
 ERAdministrationRegisterView >> formStep2: html [
 	html div class: 'tab-pane'; attributeAt: 'role' put: 'tabpanel'; id: 'step2'; with: [
 		html break .
-		self formGroup: html label: 'Address' type: 'text'.
-		self formGroup: html label: 'City' type: 'text'.
-		self formGroup: html label: 'Province/State' type: 'text'.
-		self formGroup: html label: 'Postal/ZipCode' type: 'text'.
-		self formGroup: html label: 'Facebook (URL)' type: 'text'.
-		self formGroup: html label: 'Twitter (URL)' type: 'text'.
-		self formGroup: html label: 'Home Page (URL)' type: 'text'.
+		html render: self step2.
 		html unorderedList class: 'list-inline pull-right'; with: [ 
 			html listItem: [ 
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Previous'].
-			html listItem: [
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Save and continue' ]]]
+				html render: ERButtonRegisterPrevious new.].
+			html listItem: [ 
+				html render: (ERButtonRegisterNextStep new id: 'next2'; yourself ). ]]]
 ]
 
 { #category : #rendering }
@@ -69,38 +81,84 @@ ERAdministrationRegisterView >> formStep3: html [
 		self food: html.
 		html unorderedList class: 'list-inline pull-right'; with: [ 
 			html listItem: [ 
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Previous'].
-			html listItem: [
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Save and continue' ]]]
+				html render: ERButtonRegisterPrevious new.].
+			html listItem: [ 
+				html render: (ERButtonRegisterNextStep new id: 'next3'; yourself). ]]
+		]
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> formStep4: html [
 	html div class: 'tab-pane'; attributeAt: 'role' put: 'tabpanel'; id: 'step4'; with: [
 		html break .
-		self formGroup: html label: 'Organization Name' type: 'text'.
-		self formGroup: html label: 'Address' type: 'text'.
-		self formGroup: html label: 'City' type: 'text'.
-		self formGroup: html label: 'Province/State' type: 'text'.
-		self formGroup: html label: 'Postal/ZipCode' type: 'text'.
+		html render: self step4.
 		html unorderedList class: 'list-inline pull-right'; with: [ 
 			html listItem: [ 
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Previous'].
-			html listItem: [
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Save and continue' ]]]
+				html render: ERButtonRegisterPrevious new.].
+			html listItem: [ 
+				html render: (ERButtonRegisterNextStep new id: 'next4'; yourself ). ]]]
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> formStep5: html [
 	html div class: 'tab-pane'; attributeAt: 'role' put: 'tabpanel'; id: 'step5'; with: [
 		html break .
-		html unorderedList class: 'list-inline pull-right'; with: [ 
+		html render: (ERTextInputComponent new id: 'addInfoKeywords'; name: 'addInfoKeywords'; type: 'text'; callback: [ :value | Transcript show: value asString ];label:'Keywords').
+		html render: (ERTextAreaComponent new label: 'Additional text'; id: 'addInfoAddText'; name: 'addInfoAddText'; callback: [:value | Transcript show: value asString ]).
+		html unorderedList class: 'list-inline pull-right'; with: [
 			html listItem: [ 
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Previous'].
+				html render: ERButtonRegisterPrevious new.].
+			
 			html listItem: [ 
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Skip'].
+				html render: ERButtonRegisterSkip new].
 			html listItem: [ 
-				html button type: 'button'; class: 'btn btn-primary next-step'; with: 'Save and continue' ]]]
+				html render: (ERButtonRegisterNextStep new id: 'next5'; yourself ). ]]]
+]
+
+{ #category : #rendering }
+ERAdministrationRegisterView >> formStep6: html [
+	html div
+		class: 'tab-pane';
+		attributeAt: 'role' put: 'tabpanel';
+		id: 'step6';
+		with: [ html paragraph
+				with: 'Pay by bank transfer or paypal/card. Pay in euros.'.
+			html paragraph
+				with:
+					'IMPORTANT: Bank transfers should mention "ESUG" & the registrant name(s) as a comment (e.g. "ESUG John Johnson").'.
+			html paragraph
+				with:
+					'Use the inter-country IBAN / BIC data (may need to ask your bank to process the payment).'.
+			html break.
+			html div
+				class: 'form-group';
+				with: [ html label
+						attributeAt: 'for' put: 'sel2';
+						with: 'Payment Type:'.
+					html select
+						class: 'form-control';
+						id: 'sel2';
+						with: [ html option: 'Bank transfer'.
+							html option: 'Credit Card' ] ].
+					html render: (ERTextInputComponent new id: 'reductionTicket'; name: 'reductionTicket'; type: 'text'; callback: [ :value | Transcript show: value asString  ];label:'Reduction ticket code').
+			html div
+				class: 'form-group';
+				with: [ html label
+						attributeAt: 'for' put: 'sel3';
+						with: 'Payment Type:'.
+					html select
+						class: 'form-control';
+						id: 'sel3';
+						with: [ html option: 'Dollar'.
+							html option: 'Euro' ] ].
+			html unorderedList
+				class: 'list-inline pull-right';
+				with: [ html
+						listItem: [ html render:ERButtonRegisterPrevious new ].
+					html
+						listItem: [ html render: ERButtonRegisterSkip new ].
+					html
+						listItem: [ html render: self registerButton  ] ] ]
 ]
 
 { #category : #rendering }
@@ -108,98 +166,81 @@ ERAdministrationRegisterView >> gender: html [
 	html label: 'Gender:'.
 	html div class: 'form-group'; with: [ 
 		html label class: 'radio-inline'; with:[
-			"(WAHtmlCanvas brush: WAFormInputTag new) type: 'radio'; name: 'optRadio'; with: 'Female'	"]. 
+			html radioButton name: 'optRadio'; checked: true	; with: 'Female']. 
 		html label class: 'radio-inline'; with:[
-			"(WAHtmlCanvas brush: WAFormInputTag new) type: 'radio'; name: 'optRadio'; with: 'Male'"	].]
+			html radioButton name: 'optRadio'; with: 'Male'	].]
+]
+
+{ #category : #initialization }
+ERAdministrationRegisterView >> initialize [
+	super initialize
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemDays: html [
 	html label: 'Days: '.
-	html div class: 'form-group'; with: [ 
-		html div class: 'form-check form-check-inline'; with: [ 
-			html textInput class: 'form-check-input'; type: 'checkbox'; attributeAt: 'value' put: 'option1'.
-			html label class: 'form-check-label'; with:'Monday (dd/mm/aa)'].
-		html div class: 'form-check form-check-inline'; with: [ 
-			html textInput class: 'form-check-input'; type: 'checkbox'; attributeAt: 'value' put: 'option2'.
-			html label class: 'form-check-label'; with:'Tuesday (dd/mm/aa)'].
-		html div class: 'form-check form-check-inline'; with: [ 
-			html textInput class: 'form-check-input'; type: 'checkbox'; attributeAt: 'value' put: 'option3'.
-			html label class: 'form-check-label'; with:'Wednesday (dd/mm/aa)'].
-		html div class: 'form-check form-check-inline'; with: [ 
-			html textInput class: 'form-check-input'; type: 'checkbox'; attributeAt: 'value' put: 'option4'.
-			html label class: 'form-check-label'; with:'Thursday (dd/mm/aa)'].
-		html div class: 'form-check form-check-inline'; with: [ 
-			html textInput class: 'form-check-input'; type: 'checkbox'; attributeAt: 'value' put: 'option5'.
-			html label class: 'form-check-label'; with:'Friday (dd/mm/aa)'].
-		
-		 ]
+	html div
+		class: 'form-group';
+		with: [ html render: daysAssist ].
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListAditiaonalInformation: html [
-	html listItem attributeAt: 'role' put: 'presentation'; class: 'disabled'; with: [  
-		html anchor url: '#step5';  attributeAt: 'data-toggle' put: 'tab';  attributeAt: 'aria-controls' put: 'step5'; attributeAt: 'role' put: 'tab'; attributeAt: 'title' put: 'Aditional information'; with: [ 
-			html span class: 'round-tab'; with: [ 
-				html icon class: 'glyphicon glyphicon-plus' ] ]].
+	html render: (ERTab class: 'disabled' url: 'step5' title: 'Additional information' icon: 'glyphicon glyphicon-plus' ).
+	
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListAfiliationInformation: html [
-	html listItem attributeAt: 'role' put: 'presentation'; class: 'disabled'; with: [  
-		html anchor url: '#step4';  attributeAt: 'data-toggle' put: 'tab';  attributeAt: 'aria-controls' put: 'step4'; attributeAt: 'role' put: 'tab'; attributeAt: 'title' put: 'Afiliation information'; with: [ 
-			html span class: 'round-tab'; with: [ 
-				html icon class: 'glyphicon glyphicon-briefcase' ] ]].
+html render: (ERTab class: 'disabled' url: 'step4' title: 'Afiliation information' icon: 'glyphicon glyphicon-briefcase' ).
+
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListComplete: html [
-	html listItem attributeAt: 'role' put: 'presentation'; class: 'disabled'; with: [  
-		html anchor url: '#complete';  attributeAt: 'data-toggle' put: 'tab';  attributeAt: 'aria-controls' put: 'complete'; attributeAt: 'role' put: 'tab'; attributeAt: 'title' put: 'Complete'; with: [ 
-			html span class: 'round-tab'; with: [ 
-				html icon class: 'glyphicon glyphicon-ok' ] ]].
+html render: (ERTab class: 'disabled' url: 'complete' title: 'Complete' icon: 'glyphicon glyphicon-ok' ).
+
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListConferenceOptions: html [
-	html listItem attributeAt: 'role' put: 'presentation'; class: 'disabled'; with: [  
-		html anchor url: '#step3';  attributeAt: 'data-toggle' put: 'tab';  attributeAt: 'aria-controls' put: 'step3'; attributeAt: 'role' put: 'tab'; attributeAt: 'title' put: 'Conference Options'; with: [ 
-			html span class: 'round-tab'; with: [ 
-				html icon class: 'glyphicon glyphicon-copy' ] ]].
+html render: (ERTab class: 'disabled' url: 'step3' title: 'Conference Options' icon: 'glyphicon glyphicon-copy' ).
+
+]
+
+{ #category : #rendering }
+ERAdministrationRegisterView >> itemListPaymentRegister: html [
+html render: (ERTab class: 'disabled' url: 'step6' title: 'Payment information' icon: 'glyphicon glyphicon-euro' ).
+
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListPersonalInformation: html [
-	html listItem attributeAt: 'role' put: 'presentation'; class: 'disabled'; with: [  
-		html anchor url: '#step2';  attributeAt: 'data-toggle' put: 'tab';  attributeAt: 'aria-controls' put: 'step2'; attributeAt: 'role' put: 'tab'; attributeAt: 'title' put: 'Personal Information '; with: [ 
-			html span class: 'round-tab'; with: [ 
-				html icon class: 'glyphicon glyphicon-home' ] ]].
+html render: (ERTab class: 'disabled' url: 'step2' title: 'Personal Information' icon: 'glyphicon glyphicon-home' ).
+
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListRegister: html [
-	html listItem attributeAt: 'role' put: 'presentation'; class: 'active'; with: [  
-		html anchor url: '#step1';  attributeAt: 'data-toggle' put: 'tab';  attributeAt: 'aria-controls' put: 'step1'; attributeAt: 'role' put: 'tab'; attributeAt: 'title' put: 'Registration '; with: [ 
-			html span class: 'round-tab'; with: [ 
-				html icon class: 'glyphicon glyphicon-home' ] ]].
+html render: (ERTab class: 'active' url: 'step1' title: 'Registration' icon: 'glyphicon glyphicon-user' ).
+
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> polo: html [
 	html div class: 'form-group'; with: [ 
-		html div class: 'form-group'; with: [ 
-			html label attributeAt: 'for' put: 'sel1'; with: 'Tshirt Size:'.
-			html select class: 'form-control'; id: 'sel1'; with: [ 
-				html option: 'XS'.
-				html option: 'S'.
-				html option: 'M'.
-				html option: 'L'.
-				html option: 'XL'.
-				html option: 'XXL'.
-				html option: 'XXXL'.
-				html option: 'XXXXL'.
-				
-				 ] ] ]
+		html render: (ERTextSelectComponent id: 'sel1' label: 'Tshirt Size:' listOption: #('XS' 'S' 'M' 'L' 'XL' 'XXL' 'XXXL' 'XXXXL')).
+		 ]
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> registerButton [
+	^ registerButton
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> registerButton: anObject [
+	registerButton := anObject
 ]
 
 { #category : #rendering }
@@ -219,19 +260,50 @@ ERAdministrationRegisterView >> renderContentOn: html [
 									self itemListConferenceOptions: html.
 									self itemListAfiliationInformation: html.
 									self itemListAditiaonalInformation: html.
+									self itemListPaymentRegister: html.
 									self itemListComplete: html.
-"Repetir 6 mas"
 								 ]].
-							html form attributeAt: 'role' put: 'form'; with: [ 
+							html form method: 'post'; id: 'formRegister'; name: 'formRegister'; attributeAt: 'role' put: 'form'; with: [ 
 								html div class: 'tab-content'; with: [ 
 									self formStep1: html.
 									self formStep2: html.
 									self formStep3: html.
 									self formStep4: html.
 									self formStep5: html. 
+									self formStep6: html. 
 								 	html div class: 'tab-pane'; attributeAt: 'role' put: 'tabpanel'; id: 'complete'; with: [ 
 										html heading level3; with: 'Complete'.
 										html paragraph: 'You have successfully completed all steps.' ].
 									html div class: 'clearfix'.
 									]	]]]]]]]
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> step1 [
+	^ step1
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> step1: anObject [
+	step1 := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> step2 [
+	^ step2
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> step2: anObject [
+	step2 := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> step4 [
+	^ step4
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> step4: anObject [
+	step4 := anObject
 ]

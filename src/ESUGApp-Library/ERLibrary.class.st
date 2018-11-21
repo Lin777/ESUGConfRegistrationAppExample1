@@ -225,6 +225,10 @@ span.round-tab i{
     border-radius: 100%;
     padding: 0;
 }
+
+label.error{
+	color: red
+}
 '
 ]
 
@@ -279,11 +283,11 @@ $(document).ready(function () {
     });
 
     $(".next-step").click(function (e) {
-
+		if($("#formRegister").valid()){
         var $active = $(''.wizard .nav-tabs li.active'');
         $active.next().removeClass(''disabled'');
         nextTab($active);
-
+		}
     });
     $(".prev-step").click(function (e) {
 
@@ -298,26 +302,160 @@ function nextTab(elem) {
 }
 function prevTab(elem) {
     $(elem).prev().find(''a[data-toggle="tab"]'').click();
-}
-function validacion(){
-    email = document.getElementById("email").value;
-if( !(/\w+([-+.'']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)/.test(email)) ) {
-  alert(''[ERROR] Email incorrect'');
-  return false;
-}
-
-pass = document.getElementById("password").value;
-if( pass == null || pass.length == 0 || /^\s+$/.test(pass) ) {
-  alert(''[ERROR] Debe ingresar su password'');
-  return false;
-}
-}
-$(document).ready(function() {
-       $("#loginbutton").click(function() {
-           $("#login").submit();
-       });
+}'
+,
+'$(function(){
+    $("#loginbutton").on("click", function(){
+        $("#formLogin").validate();
+        $("#email").rules("add", {
+            required: true,
+            email: true, 
+            minlength: 8,
+            maxlength:80,
+            messages: {
+                required: "Please enter your email", 
+                email: "The format of email is incorrect", 
+                minlenght: "The minimum number of characters allowed is 8", 
+                maxlenght: "The maximum number of characters allowed is 80"
+            }
+        });
+        $("#password").rules("add", {
+            required: true,
+            messages:
+            {
+                required: "Please enter your password"
+            } 
+        });
     });
+});'
+,
 '
+
+$().ready(function() {
+    $("#formRegister").validate({
+        rules:
+        {
+            "days[]": {required: true, maxlength:5}
+        },
+        messages:
+        {
+            "days[]": {required: "You must check at least 1 box", maxlength: "Check no more than {0} boxes"}
+        }
+    });
+    $("#firstName").rules("add", {
+        required: true,
+        messages: {required: "Please enter your First Name"}
+    });
+    $("#lastName").rules("add", {
+        required: true,
+        messages: {required: "Please enter your Last Name"}
+    });
+    $("#registerEmail").rules("add", {
+        required: true,
+        email: true, 
+        minlength: 8, 
+        maxlength:30,
+        messages: {
+            required: "Please enter your email", 
+            email: "The format of email is incorrect", 
+            minlength: "The minimum number of characters allowed is 8", 
+            maxlength: "The maximum number of characters allowed is 30"
+        }
+    });
+    $("#registerPassword").rules("add", {
+        required: true,
+        minlength: 8, 
+        messages: {
+            required: "Please enter your password", 
+            minlength: "Your password must have at least 8 characters"
+        }
+    });
+    $("#confirmPassword").rules("add", {
+        required: true,
+        equalTo: "#registerPassword",
+        messages: {
+            required: "Please confirm your password", 
+            equalTo: "Your password does not match"
+        }
+    });
+    $("#contactAddress").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your contact Address"
+        }
+    });
+    $("#contactCity").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your contact City"
+        }
+    });
+    $("#contactProvince").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your contact Province/State"
+        }
+    });
+    $("#contactPostal").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your contact Postal/ZipCode"
+        }
+    });
+    
+    /*$("#contactFacebook").rules("add", {
+        required: true,
+        messages: {}
+    });
+    $("#contactTwitter").rules("add", {
+        required: true,
+        messages: {}
+    });
+    $("#contactHomePage").rules("add", {
+        required: true,
+        messages: {}
+    });
+
+    $("days[]").rules("add", {
+        required: true,
+        maxlength:5,
+        messages: {
+            required: "You must check at least 1 box", 
+            maxlength: "Check no more than {0} boxes"
+        }
+    });*/
+    $("#orgName").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Organization Name"
+        }
+    });
+    $("#orgAddress").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Organization Address"
+        }
+    });
+    $("#orgCity").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Organization City"
+        }
+    });
+    $("#orgProvince").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Organization Province"
+        }
+    });
+    $("#orgPostal").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Code Postal of your Organization"
+            }
+    });
+
+ });'
 ]
 
 { #category : #updating }

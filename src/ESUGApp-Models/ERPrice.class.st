@@ -5,11 +5,30 @@ It offers a way to create the object through of a result of database
 "
 Class {
 	#name : #ERPrice,
-	#superclass : #Object,
+	#superclass : #SDActiveRecord,
 	#instVars : [
-		'conferenceId',
 		'freePricingType',
 		'price'
 	],
 	#category : #'ESUGApp-Models'
 }
+
+{ #category : #accessing }
+ERPrice >> freePricingType [
+	^ freePricingType
+]
+
+{ #category : #accessing }
+ERPrice >> freePricingType: anObject [
+	freePricingType := anObject
+]
+
+{ #category : #accessing }
+ERPrice >> price [
+	^ price
+]
+
+{ #category : #accessing }
+ERPrice >> price: anObject [
+	price := anObject
+]
