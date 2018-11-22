@@ -60,7 +60,8 @@ ERTextAreaComponent >> renderContentOn: html [
 				attributeAt: 'placeholder' put: self label;
 				class: 'form-control';
 				id: self id;
-				name: self name1 ]
+				name: self name1;
+				callback: self callback  ]
 ]
 
 { #category : #accessing }

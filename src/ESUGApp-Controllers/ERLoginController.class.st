@@ -3,7 +3,10 @@ Class {
 	#superclass : #WAObject,
 	#instVars : [
 		'email',
-		'password'
+		'password',
+		'store',
+		'user1',
+		'user2'
 	],
 	#category : #'ESUGApp-Controllers'
 }
@@ -37,8 +40,10 @@ ERLoginController >> password: anObject [
 { #category : #rendering }
 ERLoginController >> validateLogin [
 	|aUser|
- aUser := self session findUserByEmail: self email.
+ "aUser := self session findUserByEmail: self email.
  (aUser notNil and: [aUser password = self password])
   ifTrue: [^ aUser]
-  ifFalse: [^ nil].
+  ifFalse: [^ nil]."
+aUser := self session database validateUserLogin: (ERUser new email: (self email); password: (self password )).
+^ aUser 
 ]

@@ -7,6 +7,27 @@ Class {
 	#category : #'ESUGApp-Views'
 }
 
+{ #category : #accessing }
+ERAdministrationNavView >> initialize [
+	super initialize.
+	optionList := Dictionary
+		newFrom:
+			{('#login' -> 'Login').
+			('#register' -> 'Register').
+			('#portafolio' -> 'Register as Group Manager').
+			('#pricing' -> 'I forgot my password')}
+]
+
+{ #category : #accessing }
+ERAdministrationNavView >> optionList [
+	^ optionList
+]
+
+{ #category : #accessing }
+ERAdministrationNavView >> optionList: anObject [
+	optionList := anObject
+]
+
 { #category : #rendering }
 ERAdministrationNavView >> renderContentOn: html [
 	html navigation

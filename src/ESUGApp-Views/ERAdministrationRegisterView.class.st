@@ -7,10 +7,22 @@ Class {
 		'step4',
 		'registerButton',
 		'daysAssist',
-		'checkboxFood'
+		'checkboxFood',
+		'keywords',
+		'additionalText'
 	],
 	#category : #'ESUGApp-Views'
 }
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> additionalText [
+	^ additionalText
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> additionalText: anObject [
+	additionalText := anObject
+]
 
 { #category : #accessing }
 ERAdministrationRegisterView >> checkboxFood [
@@ -38,15 +50,6 @@ ERAdministrationRegisterView >> food: html [
 		html label: 'Food: '.
 		html render: self checkboxFood.
 		].
-	"
-html div class: 'form-check form-check-inline'; with: [ 
-			html checkbox class: 'form-check-input'; attributeAt: 'value' put: 'option1'.
-			html label class: 'form-check-label'; with: '  Vegetarian'
-			 ].
-		html div class: 'form-check form-check-inline'; with: [ 
-			html checkbox class: 'form-check-input'; attributeAt: 'value' put: 'option1'.
-			html label class: 'form-check-label'; with: '  Vegan'
-			 ]."
 ]
 
 { #category : #rendering }
@@ -103,8 +106,8 @@ ERAdministrationRegisterView >> formStep4: html [
 ERAdministrationRegisterView >> formStep5: html [
 	html div class: 'tab-pane'; attributeAt: 'role' put: 'tabpanel'; id: 'step5'; with: [
 		html break .
-		html render: (ERTextInputComponent new id: 'addInfoKeywords'; name: 'addInfoKeywords'; type: 'text'; callback: [ :value | Transcript show: value asString ];label:'Keywords').
-		html render: (ERTextAreaComponent new label: 'Additional text'; id: 'addInfoAddText'; name: 'addInfoAddText'; callback: [:value | Transcript show: value asString ]).
+		html render: self keywords.
+		html render: self additionalText.
 		html unorderedList class: 'list-inline pull-right'; with: [
 			html listItem: [ 
 				html render: ERButtonRegisterPrevious new.].
@@ -224,6 +227,16 @@ html render: (ERTab class: 'disabled' url: 'step2' title: 'Personal Information'
 ERAdministrationRegisterView >> itemListRegister: html [
 html render: (ERTab class: 'active' url: 'step1' title: 'Registration' icon: 'glyphicon glyphicon-user' ).
 
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> keywords [
+	^ keywords
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> keywords: anObject [
+	keywords := anObject
 ]
 
 { #category : #rendering }

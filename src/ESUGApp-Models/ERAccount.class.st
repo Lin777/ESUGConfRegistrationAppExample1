@@ -142,7 +142,9 @@ ERAccount >> homePage: anObject [
 
 { #category : #initialization }
 ERAccount >> initialize [
-	super initialize
+	super initialize.
+	diet := 'normal'.
+	gender := 'female'
 ]
 
 { #category : #accessing }

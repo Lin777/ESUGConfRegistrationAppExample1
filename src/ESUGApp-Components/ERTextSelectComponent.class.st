@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'id',
 		'label',
-		'listOptions'
+		'listOptions',
+		'callback'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -24,6 +25,16 @@ ERTextSelectComponent class >> id: aId listOption: aList [
 		id: aId;
 		listOptions: aList;
 		yourself
+]
+
+{ #category : #accessing }
+ERTextSelectComponent >> callback [
+	^ callback
+]
+
+{ #category : #accessing }
+ERTextSelectComponent >> callback: anObject [
+	callback := anObject
 ]
 
 { #category : #accessing }
@@ -60,7 +71,7 @@ ERTextSelectComponent >> listOptions: anObject [
 ERTextSelectComponent >> renderContentOn: html [
 		html div class: 'form-group'; with: [ 
 			html label attributeAt: 'for' put: self id; with: self label.
-			html select class: 'form-control'; id: self id; with: [ 
+			html select class: 'form-control'; id: self id; "callback: self callback;" with: [ 
 					self listOptions 
 						do: [ :each | 
 							html option: each .].]].

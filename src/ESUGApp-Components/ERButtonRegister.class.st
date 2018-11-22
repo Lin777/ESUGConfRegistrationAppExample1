@@ -35,6 +35,6 @@ ERButtonRegister >> renderContentOn: html [
 		name: self id;
 		type: 'submit';
 		class: 'btn btn-primary next-step';
-		with: 'Save and continue';
-		callback: self callback
+		callback: self callback;
+		with: 'Save and continue'
 ]

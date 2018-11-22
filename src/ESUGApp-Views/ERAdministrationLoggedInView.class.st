@@ -6,5 +6,5 @@ Class {
 
 { #category : #rendering }
 ERAdministrationLoggedInView >> renderContentOn: html [ 
-	html heading level3; with: 'Welcome to ESUG ', self session user email
+	html heading level3; id: 'welcome'; with: 'Welcome to ESUG ', self session user email .
 ]

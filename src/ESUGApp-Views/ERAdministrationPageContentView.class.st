@@ -8,15 +8,11 @@ Class {
 		'account',
 		'daysAssist',
 		'afiliationInfo',
-		'invoice'
+		'invoice',
+		'diet'
 	],
 	#category : #'ESUGApp-Views'
 }
-
-{ #category : #initialization }
-ERAdministrationPageContentView class >> canBeRoot [ 	
-	^ true
-]
 
 { #category : #initialization }
 ERAdministrationPageContentView class >> initialize [
@@ -65,13 +61,22 @@ ERAdministrationPageContentView >> daysAssist: anObject [
 ]
 
 { #category : #initialization }
+ERAdministrationPageContentView >> getContactAdditionalText [
+	^ ERTextAreaComponent new
+		label: 'Additional text';
+		id: 'addInfoAddText';
+		name: 'addInfoAddText';
+		callback: [ :value | self account additionalText: (value asString) ]
+]
+
+{ #category : #initialization }
 ERAdministrationPageContentView >> getContactAddress [
 	^ ERTextInputComponent
 		id: 'contactAddress'
 		name: 'contactAddress'
 		type: 'text'
 		label: 'Address'
-		callback: [ :value | self account address: value ]
+		callback: [ :value | self account address: (value asString) ]
 ]
 
 { #category : #initialization }
@@ -81,7 +86,7 @@ ERAdministrationPageContentView >> getContactCity [
 		name: 'contactCity'
 		type: 'text'
 		label: 'City'
-		callback: [ :value | self account city: value ]
+		callback: [ :value | self account city: (value asString)]
 ]
 
 { #category : #initialization }
@@ -91,7 +96,7 @@ ERAdministrationPageContentView >> getContactFacebook [
 		name: 'contactFacebook'
 		type: 'text'
 		label: 'Facebook (URL)'
-		callback: [ :value | self account facebook: value ]
+		callback: [ :value | self account facebook: (value asString) ]
 ]
 
 { #category : #initialization }
@@ -101,7 +106,17 @@ ERAdministrationPageContentView >> getContactHomePage [
 		name: 'contactHomePage'
 		type: 'text'
 		label: 'Home Page (URL)'
-		callback: [ :value | self account homePage: value ]
+		callback: [ :value | self account homePage: (value asString) ]
+]
+
+{ #category : #initialization }
+ERAdministrationPageContentView >> getContactKeywords [
+	^ ERTextInputComponent new
+		id: 'addInfoKeywords';
+		name: 'addInfoKeywords';
+		type: 'text';
+		callback: [ :value | self account keywords: value asString ];
+		label: 'Keywords'
 ]
 
 { #category : #initialization }
@@ -111,7 +126,7 @@ ERAdministrationPageContentView >> getContactPostal [
 		name: 'contactPostal'
 		type: 'text'
 		label: 'Postal/ZipCode'
-		callback: [ :value | self account postalZipCode: value ]
+		callback: [ :value | self account postalZipCode: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -121,7 +136,7 @@ ERAdministrationPageContentView >> getContactProvince [
 		name: 'contactProvince'
 		type: 'text'
 		label: 'Province/State'
-		callback: [ :value | self account provinceState: value ]
+		callback: [ :value | self account provinceState: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -131,7 +146,7 @@ ERAdministrationPageContentView >> getContactTwitter [
 		name: 'contactTwitter'
 		type: 'text'
 		label: 'Twitter (URL)'
-		callback: [ :value | self account twitter: value ]
+		callback: [ :value | self account twitter: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -141,7 +156,7 @@ ERAdministrationPageContentView >> getFirstName [
 		name: 'firstName'
 		type: 'text'
 		label: 'First Name'
-		callback: [ :value | self account firstName: value ]
+		callback: [ :value | self account firstName: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -151,7 +166,7 @@ ERAdministrationPageContentView >> getLastName [
 		name: 'lastName'
 		type: 'text'
 		label: 'Last Name'
-		callback: [ :value | self account lastName: value ]
+		callback: [ :value | self account lastName: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -192,13 +207,13 @@ ERAdministrationPageContentView >> getListOfFoodPreference [
 			(ERCheckBox new
 				id: 'vegetarian';
 				label: 'Vegetarian';
-				callback: [ :value | Transcript show: value ];
+				callback: [ :value | value ifTrue: [ self account diet: 'vegetarian' ] ];
 				name: 'vegetarian');
 		add:
 			(ERCheckBox new
 				id: 'vegan';
 				label: 'Vegan';
-				callback: [ :value | Transcript show: value ];
+				callback: [ :value | value ifTrue: [ self account diet: 'vegan' ] ];
 				name: 'vegan');
 		yourself
 ]
@@ -210,7 +225,7 @@ ERAdministrationPageContentView >> getOrganizationAddress [
 		name: 'orgAddress'
 		type: 'text'
 		label: 'Address'
-		callback: [ :value | self afiliationInfo address: value ]
+		callback: [ :value | self afiliationInfo address: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -220,7 +235,7 @@ ERAdministrationPageContentView >> getOrganizationCity [
 		name: 'orgCity'
 		type: 'text'
 		label: 'City'
-		callback: [ :value | self afiliationInfo city: value ]
+		callback: [ :value | self afiliationInfo city: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -230,7 +245,7 @@ ERAdministrationPageContentView >> getOrganizationName [
 		name: 'orgName'
 		type: 'text'
 		label: 'Organization Name'
-		callback: [ :value | self afiliationInfo name: value ]
+		callback: [ :value | self afiliationInfo name: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -240,7 +255,7 @@ ERAdministrationPageContentView >> getOrganizationPostal [
 		name: 'orgPostal'
 		type: 'text'
 		label: 'Postal/ZipCode'
-		callback: [ :value | self afiliationInfo postalZipCode: value ]
+		callback: [ :value | self afiliationInfo postalZipCode: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -250,15 +265,19 @@ ERAdministrationPageContentView >> getOrganizationProvince [
 		name: 'orgProvince'
 		type: 'text'
 		label: 'Province/State'
-		callback: [ :value | self afiliationInfo provinceState: value ]
+		callback: [ :value | self afiliationInfo provinceState: (value asString ) ]
 ]
 
 { #category : #initialization }
 ERAdministrationPageContentView >> getRegisterButton [
 	^ ERButtonRegister new
 		id: 'registerAttendee';
-		callback: [ self registerAttendee.	"self answer: user. "
-			self call: ERAdministrationLoggedInView new ]
+		callback: [ | userRegister |
+			userRegister := self registerAttendee.
+			"userRegister
+				ifNotNil: [ self session login: userRegister.
+					self call: ERAdministrationLoggedInView new]"
+				self answer: userRegister  ]
 ]
 
 { #category : #initialization }
@@ -277,7 +296,7 @@ ERAdministrationPageContentView >> getRegisterEmail [
 		name: 'registerEmail'
 		type: 'text'
 		label: 'Email'
-		callback: [ :value | self user email: value ]
+		callback: [ :value | self user email: (value asString ) ]
 ]
 
 { #category : #initialization }
@@ -301,13 +320,14 @@ ERAdministrationPageContentView >> initialize [
 
 { #category : #initialization }
 ERAdministrationPageContentView >> initializeLoginComponent [
-	loginComponent := ERLoginComponent new emailComp:
+	loginComponent := ERLoginComponent new
+		emailComp:
 			(ERTextInputComponent
 				id: 'email'
 				name: 'email'
 				type: 'text'
 				label: 'Email address'
-				callback: [ :value | self user email: value ]);
+				callback: [ :value | self user email: value asString ]);
 		passComp:
 			(ERTextInputComponent
 				id: 'password'
@@ -320,7 +340,9 @@ ERAdministrationPageContentView >> initializeLoginComponent [
 				id: 'loginbutton'
 				type: 'submit'
 				label: 'Login'
-				callback: [ self validateUser ])
+				callback: [ | userValidated |
+					userValidated := self validateUser.
+					self answer: userValidated ])
 ]
 
 { #category : #initialization }
@@ -367,7 +389,9 @@ ERAdministrationPageContentView >> initializeRegisterComponent [
 				list: self getListOfDays);
 		checkboxFood:
 			(ERForm new
-				list: self getListOfFoodPreference)
+				list: self getListOfFoodPreference);
+		additionalText: self getContactAdditionalText ;
+		keywords: self getContactKeywords .
 ]
 
 { #category : #accessing }
@@ -404,8 +428,11 @@ ERAdministrationPageContentView >> loginUser [
 { #category : #'as yet unclassified' }
 ERAdministrationPageContentView >> registerAttendee [
 	|controller|
-	controller := ERRegisterAttendeeController new aUser: self user; affiliationInfo: self afiliationInfo; daysAssist: self daysAssist; anAccount: self account; invoice: self invoice.
-	controller register.
+	
+	controller := ERRegisterAttendeeController new aUser: self user; affiliationInfo: self afiliationInfo; daysAssist: self daysAssist; anAccount: self account; invoice: self invoice; yourself.
+	Transcript show: 'Call a controller'.
+	^ controller register.
+	
 ]
 
 { #category : #accessing }
@@ -442,10 +469,5 @@ ERAdministrationPageContentView >> user: anObject [
 ERAdministrationPageContentView >> validateUser [
 	| validatedUser |
 	validatedUser := self loginUser.
-	validatedUser
-		ifNotNil: [
-			self session login: validatedUser.
-			self call: ERAdministrationLoggedInView new].
-	validatedUser
-		ifNil: [ Transcript show: ', user nil' ]
+		^ validatedUser 
 ]

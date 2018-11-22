@@ -28,6 +28,12 @@ ERUser class >> hashPassword: aString [
 
 ]
 
+{ #category : #tests }
+ERUser class >> testUser: aString [ 
+	^ (self new) email: (aString, '@gmail.com'); password: (ERUser hashPassword: '12345678') asString; rol: 'attendee'; yourself .
+	
+]
+
 { #category : #accessing }
 ERUser >> email [
 	^ email
@@ -41,7 +47,8 @@ ERUser >> email: anObject [
 { #category : #initialization }
 ERUser >> initialize [
 	super initialize.
-	rol := 'attendee'
+	rol := 'attendee'.
+	
 ]
 
 { #category : #accessing }

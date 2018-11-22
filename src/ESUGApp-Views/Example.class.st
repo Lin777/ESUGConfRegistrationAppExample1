@@ -27,5 +27,14 @@ Example class >> initialize [
 
 { #category : #rendering }
 Example >> renderContentOn: html [
-	html render: (ERTextInputComponent new id: 'addInfoKeywords'; name: 'addInfoKeywords'; type: 'text'; callback: [  ];label:'Keywords')
+	html div
+				class: 'form-group';
+				with: [ html label
+						attributeAt: 'for' put: 'sel3';
+						with: 'Payment Type:'.
+					html select
+						class: 'form-control';
+						id: 'sel3';
+						with: [ html option value: 'Dollar'; label: 'Dollar'; callback: [:value | Transcript show: value asString ]; selected: true.
+							html option value: 'Euro'; label:'Euro'; callback: [:value | Transcript show: value asString]; selected: false ].]
 ]

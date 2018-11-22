@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #testing }
+ERRoot class >> canBeRoot [
+	^ true
+]
+
+{ #category : #testing }
 ERRoot class >> initialize [
  "self initialize"
  (WAAdmin
@@ -24,11 +29,8 @@ ERRoot class >> initialize [
 ERRoot >> go [
  | user |
 
-	Transcript show: 'Redireccionamiento'.
  user := self call: ERAdministrationPageContentView new.
  user ifNotNil: [
-	Transcript show: 'Redireccionamiento'.
   self session login: user.
   self call: ERAdministrationLoggedInView new].
-user ifNil: [ Transcript show: 'User nil' ].
 ]
