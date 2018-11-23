@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'emailComp',
 		'passComp',
-		'buttonComp'
+		'buttonComp',
+		'messageComponent'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -32,6 +33,16 @@ ERLoginComponent >> emailComp [
 { #category : #accessing }
 ERLoginComponent >> emailComp: anObject [
 	emailComp := anObject
+]
+
+{ #category : #accessing }
+ERLoginComponent >> messageComponent [
+	^ messageComponent
+]
+
+{ #category : #accessing }
+ERLoginComponent >> messageComponent: anObject [
+	messageComponent := anObject
 ]
 
 { #category : #accessing }
@@ -69,7 +80,9 @@ ERLoginComponent >> renderContentOn: html [
 														with: 'Please login' ].
 											html div
 												class: 'panel-body';
-												with: [ html render: self emailComp.
+												with: [ 
+													html render: self messageComponent .
+													html render: self emailComp.
 													html render: self passComp ].
 											html div
 												class: 'panel-footer';

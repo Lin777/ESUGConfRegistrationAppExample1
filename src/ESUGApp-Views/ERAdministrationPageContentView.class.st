@@ -61,6 +61,13 @@ ERAdministrationPageContentView >> daysAssist: anObject [
 ]
 
 { #category : #initialization }
+ERAdministrationPageContentView >> getButtonLogin [
+	^ ERComponentButton loginButton
+		id: 'loginbutton';
+		callback: [ self loginUser ]
+]
+
+{ #category : #initialization }
 ERAdministrationPageContentView >> getContactAdditionalText [
 	^ ERTextAreaComponent new
 		label: 'Additional text';
@@ -150,6 +157,16 @@ ERAdministrationPageContentView >> getContactTwitter [
 ]
 
 { #category : #initialization }
+ERAdministrationPageContentView >> getEmailLogin [
+	^ (ERTextInputComponent
+				id: 'email'
+				name: 'email'
+				type: 'text'
+				label: 'Email address'
+				callback: [ :value | self user email: value asString ])
+]
+
+{ #category : #initialization }
 ERAdministrationPageContentView >> getFirstName [
 	^ ERTextInputComponent
 		id: 'firstName'
@@ -218,6 +235,19 @@ ERAdministrationPageContentView >> getListOfFoodPreference [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+ERAdministrationPageContentView >> getLoginController [
+	^ ERLoginController new
+		email: self user email;
+		password: self user password;
+		yourself.
+]
+
+{ #category : #initialization }
+ERAdministrationPageContentView >> getMessageLogin [
+	^ (ERComponentAlert warningAlert id: 'loginAlert')
+]
+
 { #category : #initialization }
 ERAdministrationPageContentView >> getOrganizationAddress [
 	^ ERTextInputComponent
@@ -269,15 +299,20 @@ ERAdministrationPageContentView >> getOrganizationProvince [
 ]
 
 { #category : #initialization }
+ERAdministrationPageContentView >> getPasswordLogin [
+	^ (ERTextInputComponent
+				id: 'password'
+				name: 'password'
+				type: 'password'
+				label: 'Password'
+				callback: [ :value | self user password: (ERUser hashPassword: value) asString ])
+]
+
+{ #category : #initialization }
 ERAdministrationPageContentView >> getRegisterButton [
 	^ ERButtonRegister new
 		id: 'registerAttendee';
-		callback: [ | userRegister |
-			userRegister := self registerAttendee.
-			"userRegister
-				ifNotNil: [ self session login: userRegister.
-					self call: ERAdministrationLoggedInView new]"
-				self answer: userRegister  ]
+		callback: [ self registerAttendee ]
 ]
 
 { #category : #initialization }
@@ -287,6 +322,17 @@ ERAdministrationPageContentView >> getRegisterConfirmPassword [
 		name: 'confirmPassword'
 		type: 'password'
 		label: 'Confirm password'
+]
+
+{ #category : #'as yet unclassified' }
+ERAdministrationPageContentView >> getRegisterController [
+	^ ERRegisterAttendeeController new
+		aUser: self user;
+		affiliationInfo: self afiliationInfo;
+		daysAssist: self daysAssist;
+		anAccount: self account;
+		invoice: self invoice;
+		yourself.
 ]
 
 { #category : #initialization }
@@ -321,28 +367,10 @@ ERAdministrationPageContentView >> initialize [
 { #category : #initialization }
 ERAdministrationPageContentView >> initializeLoginComponent [
 	loginComponent := ERLoginComponent new
-		emailComp:
-			(ERTextInputComponent
-				id: 'email'
-				name: 'email'
-				type: 'text'
-				label: 'Email address'
-				callback: [ :value | self user email: value asString ]);
-		passComp:
-			(ERTextInputComponent
-				id: 'password'
-				name: 'password'
-				type: 'password'
-				label: 'Password'
-				callback: [ :value | self user password: (ERUser hashPassword: value) asString ]);
-		buttonComp:
-			(ERButton
-				id: 'loginbutton'
-				type: 'submit'
-				label: 'Login'
-				callback: [ | userValidated |
-					userValidated := self validateUser.
-					self answer: userValidated ])
+		messageComponent: self getMessageLogin;
+		emailComp: self getEmailLogin;
+		passComp: self getPasswordLogin;
+		buttonComp: self getButtonLogin.
 ]
 
 { #category : #initialization }
@@ -391,7 +419,8 @@ ERAdministrationPageContentView >> initializeRegisterComponent [
 			(ERForm new
 				list: self getListOfFoodPreference);
 		additionalText: self getContactAdditionalText ;
-		keywords: self getContactKeywords .
+		keywords: self getContactKeywords ;
+		messageComponent: (ERComponentAlert warningAlert id: 'registerAlert')
 ]
 
 { #category : #accessing }
@@ -417,22 +446,21 @@ ERAdministrationPageContentView >> loginComponent: anObject [
 { #category : #'as yet unclassified' }
 ERAdministrationPageContentView >> loginUser [
 	| userValidate controller |
-	controller := (ERLoginController new
-		email: self user email;
-		password: self user password;
-		yourself).
+	controller := self getLoginController.
 	userValidate := controller validateLogin.
-	^ userValidate
+	userValidate notNil
+		ifTrue: [ self answer: userValidate ]
+		ifFalse:
+			[ loginComponent messageComponent errorMessage: 'Login failed.' ]
 ]
 
 { #category : #'as yet unclassified' }
 ERAdministrationPageContentView >> registerAttendee [
-	|controller|
-	
-	controller := ERRegisterAttendeeController new aUser: self user; affiliationInfo: self afiliationInfo; daysAssist: self daysAssist; anAccount: self account; invoice: self invoice; yourself.
-	Transcript show: 'Call a controller'.
-	^ controller register.
-	
+	| controller anUser|
+	controller := self getRegisterController.
+	anUser := controller register.
+	anUser ifNil: [ registerComponent messageComponent errorMessage: 'This email is already registered' ]
+	ifNotNil: [ self answer: anUser  ]
 ]
 
 { #category : #accessing }
@@ -449,7 +477,7 @@ ERAdministrationPageContentView >> registerComponent: anObject [
 ERAdministrationPageContentView >> renderContentOn: html [
 	html render: (ERAdministrationNavView new).
 	html render: self loginComponent.
-	html render: self registerComponent ."(ERAdministrationRegisterView new)."
+	html render: self registerComponent .
 	html render: (ERAdministrationRegisterAsGroupManagerView new).
 	html render: (ERAdministrationForgotPassView new).
 	html render: (ERAdministrationFooterView  new).
@@ -463,11 +491,4 @@ ERAdministrationPageContentView >> user [
 { #category : #accessing }
 ERAdministrationPageContentView >> user: anObject [
 	user := anObject
-]
-
-{ #category : #'as yet unclassified' }
-ERAdministrationPageContentView >> validateUser [
-	| validatedUser |
-	validatedUser := self loginUser.
-		^ validatedUser 
 ]

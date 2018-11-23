@@ -9,7 +9,8 @@ Class {
 		'daysAssist',
 		'checkboxFood',
 		'keywords',
-		'additionalText'
+		'additionalText',
+		'messageComponent'
 	],
 	#category : #'ESUGApp-Views'
 }
@@ -46,20 +47,27 @@ ERAdministrationRegisterView >> daysAssist: anObject [
 
 { #category : #rendering }
 ERAdministrationRegisterView >> food: html [
-	html div class: 'form-group'; with: [ 
-		html label: 'Food: '.
-		html render: self checkboxFood.
-		].
+	html div
+		class: 'form-group';
+		with: [ html label: 'Food: '.
+			html render: self checkboxFood ]
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> formStep1: html [
-	html div class: 'tab-pane active'; attributeAt: 'role' put: 'tabpanel'; id: 'step1'; with: [
-		html render: self step1.
-		html unorderedList class: 'list-inline pull-right'; with: [ 
-			html listItem: [ 
-				html render: (ERButtonRegisterNextStep new id: 'next1'; yourself ) ]]
-			]
+	html div
+		class: 'tab-pane active';
+		attributeAt: 'role' put: 'tabpanel';
+		id: 'step1';
+		with: [ html render: self step1.
+			html unorderedList
+				class: 'list-inline pull-right';
+				with: [ html
+						listItem: [ html
+								render:
+									(ERComponentButton nextStepButton
+										id: 'next1';
+										yourself) ] ] ]
 ]
 
 { #category : #rendering }
@@ -69,9 +77,9 @@ ERAdministrationRegisterView >> formStep2: html [
 		html render: self step2.
 		html unorderedList class: 'list-inline pull-right'; with: [ 
 			html listItem: [ 
-				html render: ERButtonRegisterPrevious new.].
+				html render: (ERComponentButton previousButton id: 'prev1')].
 			html listItem: [ 
-				html render: (ERButtonRegisterNextStep new id: 'next2'; yourself ). ]]]
+				html render: (ERComponentButton nextStepButton id: 'next2') ]]]
 ]
 
 { #category : #rendering }
@@ -84,9 +92,9 @@ ERAdministrationRegisterView >> formStep3: html [
 		self food: html.
 		html unorderedList class: 'list-inline pull-right'; with: [ 
 			html listItem: [ 
-				html render: ERButtonRegisterPrevious new.].
+				html render: (ERComponentButton previousButton id: 'prev2')].
 			html listItem: [ 
-				html render: (ERButtonRegisterNextStep new id: 'next3'; yourself). ]]
+				html render: (ERComponentButton nextStepButton id: 'next3'). ]]
 		]
 ]
 
@@ -97,25 +105,25 @@ ERAdministrationRegisterView >> formStep4: html [
 		html render: self step4.
 		html unorderedList class: 'list-inline pull-right'; with: [ 
 			html listItem: [ 
-				html render: ERButtonRegisterPrevious new.].
+				html render: (ERComponentButton previousButton id: 'prev3')].
 			html listItem: [ 
-				html render: (ERButtonRegisterNextStep new id: 'next4'; yourself ). ]]]
+				html render: (ERComponentButton nextStepButton id: 'next4'). ]]]
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> formStep5: html [
-	html div class: 'tab-pane'; attributeAt: 'role' put: 'tabpanel'; id: 'step5'; with: [
-		html break .
-		html render: self keywords.
-		html render: self additionalText.
-		html unorderedList class: 'list-inline pull-right'; with: [
-			html listItem: [ 
-				html render: ERButtonRegisterPrevious new.].
-			
-			html listItem: [ 
-				html render: ERButtonRegisterSkip new].
-			html listItem: [ 
-				html render: (ERButtonRegisterNextStep new id: 'next5'; yourself ). ]]]
+	html div
+		class: 'tab-pane';
+		attributeAt: 'role' put: 'tabpanel';
+		id: 'step5';
+		with: [ html break.
+			html render: self keywords.
+			html render: self additionalText.
+			html unorderedList
+				class: 'list-inline pull-right';
+				with: [ html listItem: [ html render: (ERComponentButton previousButton id: 'prev4') ].
+					html listItem: [ html render: (ERComponentButton skipButton id: 'skip5') ].
+					html listItem: [ html render: (ERComponentButton nextStepButton id: 'next5') ] ] ]
 ]
 
 { #category : #rendering }
@@ -124,8 +132,7 @@ ERAdministrationRegisterView >> formStep6: html [
 		class: 'tab-pane';
 		attributeAt: 'role' put: 'tabpanel';
 		id: 'step6';
-		with: [ html paragraph
-				with: 'Pay by bank transfer or paypal/card. Pay in euros.'.
+		with: [ html paragraph with: 'Pay by bank transfer or paypal/card. Pay in euros.'.
 			html paragraph
 				with:
 					'IMPORTANT: Bank transfers should mention "ESUG" & the registrant name(s) as a comment (e.g. "ESUG John Johnson").'.
@@ -143,7 +150,14 @@ ERAdministrationRegisterView >> formStep6: html [
 						id: 'sel2';
 						with: [ html option: 'Bank transfer'.
 							html option: 'Credit Card' ] ].
-					html render: (ERTextInputComponent new id: 'reductionTicket'; name: 'reductionTicket'; type: 'text'; callback: [ :value | Transcript show: value asString  ];label:'Reduction ticket code').
+			html
+				render:
+					(ERTextInputComponent new
+						id: 'reductionTicket';
+						name: 'reductionTicket';
+						type: 'text';
+						callback: [ :value | Transcript show: value asString ];
+						label: 'Reduction ticket code').
 			html div
 				class: 'form-group';
 				with: [ html label
@@ -156,12 +170,14 @@ ERAdministrationRegisterView >> formStep6: html [
 							html option: 'Euro' ] ].
 			html unorderedList
 				class: 'list-inline pull-right';
-				with: [ html
-						listItem: [ html render:ERButtonRegisterPrevious new ].
+				with: [ html listItem: [ html render: (ERComponentButton previousButton id: 'prev5') ].
 					html
-						listItem: [ html render: ERButtonRegisterSkip new ].
-					html
-						listItem: [ html render: self registerButton  ] ] ]
+						listItem: [ html
+								render:
+									(ERComponentButton skipButton
+										id: 'skip5';
+										callback: self registerButton callback) ].
+					html listItem: [ html render: self registerButton ] ] ]
 ]
 
 { #category : #rendering }
@@ -184,43 +200,73 @@ ERAdministrationRegisterView >> itemDays: html [
 	html label: 'Days: '.
 	html div
 		class: 'form-group';
-		with: [ html render: daysAssist ].
+		with: [ html render: daysAssist ]
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListAditiaonalInformation: html [
-	html render: (ERTab class: 'disabled' url: 'step5' title: 'Additional information' icon: 'glyphicon glyphicon-plus' ).
-	
+	html
+		render:
+			(ERTab
+				class: 'disabled'
+				url: 'step5'
+				title: 'Additional information'
+				icon: 'glyphicon glyphicon-plus')
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListAfiliationInformation: html [
-html render: (ERTab class: 'disabled' url: 'step4' title: 'Afiliation information' icon: 'glyphicon glyphicon-briefcase' ).
-
+	html
+		render:
+			(ERTab
+				class: 'disabled'
+				url: 'step4'
+				title: 'Afiliation information'
+				icon: 'glyphicon glyphicon-briefcase')
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListComplete: html [
-html render: (ERTab class: 'disabled' url: 'complete' title: 'Complete' icon: 'glyphicon glyphicon-ok' ).
-
+	html
+		render:
+			(ERTab
+				class: 'disabled'
+				url: 'complete'
+				title: 'Complete'
+				icon: 'glyphicon glyphicon-ok')
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListConferenceOptions: html [
-html render: (ERTab class: 'disabled' url: 'step3' title: 'Conference Options' icon: 'glyphicon glyphicon-copy' ).
-
+	html
+		render:
+			(ERTab
+				class: 'disabled'
+				url: 'step3'
+				title: 'Conference Options'
+				icon: 'glyphicon glyphicon-copy')
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListPaymentRegister: html [
-html render: (ERTab class: 'disabled' url: 'step6' title: 'Payment information' icon: 'glyphicon glyphicon-euro' ).
-
+	html
+		render:
+			(ERTab
+				class: 'disabled'
+				url: 'step6'
+				title: 'Payment information'
+				icon: 'glyphicon glyphicon-euro')
 ]
 
 { #category : #rendering }
 ERAdministrationRegisterView >> itemListPersonalInformation: html [
-html render: (ERTab class: 'disabled' url: 'step2' title: 'Personal Information' icon: 'glyphicon glyphicon-home' ).
-
+	html
+		render:
+			(ERTab
+				class: 'disabled'
+				url: 'step2'
+				title: 'Personal Information'
+				icon: 'glyphicon glyphicon-home')
 ]
 
 { #category : #rendering }
@@ -237,6 +283,16 @@ ERAdministrationRegisterView >> keywords [
 { #category : #accessing }
 ERAdministrationRegisterView >> keywords: anObject [
 	keywords := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> messageComponent [
+	^ messageComponent
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> messageComponent: anObject [
+	messageComponent := anObject
 ]
 
 { #category : #rendering }
@@ -276,6 +332,7 @@ ERAdministrationRegisterView >> renderContentOn: html [
 									self itemListPaymentRegister: html.
 									self itemListComplete: html.
 								 ]].
+							html render: self messageComponent.
 							html form method: 'post'; id: 'formRegister'; name: 'formRegister'; attributeAt: 'role' put: 'form'; with: [ 
 								html div class: 'tab-content'; with: [ 
 									self formStep1: html.

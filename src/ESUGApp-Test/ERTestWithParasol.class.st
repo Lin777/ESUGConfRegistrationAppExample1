@@ -52,11 +52,6 @@ ERTestWithParasol >> tearDown [
 	serverAdaptor stop.
 ]
 
-{ #category : #accessing }
-ERTestWithParasol >> test1 [
-	self assert: 'Hola mundo' = 'Hola mundo'
-]
-
 { #category : #tests }
 ERTestWithParasol >> testLoginErrorWhenNoTextFieldIsEntered [
 	|emailError passwordError signIn|
@@ -104,9 +99,9 @@ ERTestWithParasol >> testLoginUnregisteredUser [
 	signIn := driver findElementByID: 'loginbutton'.
 	email sendKeys: 'noValid@gmail.com'.
 	password sendKeys: '1234'.
-	signIn click ."
-	message := driver findElementByName: 'message'.
-	self assert: message  getText = 'Login failed.'."
+	signIn click .
+	message := driver findElementByID: 'loginAlert'.
+	self assert: message getText = 'Login failed.'.
 ]
 
 { #category : #registerTests }

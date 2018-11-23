@@ -75,6 +75,13 @@ ERSandstoneDatabase >> addUser: aUser [
 ]
 
 { #category : #adding }
+ERSandstoneDatabase >> addUserifNotExist: aUser [
+   
+ ^ aUser save. 
+
+]
+
+{ #category : #adding }
 ERSandstoneDatabase >> findUserByEmail: aString [ 
 
  ^ ERUser find: [ :each | each email = aString]
@@ -87,9 +94,9 @@ ERSandstoneDatabase >> updateUser: aUser [
 
 { #category : #adding }
 ERSandstoneDatabase >> validateUserLogin: aUser [
-	|user|
- user := self findUserByEmail: aUser  email.
- (user notNil and: [user password = aUser password])
-ifTrue: [^ aUser]
-  ifFalse: [^ nil].
+	| user |
+	user := self findUserByEmail: aUser email.
+	(user notNil and: [ user password = aUser password ])
+		ifTrue: [ ^ aUser ]
+		ifFalse: [ ^ nil ]
 ]

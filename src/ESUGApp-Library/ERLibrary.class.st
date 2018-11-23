@@ -303,8 +303,18 @@ function nextTab(elem) {
 function prevTab(elem) {
     $(elem).prev().find(''a[data-toggle="tab"]'').click();
 }'
-,
-'$(function(){
+, self validatorForLogin, self validatorOfRegister.
+]
+
+{ #category : #updating }
+ERLibrary >> selectorsToInclude [
+ 
+ ^ Array with: 'esugCss' with: 'esugJs'
+]
+
+{ #category : #updating }
+ERLibrary >> validatorForLogin [
+	^ '$(function(){
     $("#loginbutton").on("click", function(){
         $("#formLogin").validate();
         $("#email").rules("add", {
@@ -328,10 +338,11 @@ function prevTab(elem) {
         });
     });
 });'
-,
-'
+]
 
-$().ready(function() {
+{ #category : #updating }
+ERLibrary >> validatorOfRegister [
+	^ ' $().ready(function() {
     $("#formRegister").validate({
         rules:
         {
@@ -456,10 +467,4 @@ $().ready(function() {
     });
 
  });'
-]
-
-{ #category : #updating }
-ERLibrary >> selectorsToInclude [
- 
- ^ Array with: 'esugCss' with: 'esugJs'
 ]

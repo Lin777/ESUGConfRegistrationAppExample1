@@ -30,7 +30,7 @@ ERUser class >> hashPassword: aString [
 
 { #category : #tests }
 ERUser class >> testUser: aString [ 
-	^ (self new) email: (aString, '@gmail.com'); password: (ERUser hashPassword: '12345678') asString; rol: 'attendee'; yourself .
+	^ (self new) email: (aString, '@gmail.com'); password: (ERUser hashPassword: '12345678') asString; role: 'attendee'; yourself .
 	
 ]
 
@@ -62,11 +62,11 @@ ERUser >> password: anObject [
 ]
 
 { #category : #accessing }
-ERUser >> rol [
+ERUser >> role [
 	^ rol
 ]
 
 { #category : #accessing }
-ERUser >> rol: anObject [
+ERUser >> role: anObject [
 	rol := anObject
 ]

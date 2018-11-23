@@ -71,10 +71,10 @@ ERRelationalDatabase class >> writeMutex [
 { #category : #actions }
 ERRelationalDatabase >> connect [
 
- self connection: (PGConnection new
+ "self connection: (PGConnection new
   connectionArgs: self class connectionArguments;
   startup;
-  yourself).
+  yourself)."
 ]
 
 { #category : #accessing }

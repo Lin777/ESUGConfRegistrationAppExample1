@@ -21,12 +21,6 @@ ERLoginController >> email: anObject [
 	email := anObject
 ]
 
-{ #category : #rendering }
-ERLoginController >> loginFailed [
-
- Transcript show: 'Login failed.'.
-]
-
 { #category : #accessing }
 ERLoginController >> password [
 	^ password
@@ -39,11 +33,11 @@ ERLoginController >> password: anObject [
 
 { #category : #rendering }
 ERLoginController >> validateLogin [
-	|aUser|
- "aUser := self session findUserByEmail: self email.
- (aUser notNil and: [aUser password = self password])
-  ifTrue: [^ aUser]
-  ifFalse: [^ nil]."
-aUser := self session database validateUserLogin: (ERUser new email: (self email); password: (self password )).
-^ aUser 
+	| aUser |
+	aUser := self session database
+		validateUserLogin:
+			(ERUser new
+				email: self email;
+				password: self password).
+	^ aUser
 ]

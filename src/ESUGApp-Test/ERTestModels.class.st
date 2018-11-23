@@ -70,8 +70,6 @@ ERTestModels >> testValidateLoginNonExistentUser [
 	| result |
 	result := database
 		validateUserLogin:
-			user2"(ERUser new
-				email: 'bar@gmail.com';
-				password: (ERUser hashPassword: '12345678') asString)".
+			user2.
 	self assert: result isNil
 ]
