@@ -8,7 +8,8 @@ ESUG Conference Registration Application
 
 You can get both by downloading it from the [Pharo](http://pharo.org) site or in the command line with [zeroconf](http://get.pharo.org): 
 
-```Metacello new
+```
+Metacello new
  baseline:'ESUGApp';
  repository: 'github://Lin777/ESUGConfRegistrationApp:master/src';
  load
