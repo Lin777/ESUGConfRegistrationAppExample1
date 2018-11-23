@@ -20,8 +20,23 @@ Class {
 }
 
 { #category : #tests }
+ERTestModels >> addAffiliationInformation [
+	^ self database addAffiliationInfo: affiliation   .
+]
+
+{ #category : #tests }
 ERTestModels >> addCoupon [
 	^ self database addCoupon: couponGold 
+]
+
+{ #category : #tests }
+ERTestModels >> addDaysAssist [
+	^ self database addDaysAssist: daysAssist  .
+]
+
+{ #category : #tests }
+ERTestModels >> addInvoice [
+	^ self database addInvoice: invoiceWtihoutCoupon .
 ]
 
 { #category : #tests }
@@ -36,7 +51,7 @@ ERTestModels >> addPrice2 [
 
 { #category : #tests }
 ERTestModels >> addUser [
-	self database addUser: user1.
+	^ self database addUser: user1.
 ]
 
 { #category : #accessing }
@@ -90,6 +105,17 @@ ERTestModels >> tearDown [
 	SDFooObject do: [:each | [each delete] on: Error do: [] ].
 	ERUser allSubclassesDo: [ :each | each coolDown ].
 	Smalltalk garbageCollectMost 
+]
+
+{ #category : #tests }
+ERTestModels >> testAddAccount [
+	|anAccount account|
+	
+	account := ERAccount testAccount: 'account' user: (self addUser) invoice: (self addInvoice) daysAssist: (self addDaysAssist) affiliationInformation: (self addAffiliationInformation).
+	
+	anAccount   := self database addAccount: account .
+	
+	self deny: anAccount isNil .
 ]
 
 { #category : #tests }
@@ -147,6 +173,15 @@ ERTestModels >> testAddInvoiceWithoutCoupon [
 	invoice  := self database addInvoice: invoiceWtihoutCoupon  .
 	
 	self deny: invoice isNil.
+]
+
+{ #category : #tests }
+ERTestModels >> testAddPrice [
+	|aPrice |
+	
+	aPrice  := self database addConference: price1 .
+	
+	self deny: aPrice isNil .
 ]
 
 { #category : #tests }
