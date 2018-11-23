@@ -14,6 +14,18 @@ Class {
 	#category : #'ESUGApp-Models'
 }
 
+{ #category : #tests }
+ERInvoice class >> testInvoiceWithCoupon: aCoupon [
+	^ (self new) amount: '100000'; coupon: aCoupon; paid: true; yourself .
+	
+]
+
+{ #category : #tests }
+ERInvoice class >> testInvoiceWithoutCoupon [
+	^ (self new) amount: '100000'; paid: true; yourself .
+	
+]
+
 { #category : #accessing }
 ERInvoice >> amount [
 	^ amount

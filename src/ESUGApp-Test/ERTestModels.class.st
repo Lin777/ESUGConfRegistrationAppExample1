@@ -5,10 +5,22 @@ Class {
 		'database',
 		'store',
 		'user1',
-		'user2'
+		'user2',
+		'invoiceWithCoupon',
+		'invoiceWtihoutCoupon',
+		'couponGold',
+		'couponPlatinum',
+		'conference',
+		'daysAssist',
+		'affiliation'
 	],
 	#category : #'ESUGApp-Test'
 }
+
+{ #category : #tests }
+ERTestModels >> addUser [
+	self database addUser: user1.
+]
 
 { #category : #accessing }
 ERTestModels >> database [
@@ -36,7 +48,19 @@ ERTestModels >> setUp [
 	
 	user1 := ERUser testUser: 'user1'.
 	user2 := ERUser testUser: 'user2'.
-
+	
+	affiliation := ERAfiliation testAffiliation: 'AffiliationExample'.
+	
+	couponGold := ERCoupon testCouponGoldSponsor: 'sponsorGold'.
+	couponPlatinum := ERCoupon testCouponPlatinumSponsor: 'sponsorPlatinum'.
+	
+	conference := ERConference testConference: 'ESUG_2019'.
+	
+	daysAssist := ERDaysAssist testDaysAssistAllDays .
+	
+	invoiceWithCoupon := ERInvoice testInvoiceWithCoupon: couponGold .
+	invoiceWtihoutCoupon := ERInvoice testInvoiceWithoutCoupon .
+	
 ]
 
 { #category : #running }
@@ -49,11 +73,19 @@ ERTestModels >> tearDown [
 ]
 
 { #category : #tests }
+ERTestModels >> testAddAffiliationInformation [
+	|affiliationInformation |
+	
+	affiliationInformation  := self database addAffiliationInfo: affiliation .
+	
+	self deny: affiliationInformation equals: nil .
+]
+
+{ #category : #tests }
 ERTestModels >> testAddUser [
 	|user|
 	
-	user := user1 .
-	user := self database addUser: user.
+	user := self database addUser: user1.
 	
 	self deny: user equals: nil .
 ]
@@ -61,7 +93,8 @@ ERTestModels >> testAddUser [
 { #category : #tests }
 ERTestModels >> testValidateLoginExistentUser [
 	|result|
-	result := user1 "database validateUserLogin: (ERUser new email: 'foo@gmail.com'; password: (ERUser hashPassword: '12345678') asString)".
+	self addUser .
+	result := database validateUserLogin: user1.
 	self deny: (result isNil)
 ]
 

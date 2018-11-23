@@ -16,6 +16,17 @@ Class {
 	#category : #'ESUGApp-Models'
 }
 
+{ #category : #tests }
+ERDaysAssist class >> testDaysAssistAllDays [
+	^ self new
+		monday: true;
+		tuesday: true;
+		wednesday: true;
+		thursday: true;
+		friday: true;
+		yourself
+]
+
 { #category : #accessing }
 ERDaysAssist >> friday [
 	^ friday

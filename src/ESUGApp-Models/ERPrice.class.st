@@ -7,20 +7,40 @@ Class {
 	#name : #ERPrice,
 	#superclass : #SDActiveRecord,
 	#instVars : [
-		'freePricingType',
+		'feePricingType',
 		'price'
 	],
 	#category : #'ESUGApp-Models'
 }
 
-{ #category : #accessing }
-ERPrice >> freePricingType [
-	^ freePricingType
+{ #category : #'as yet unclassified' }
+ERPrice class >> earlybirdFee [
+	^ (self new) feePricingType: 'Earlybird'; yourself .
+]
+
+{ #category : #'as yet unclassified' }
+ERPrice class >> stantdardFee [
+	^ (self new) feePricingType: 'Standard'; yourself.
+]
+
+{ #category : #tests }
+ERPrice class >> testPriceEarlybirdFee: aPrice [
+	^ (self earlybirdFee ) price: aPrice .
+]
+
+{ #category : #tests }
+ERPrice class >> testPriceStandardFee: aPrice [
+	^ (self stantdardFee ) price: aPrice .
 ]
 
 { #category : #accessing }
-ERPrice >> freePricingType: anObject [
-	freePricingType := anObject
+ERPrice >> feePricingType [
+	^ feePricingType
+]
+
+{ #category : #accessing }
+ERPrice >> feePricingType: anObject [
+	feePricingType := anObject
 ]
 
 { #category : #accessing }

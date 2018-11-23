@@ -11,6 +11,17 @@ Class {
 	#category : #'ESUGApp-Models'
 }
 
+{ #category : #tests }
+ERAfiliation class >> testAffiliation: aString [
+	^ self new
+		name: aString;
+		address: aString , ' address';
+		city: aString , 'city';
+		postalZipCode: aString , ' postal zip code';
+		provinceState: aString , ' province';
+		yourself
+]
+
 { #category : #accessing }
 ERAfiliation >> address [
 	^ address

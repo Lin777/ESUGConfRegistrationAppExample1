@@ -30,6 +30,31 @@ Class {
 	#category : #'ESUGApp-Models'
 }
 
+{ #category : #tests }
+ERAccount class >> testAccount: aString user: anUser invoice: anInvoice daysAssist: setDaysAssist affiliationInformation: anAffiliationInformation [
+	^ self new
+		firstName: aString;
+		lastName: aString , ' lastName';
+		gender: 'female';
+		address: aString , ' address';
+		city: aString , ' city';
+		country: aString , ' country';
+		provinceState: aString , ' province state';
+		postalZipCode: aString , ' postal zip code';
+		diet: 'vegetarian';
+		polosize: 'L';
+		user: anUser;
+		invoice: anInvoice;
+		daysAssist: setDaysAssist;
+		facebook: aString , ' facebook';
+		twitter: aString , ' twitter';
+		homePage: aString , ' home page';
+		affiliationInfo: anAffiliationInformation;
+		keywords: aString;
+		additionalText: aString;
+		yourself
+]
+
 { #category : #accessing }
 ERAccount >> additionalText [
 	^ additionalText
