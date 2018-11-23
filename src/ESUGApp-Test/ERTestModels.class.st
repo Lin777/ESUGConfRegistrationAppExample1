@@ -21,7 +21,7 @@ Class {
 
 { #category : #tests }
 ERTestModels >> addAffiliationInformation [
-	^ self database addAffiliationInfo: affiliation   .
+	^ self database addAffiliationInfo: affiliation.
 ]
 
 { #category : #tests }
@@ -77,6 +77,12 @@ ERTestModels >> setUp [
 	SDFooObject warmUp.
 	database := ERSandstoneDatabase new.
 	ERUser withAllSubclasses do: [ :each | each warmUp ].
+	ERAfiliation warmUp .
+	ERCoupon warmUp .
+	ERPrice warmUp .
+	ERConference warmUp .
+	ERDaysAssist warmUp.
+	ERInvoice warmUp .
 	
 	user1 := ERUser testUser: 'user1'.
 	user2 := ERUser testUser: 'user2'.
@@ -89,7 +95,7 @@ ERTestModels >> setUp [
 	price1 := ERPrice testPriceEarlybirdFee: '200'.
 	price2 := ERPrice testPriceStandardFee: '400'.
 	
-	conference := ERConference testConference: 'ESUG_2019'; prices: (OrderedCollection new add: (self addPrice1); add: (self addPrice2); yourself) .
+	conference := (ERConference testConference: 'ESUG_2019' prices: (OrderedCollection new add: (self addPrice1); add: (self addPrice2); yourself)) .
 	
 	daysAssist := ERDaysAssist testDaysAssistAllDays .
 	

@@ -49,7 +49,7 @@ ERAccount class >> testAccount: aString user: anUser invoice: anInvoice daysAssi
 		facebook: aString , ' facebook';
 		twitter: aString , ' twitter';
 		homePage: aString , ' home page';
-		affiliationInfo: anAffiliationInformation;
+		afiliation: anAffiliationInformation;
 		keywords: aString;
 		additionalText: aString;
 		yourself
