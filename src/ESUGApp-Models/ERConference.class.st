@@ -31,6 +31,19 @@ ERConference class >> testConference: aString [
 		yourself
 ]
 
+{ #category : #tests }
+ERConference class >> testConference: aString prices: setPrices [
+	^ self new
+		name: aString;
+		description: aString , ' description ....';
+		start: (Date newDay: 14 month: #Feb year: 2019);
+		stop: (Date newDay: 24 month: #Feb year: 2019);
+		stateRegistration: true;
+		attendees: OrderedCollection new;
+		prices: setPrices;
+		yourself
+]
+
 { #category : #initialization }
 ERConference >> addAttendee: anAccount [
 	^ self attendees add: anAccount 

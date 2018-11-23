@@ -60,6 +60,11 @@ ERSandstoneDatabase >> addInvoice: aInvoice [
 ]
 
 { #category : #adding }
+ERSandstoneDatabase >> addPrice: aPrice [
+	^ aPrice save.
+]
+
+{ #category : #adding }
 ERSandstoneDatabase >> addTask: aTask toUser: aUser [
 
  aUser save. 

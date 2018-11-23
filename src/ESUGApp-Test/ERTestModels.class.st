@@ -12,10 +12,27 @@ Class {
 		'couponPlatinum',
 		'conference',
 		'daysAssist',
-		'affiliation'
+		'affiliation',
+		'price1',
+		'price2'
 	],
 	#category : #'ESUGApp-Test'
 }
+
+{ #category : #tests }
+ERTestModels >> addCoupon [
+	^ self database addCoupon: couponGold 
+]
+
+{ #category : #tests }
+ERTestModels >> addPrice1 [
+	^ self database addPrice: price1 .
+]
+
+{ #category : #tests }
+ERTestModels >> addPrice2 [
+	^ self database addPrice: price2 .
+]
 
 { #category : #tests }
 ERTestModels >> addUser [
@@ -54,7 +71,10 @@ ERTestModels >> setUp [
 	couponGold := ERCoupon testCouponGoldSponsor: 'sponsorGold'.
 	couponPlatinum := ERCoupon testCouponPlatinumSponsor: 'sponsorPlatinum'.
 	
-	conference := ERConference testConference: 'ESUG_2019'.
+	price1 := ERPrice testPriceEarlybirdFee: '200'.
+	price2 := ERPrice testPriceStandardFee: '400'.
+	
+	conference := ERConference testConference: 'ESUG_2019'; prices: (OrderedCollection new add: (self addPrice1); add: (self addPrice2); yourself) .
 	
 	daysAssist := ERDaysAssist testDaysAssistAllDays .
 	
@@ -79,6 +99,54 @@ ERTestModels >> testAddAffiliationInformation [
 	affiliationInformation  := self database addAffiliationInfo: affiliation .
 	
 	self deny: affiliationInformation isNil .
+]
+
+{ #category : #tests }
+ERTestModels >> testAddConference [
+	|aConference |
+	
+	aConference  := self database addConference: conference .
+	
+	self deny: aConference isNil .
+]
+
+{ #category : #tests }
+ERTestModels >> testAddCoupon [
+	|aCouponGold aCouponPlatinum |
+	
+	aCouponGold  := self database addConference: couponGold .
+	aCouponPlatinum := self database addConference: couponPlatinum .
+	
+	self deny: aCouponGold isNil.
+	self deny: aCouponPlatinum isNil .
+]
+
+{ #category : #tests }
+ERTestModels >> testAddDaysAssist [
+	|setDays |
+	
+	setDays  := self database addDaysAssist: daysAssist .
+	
+	self deny: setDays isNil.
+]
+
+{ #category : #tests }
+ERTestModels >> testAddInvoiceWithCoupon [
+	|coupon invoice |
+	
+	coupon := self addCoupon .
+	invoice  := self database addInvoice: (ERInvoice testInvoiceWithCoupon: coupon )  .
+	
+	self deny: invoice isNil.
+]
+
+{ #category : #tests }
+ERTestModels >> testAddInvoiceWithoutCoupon [
+	|invoice |
+	
+	invoice  := self database addInvoice: invoiceWtihoutCoupon  .
+	
+	self deny: invoice isNil.
 ]
 
 { #category : #tests }
