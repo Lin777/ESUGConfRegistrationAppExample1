@@ -42,6 +42,11 @@ ERAfiliation >> city: anObject [
 	city := anObject
 ]
 
+{ #category : #initialization }
+ERAfiliation >> initialize [
+	super initialize
+]
+
 { #category : #accessing }
 ERAfiliation >> name1 [
 	^ name

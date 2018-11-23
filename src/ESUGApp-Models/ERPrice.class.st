@@ -43,6 +43,11 @@ ERPrice >> feePricingType: anObject [
 	feePricingType := anObject
 ]
 
+{ #category : #initialization }
+ERPrice >> initialize [
+	super initialize
+]
+
 { #category : #accessing }
 ERPrice >> price [
 	^ price

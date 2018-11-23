@@ -78,7 +78,7 @@ ERTestModels >> testAddAffiliationInformation [
 	
 	affiliationInformation  := self database addAffiliationInfo: affiliation .
 	
-	self deny: affiliationInformation equals: nil .
+	self deny: affiliationInformation isNil .
 ]
 
 { #category : #tests }
@@ -87,7 +87,7 @@ ERTestModels >> testAddUser [
 	
 	user := self database addUser: user1.
 	
-	self deny: user equals: nil .
+	self deny: user isNil .
 ]
 
 { #category : #tests }
