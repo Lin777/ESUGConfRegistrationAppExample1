@@ -106,8 +106,30 @@ ERTestModels >> setUp [
 
 { #category : #running }
 ERTestModels >> tearDown [
-	ERUser do: [ :each | [each delete] on: Error do: [] ].
-	ERUser coolDown.
+	ERAfiliation do: [ :each | [each delete] on: Error do: [] ].
+	ERAfiliation coolDown .
+	
+	ERAccount do: [ :each | [each delete] on: Error do: [] ].
+	ERAccount coolDown .
+	
+	ERConference do: [ :each | [each delete] on: Error do: [] ].
+	ERConference coolDown .
+	
+	ERCoupon do: [ :each | [each delete] on: Error do: [] ].
+	ERCoupon coolDown .
+	
+	ERDaysAssist  do: [ :each | [each delete] on: Error do: [] ].
+	ERDaysAssist coolDown .
+	
+	ERInvoice   do: [ :each | [each delete] on: Error do: [] ].
+	ERInvoice coolDown .
+	
+	ERPrice  do: [ :each | [each delete] on: Error do: [] ].
+	ERPrice coolDown .
+	
+	ERUser   do: [ :each | [each delete] on: Error do: [] ].
+	ERUser coolDown .
+	
 	SDFooObject do: [:each | [each delete] on: Error do: [] ].
 	ERUser allSubclassesDo: [ :each | each coolDown ].
 	Smalltalk garbageCollectMost 
@@ -117,7 +139,7 @@ ERTestModels >> tearDown [
 ERTestModels >> testAddAccount [
 	|anAccount account|
 	
-	account := ERAccount testAccount: 'account' user: (self addUser) invoice: (self addInvoice) daysAssist: (self addDaysAssist) affiliationInformation: (self addAffiliationInformation).
+	account := (ERAccount testAccount: 'account' user: (self addUser) invoice: (self addInvoice) daysAssist: (self addDaysAssist) affiliationInformation: (self addAffiliationInformation)).
 	
 	anAccount   := self database addAccount: account .
 	
