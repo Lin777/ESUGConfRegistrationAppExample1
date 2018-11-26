@@ -83,6 +83,7 @@ ERTestModels >> setUp [
 	ERConference warmUp .
 	ERDaysAssist warmUp.
 	ERInvoice warmUp .
+	ERAccount warmUp .
 	
 	user1 := ERUser testUser: 'user1'.
 	user2 := ERUser testUser: 'user2'.
@@ -130,8 +131,9 @@ ERTestModels >> tearDown [
 	ERUser   do: [ :each | [each delete] on: Error do: [] ].
 	ERUser coolDown .
 	
-	SDFooObject do: [:each | [each delete] on: Error do: [] ].
-	ERUser allSubclassesDo: [ :each | each coolDown ].
+	ERAccount  do: [:each | [each delete] on: Error do: [] ].
+	ERAccount  allSubclassesDo: [ :each | each coolDown ].
+	
 	Smalltalk garbageCollectMost 
 ]
 
