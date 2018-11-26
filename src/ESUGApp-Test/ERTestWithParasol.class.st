@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'driver',
 		'serverAdaptor',
-		'userRegistered'
+		'userRegistered',
+		'store'
 	],
 	#category : #'ESUGApp-Test'
 }
@@ -12,6 +13,11 @@ Class {
 { #category : #accessing }
 ERTestWithParasol >> baseURL [
 	^ 'http://localhost:8080/ESUG'
+]
+
+{ #category : #accessing }
+ERTestWithParasol >> defaultStore [
+	^ SDMemoryStore new
 ]
 
 { #category : #registerTests }
@@ -42,7 +48,8 @@ ERTestWithParasol >> firstStepSuccesfull [
 
 { #category : #accessing }
 ERTestWithParasol >> setUp [
-	"userRegistered := ERUser testUser: 'registeredUser'."
+	self warmUpModels .
+	userRegistered := ERUser testUser: 'registeredUser'.
 	serverAdaptor := (Smalltalk at: #ZnZincServerAdaptor) startOn: 8080.
 	driver := BPRemoteWebDriver withCapabilities: BPDesiredCapabilities chrome.
 	driver get: self baseURL 
@@ -50,8 +57,41 @@ ERTestWithParasol >> setUp [
 
 { #category : #accessing }
 ERTestWithParasol >> tearDown [
+	self tearDownModels .
 	driver quit.
 	serverAdaptor stop.
+]
+
+{ #category : #'as yet unclassified' }
+ERTestWithParasol >> tearDownModels [
+	ERAfiliation do: [ :each | [each delete] on: Error do: [] ].
+	ERAfiliation coolDown .
+	
+	ERAccount do: [ :each | [each delete] on: Error do: [] ].
+	ERAccount coolDown .
+	
+	ERConference do: [ :each | [each delete] on: Error do: [] ].
+	ERConference coolDown .
+	
+	ERCoupon do: [ :each | [each delete] on: Error do: [] ].
+	ERCoupon coolDown .
+	
+	ERDaysAssist  do: [ :each | [each delete] on: Error do: [] ].
+	ERDaysAssist coolDown .
+	
+	ERInvoice   do: [ :each | [each delete] on: Error do: [] ].
+	ERInvoice coolDown .
+	
+	ERPrice  do: [ :each | [each delete] on: Error do: [] ].
+	ERPrice coolDown .
+	
+	ERUser   do: [ :each | [each delete] on: Error do: [] ].
+	ERUser coolDown .
+	
+	ERAccount  do: [:each | [each delete] on: Error do: [] ].
+	ERAccount  allSubclassesDo: [ :each | each coolDown ].
+	
+	Smalltalk garbageCollectMost 
 ]
 
 { #category : #tests }
@@ -84,13 +124,14 @@ ERTestWithParasol >> testLoginErrorWhenThePasswordFieldIsNotEntered [
 { #category : #loginTests }
 ERTestWithParasol >> testLoginRegisteredUser [
 	|email password signIn|
+	userRegistered save.
 	email := driver findElementByID: 'email'.
 	password := driver findElementByID: 'password'.
 	signIn := driver findElementByID: 'loginbutton'.
-	email sendKeys: 'registeredUser@gmail.com'.
+	email sendKeys: userRegistered email.
 	password sendKeys: '12345678'.
 	signIn click .
-	self assert: (driver findElementByID: 'welcome') getText = 'Welcome to ESUG luchex@gmail.com'.
+	self assert: (driver findElementByID: 'userSessionEmail') getText = userRegistered email.
 ]
 
 { #category : #loginTests }
@@ -498,4 +539,20 @@ ERTestWithParasol >> testRegisterUserSuccesfull [
 	selectPaymentType selectByVisibleText: 'Bank transfer'.
 	reductionTicket sendKeys: '1234567890'.
 	selectCurrency selectByVisibleText: 'Euro'.
+]
+
+{ #category : #accessing }
+ERTestWithParasol >> warmUpModels [
+	store := self defaultStore.
+	SDActiveRecord setStore: store.
+	SDFooObject warmUp.
+	ERUser withAllSubclasses do: [ :each | each warmUp ].
+	ERAfiliation warmUp .
+	ERCoupon warmUp .
+	ERPrice warmUp .
+	ERConference warmUp .
+	ERDaysAssist warmUp.
+	ERInvoice warmUp .
+	ERAccount warmUp .
+	
 ]

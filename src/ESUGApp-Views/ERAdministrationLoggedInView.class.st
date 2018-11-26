@@ -18,7 +18,7 @@ ERAdministrationLoggedInView >> renderContentOn: html [
 								with: 'ESUG' ].
 					html unorderedList
 						class: 'list-unstyled components';
-						with: [ html paragraph: self session user email.
+						with: [ html paragraph id:'userSessionEmail'; with: self session user email.
 							html
 								listItem: [ html anchor
 										url: '#menu';
