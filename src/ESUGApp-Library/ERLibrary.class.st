@@ -229,8 +229,8 @@ span.round-tab i{
 label.error{
 	color: red
 }
-',
-self styleForHomePage .
+'",
+self styleForHomePage ."
 ]
 
 { #category : #updating }
@@ -304,7 +304,7 @@ function nextTab(elem) {
 function prevTab(elem) {
     $(elem).prev().find(''a[data-toggle="tab"]'').click();
 }'
-, self validatorForLogin, self validatorOfRegister, self homePageJS .
+, self validatorForLogin, self validatorOfRegister", self homePageJS ."
 ]
 
 { #category : #updating }

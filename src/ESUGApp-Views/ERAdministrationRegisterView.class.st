@@ -2,6 +2,27 @@ Class {
 	#name : #ERAdministrationRegisterView,
 	#superclass : #WAComponent,
 	#instVars : [
+		'firstName',
+		'lastName',
+		'registerEmail',
+		'registerPassword',
+		'registerConfirmPassword',
+		'contactAddress',
+		'contactCity',
+		'contactProvince',
+		'contactPostal',
+		'contactFacebook',
+		'contactTwitter',
+		'contactHomePage',
+		'organizationName',
+		'organizationAddress',
+		'organizationCity',
+		'organizationProvince',
+		'organizationPostal',
+		'listOfDays',
+		'listOfFoodPreference',
+		'contactAdditionalText',
+		'contactKeywords',
 		'step1',
 		'step2',
 		'step4',
@@ -27,7 +48,8 @@ ERAdministrationRegisterView >> additionalText: anObject [
 
 { #category : #accessing }
 ERAdministrationRegisterView >> checkboxFood [
-	^ checkboxFood
+	^ (ERForm new
+				list: self listOfFoodPreference )
 ]
 
 { #category : #accessing }
@@ -36,13 +58,109 @@ ERAdministrationRegisterView >> checkboxFood: anObject [
 ]
 
 { #category : #accessing }
-ERAdministrationRegisterView >> daysAssist [
-	^ daysAssist
+ERAdministrationRegisterView >> contactAdditionalText [
+	^ contactAdditionalText
 ]
 
 { #category : #accessing }
-ERAdministrationRegisterView >> daysAssist: anObject [
-	daysAssist := anObject
+ERAdministrationRegisterView >> contactAdditionalText: anObject [
+	contactAdditionalText := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactAddress [
+	^ contactAddress
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactAddress: anObject [
+	contactAddress := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactCity [
+	^ contactCity
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactCity: anObject [
+	contactCity := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactFacebook [
+	^ contactFacebook
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactFacebook: anObject [
+	contactFacebook := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactHomePage [
+	^ contactHomePage
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactHomePage: anObject [
+	contactHomePage := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactKeywords [
+	^ contactKeywords
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactKeywords: anObject [
+	contactKeywords := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactPostal [
+	^ contactPostal
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactPostal: anObject [
+	contactPostal := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactProvince [
+	^ contactProvince
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactProvince: anObject [
+	contactProvince := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactTwitter [
+	^ contactTwitter
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> contactTwitter: anObject [
+	contactTwitter := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> daysAssist [
+	^ (ERForm new
+				list: self listOfDays )
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> firstName [
+	^ firstName
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> firstName: anObject [
+	firstName := anObject
 ]
 
 { #category : #rendering }
@@ -200,7 +318,7 @@ ERAdministrationRegisterView >> itemDays: html [
 	html label: 'Days: '.
 	html div
 		class: 'form-group';
-		with: [ html render: daysAssist ]
+		with: [ html render: self daysAssist ]
 ]
 
 { #category : #rendering }
@@ -286,6 +404,37 @@ ERAdministrationRegisterView >> keywords: anObject [
 ]
 
 { #category : #accessing }
+ERAdministrationRegisterView >> lastName [
+	^ lastName
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> lastName: anObject [
+	lastName := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> listOfDays [
+	^ listOfDays
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> listOfDays: anObject [
+	listOfDays := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> listOfFoodPreference [
+	^ listOfFoodPreference
+	
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> listOfFoodPreference: anObject [
+	listOfFoodPreference := anObject
+]
+
+{ #category : #accessing }
 ERAdministrationRegisterView >> messageComponent [
 	^ messageComponent
 ]
@@ -293,6 +442,56 @@ ERAdministrationRegisterView >> messageComponent [
 { #category : #accessing }
 ERAdministrationRegisterView >> messageComponent: anObject [
 	messageComponent := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationAddress [
+	^ organizationAddress
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationAddress: anObject [
+	organizationAddress := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationCity [
+	^ organizationCity
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationCity: anObject [
+	organizationCity := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationName [
+	^ organizationName
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationName: anObject [
+	organizationName := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationPostal [
+	^ organizationPostal
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationPostal: anObject [
+	organizationPostal := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationProvince [
+	^ organizationProvince
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> organizationProvince: anObject [
+	organizationProvince := anObject
 ]
 
 { #category : #rendering }
@@ -310,6 +509,36 @@ ERAdministrationRegisterView >> registerButton [
 { #category : #accessing }
 ERAdministrationRegisterView >> registerButton: anObject [
 	registerButton := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> registerConfirmPassword [
+	^ registerConfirmPassword
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> registerConfirmPassword: anObject [
+	registerConfirmPassword := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> registerEmail [
+	^ registerEmail
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> registerEmail: anObject [
+	registerEmail := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> registerPassword [
+	^ registerPassword
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> registerPassword: anObject [
+	registerPassword := anObject
 ]
 
 { #category : #rendering }
@@ -350,30 +579,40 @@ ERAdministrationRegisterView >> renderContentOn: html [
 
 { #category : #accessing }
 ERAdministrationRegisterView >> step1 [
-	^ step1
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> step1: anObject [
-	step1 := anObject
+	^ (ERForm new
+				list:
+					(OrderedCollection new
+						add: self firstName;
+						add: self lastName;
+						add: self registerEmail ;
+						add: self registerPassword;
+						add: self registerConfirmPassword;
+						yourself))
 ]
 
 { #category : #accessing }
 ERAdministrationRegisterView >> step2 [
-	^ step2
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> step2: anObject [
-	step2 := anObject
+	^ (ERForm new
+				list:
+					(OrderedCollection new
+						add: self contactAddress ;
+						add: self contactCity ;
+						add: self contactProvince;
+						add: self contactPostal;
+						add: self contactFacebook ;
+						add: self contactTwitter ;
+						add: self contactHomePage;
+						yourself))
 ]
 
 { #category : #accessing }
 ERAdministrationRegisterView >> step4 [
-	^ step4
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> step4: anObject [
-	step4 := anObject
+	^ (ERForm new
+				list:
+					(OrderedCollection new
+						add: self organizationName ;
+						add: self organizationAddress;
+						add: self organizationCity ;
+						add: self organizationProvince ;
+						add: self organizationPostal ;yourself ))
 ]

@@ -14,22 +14,6 @@ Class {
 	#category : #'ESUGApp-Views'
 }
 
-{ #category : #initialization }
-ERAdministrationPageContentView class >> initialize [
- "self initialize"
- (WAAdmin
-  register: self
-  asApplicationAt: 'ESUG')
-	addLibrary: CssBootstrapLibrary337 ;
-	addLibrary: CssGoogleMonserratLibrary  ;
-	addLibrary: CssGoogleLatoLibrary  ;
-	addLibrary: JQGoogleLibrary331 ;
-	addLibrary: JQBootstrapLibrary337 ;
-   addLibrary: ERLibrary;
-	addLibrary: JQValidateForm ;
-  preferenceAt: #sessionClass put: ERSession.
-]
-
 { #category : #accessing }
 ERAdministrationPageContentView >> account [
 	^ account
@@ -249,6 +233,11 @@ ERAdministrationPageContentView >> getMessageLogin [
 ]
 
 { #category : #initialization }
+ERAdministrationPageContentView >> getMessageRegister [
+	^ (ERComponentAlert warningAlert id: 'registerAlert')
+]
+
+{ #category : #initialization }
 ERAdministrationPageContentView >> getOrganizationAddress [
 	^ ERTextInputComponent
 		id: 'orgAddress'
@@ -352,14 +341,17 @@ ERAdministrationPageContentView >> getRegisterPassword [
 		name: 'registerPassword'
 		type: 'password'
 		label: 'Password'
-		callback:
-			[ :value | self user password: (ERUser hashPassword: value) asString ]
+		callback: [ :value | self user password: (ERUser hashPassword: value) asString ]
 ]
 
 { #category : #initialization }
 ERAdministrationPageContentView >> initialize [
 	super initialize.
 	user := ERUser new.
+	account := ERAccount new.
+	daysAssist := ERDaysAssist new.
+	afiliationInfo := ERAfiliation new.
+	invoice := ERInvoice new.
 	self initializeLoginComponent .
 	self initializeRegisterComponent .
 ]
@@ -375,52 +367,31 @@ ERAdministrationPageContentView >> initializeLoginComponent [
 
 { #category : #initialization }
 ERAdministrationPageContentView >> initializeRegisterComponent [
-	account := ERAccount new.
-	daysAssist := ERDaysAssist new.
-	afiliationInfo := ERAfiliation new.
-	invoice := ERInvoice new.
 	registerComponent := ERAdministrationRegisterView new
-		step1:
-			(ERForm new
-				list:
-					(OrderedCollection new
-						add: self getFirstName;
-						add: self getLastName;
-						add: self getRegisterEmail;
-						add: self getRegisterPassword;
-						add: self getRegisterConfirmPassword;
-						yourself));
-		step2:
-			(ERForm new
-				list:
-					(OrderedCollection new
-						add: self getContactAddress;
-						add: self getContactCity;
-						add: self getContactProvince;
-						add: self getContactPostal;
-						add: self getContactFacebook;
-						add: self getContactTwitter;
-						add: self getContactHomePage;
-						yourself));
-		step4:
-			(ERForm new
-				list:
-					(OrderedCollection new
-						add: self getOrganizationName;
-						add: self getOrganizationAddress;
-						add: self getOrganizationCity;
-						add: self getOrganizationProvince;
-						add: self getOrganizationPostal;yourself ));
+		firstName: self getFirstName ;
+		lastName: self getLastName ;
+		registerEmail: self getRegisterEmail ;
+		registerPassword: self getRegisterPassword ;
+		registerConfirmPassword: self getRegisterConfirmPassword;
+		contactAddress: self getContactAddress ;
+		contactCity: self getContactCity ;
+		contactProvince: self getContactProvince ;
+		contactPostal: self getContactPostal ;
+		contactFacebook: self getContactFacebook ;
+		contactTwitter: self getContactTwitter ;
+		contactHomePage: self getContactHomePage ;
+		organizationName: self getOrganizationName ;
+		organizationAddress: self getOrganizationAddress ;
+		organizationCity: self getOrganizationCity ;
+		organizationProvince: self getOrganizationProvince ;
+		organizationPostal: self getOrganizationPostal ;
 		registerButton: self getRegisterButton;
-		daysAssist:
-			(ERForm new
-				list: self getListOfDays);
-		checkboxFood:
-			(ERForm new
-				list: self getListOfFoodPreference);
+		listOfDays: self getListOfDays;
+		listOfFoodPreference: self getListOfFoodPreference ;
 		additionalText: self getContactAdditionalText ;
 		keywords: self getContactKeywords ;
-		messageComponent: (ERComponentAlert warningAlert id: 'registerAlert')
+		messageComponent: self getMessageRegister;
+		yourself .
 ]
 
 { #category : #accessing }

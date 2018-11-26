@@ -35,6 +35,7 @@ Example >> renderContentOn: html [
 			html select
 				class: 'form-control';
 				id: 'sel3';
+				callback: [ :value | Transcript show: value asString  ];
 				with: [ html option
 						value: 'Dollar';
 						label: 'Dollar';
