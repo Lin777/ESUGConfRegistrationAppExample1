@@ -4,5 +4,5 @@ Extension { #name : #WAHtmlCanvas }
 WAHtmlCanvas >> icon [
 	"Defines an icon element."
 
-	^ self tag: 'icon'
+	^ self tag: 'i'
 ]
