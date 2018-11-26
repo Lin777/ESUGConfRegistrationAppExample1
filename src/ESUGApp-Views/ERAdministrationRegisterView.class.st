@@ -175,7 +175,7 @@ ERAdministrationRegisterView >> formStep6: html [
 						listItem: [ html
 								render:
 									(ERComponentButton skipButton
-										id: 'skip5';
+										id: 'skip6';
 										callback: self registerButton callback) ].
 					html listItem: [ html render: self registerButton ] ] ]
 ]

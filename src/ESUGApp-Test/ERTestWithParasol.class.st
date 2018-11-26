@@ -3,7 +3,8 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'driver',
-		'serverAdaptor'
+		'serverAdaptor',
+		'userRegistered'
 	],
 	#category : #'ESUGApp-Test'
 }
@@ -41,6 +42,7 @@ ERTestWithParasol >> firstStepSuccesfull [
 
 { #category : #accessing }
 ERTestWithParasol >> setUp [
+	"userRegistered := ERUser testUser: 'registeredUser'."
 	serverAdaptor := (Smalltalk at: #ZnZincServerAdaptor) startOn: 8080.
 	driver := BPRemoteWebDriver withCapabilities: BPDesiredCapabilities chrome.
 	driver get: self baseURL 
@@ -85,7 +87,7 @@ ERTestWithParasol >> testLoginRegisteredUser [
 	email := driver findElementByID: 'email'.
 	password := driver findElementByID: 'password'.
 	signIn := driver findElementByID: 'loginbutton'.
-	email sendKeys: 'luchex@gmail.com'.
+	email sendKeys: 'registeredUser@gmail.com'.
 	password sendKeys: '12345678'.
 	signIn click .
 	self assert: (driver findElementByID: 'welcome') getText = 'Welcome to ESUG luchex@gmail.com'.
