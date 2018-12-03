@@ -18,7 +18,9 @@ To load the ESUGApp package into the Pharo image:
 Metacello new
  baseline:'ESUGApp';
  repository: 'github://Lin777/ESUGConfRegistrationApp:master/src';
- load
+ load.
+ 
+ (Smalltalk at: #ZnZincServerAdaptor) startOn: 8080.
 ```
 
 You can see the application run in: http://localhost:8080/ESUG
