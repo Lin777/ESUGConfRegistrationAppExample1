@@ -21,6 +21,8 @@ Metacello new
  load
 ```
 
+You can see the application run in: http://localhost:8080/ESUG
+
 ## Run Tests
 
 The tests for the model run like any test.
