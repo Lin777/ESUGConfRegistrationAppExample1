@@ -93,6 +93,17 @@ ERSandstoneDatabase >> findUserByEmail: aString [
 ]
 
 { #category : #adding }
+ERSandstoneDatabase >> getAccountByUser: anUser [
+	^ ERAccount find: [ :each | each user = anUser ].
+	
+]
+
+{ #category : #adding }
+ERSandstoneDatabase >> getRoleOfAUser: anUser [
+	^ anUser role 
+]
+
+{ #category : #adding }
 ERSandstoneDatabase >> updateUser: aUser [
 	
 ]

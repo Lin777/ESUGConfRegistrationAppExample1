@@ -33,4 +33,17 @@ ERRoot >> go [
  user ifNotNil: [
   self session login: user.
   self call: ERAdministrationLoggedInView new].
+
+"
+ | loginAnswer user |
+ loginAnswer := self call: ERAdministrationPageContentView new.
+ loginAnswer = #registerUser
+  ifTrue: [user := self call: ERRegisterComponent new]
+  ifFalse: [user := loginAnswer].
+ loginAnswer = #registerUserAsGroupManager
+ifTrue: [ user := self call: ERRegisterAsGroupManagerComponent new ]
+ifFalse: [ user := loginAnswer ].
+ user ifNotNil: [
+  self session login: user.
+  self call: ERAdministrationLoggedInView new]."
 ]

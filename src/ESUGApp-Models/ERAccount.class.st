@@ -25,7 +25,9 @@ Class {
 		'homePage',
 		'afiliation',
 		'keywords',
-		'additionalText'
+		'additionalText',
+		'paymentType',
+		'paymentCurrency'
 	],
 	#category : #'ESUGApp-Models'
 }
@@ -200,6 +202,26 @@ ERAccount >> lastName [
 { #category : #accessing }
 ERAccount >> lastName: anObject [
 	lastName := anObject
+]
+
+{ #category : #accessing }
+ERAccount >> paymentCurrency [
+	^ paymentCurrency
+]
+
+{ #category : #accessing }
+ERAccount >> paymentCurrency: anObject [
+	paymentCurrency := anObject
+]
+
+{ #category : #accessing }
+ERAccount >> paymentType [
+	^ paymentType
+]
+
+{ #category : #accessing }
+ERAccount >> paymentType: anObject [
+	paymentType := anObject
 ]
 
 { #category : #accessing }

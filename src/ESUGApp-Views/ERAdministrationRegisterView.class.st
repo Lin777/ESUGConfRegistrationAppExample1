@@ -2,36 +2,37 @@ Class {
 	#name : #ERAdministrationRegisterView,
 	#superclass : #WAComponent,
 	#instVars : [
-		'firstName',
-		'lastName',
-		'registerEmail',
-		'registerPassword',
-		'registerConfirmPassword',
+		'additionalText',
+		'checkboxFood',
+		'contactAdditionalText',
 		'contactAddress',
 		'contactCity',
-		'contactProvince',
-		'contactPostal',
 		'contactFacebook',
-		'contactTwitter',
 		'contactHomePage',
-		'organizationName',
-		'organizationAddress',
-		'organizationCity',
-		'organizationProvince',
-		'organizationPostal',
+		'contactKeywords',
+		'contactPostal',
+		'contactProvince',
+		'contactTwitter',
+		'currency',
+		'daysAssist',
+		'firstName',
+		'keywords',
+		'lastName',
+		'listGender',
 		'listOfDays',
 		'listOfFoodPreference',
-		'contactAdditionalText',
-		'contactKeywords',
-		'step1',
-		'step2',
-		'step4',
-		'registerButton',
-		'daysAssist',
-		'checkboxFood',
-		'keywords',
-		'additionalText',
-		'messageComponent'
+		'tShirtSize',
+		'registerPassword',
+		'registerEmail',
+		'registerConfirmPassword',
+		'messageComponent',
+		'organizationAddress',
+		'organizationCity',
+		'organizationName',
+		'organizationPostal',
+		'organizationProvince',
+		'paymentType',
+		'registerButton'
 	],
 	#category : #'ESUGApp-Views'
 }
@@ -147,6 +148,16 @@ ERAdministrationRegisterView >> contactTwitter: anObject [
 	contactTwitter := anObject
 ]
 
+{ #category : #rendering }
+ERAdministrationRegisterView >> currency [
+	^ currency 
+]
+
+{ #category : #rendering }
+ERAdministrationRegisterView >> currency: anObject [
+	currency := anObject 
+]
+
 { #category : #accessing }
 ERAdministrationRegisterView >> daysAssist [
 	^ (ERForm new
@@ -258,16 +269,7 @@ ERAdministrationRegisterView >> formStep6: html [
 				with:
 					'Use the inter-country IBAN / BIC data (may need to ask your bank to process the payment).'.
 			html break.
-			html div
-				class: 'form-group';
-				with: [ html label
-						attributeAt: 'for' put: 'sel2';
-						with: 'Payment Type:'.
-					html select
-						class: 'form-control';
-						id: 'sel2';
-						with: [ html option: 'Bank transfer'.
-							html option: 'Credit Card' ] ].
+			html render: self paymentType.
 			html
 				render:
 					(ERTextInputComponent new
@@ -276,16 +278,7 @@ ERAdministrationRegisterView >> formStep6: html [
 						type: 'text';
 						callback: [ :value | Transcript show: value asString ];
 						label: 'Reduction ticket code').
-			html div
-				class: 'form-group';
-				with: [ html label
-						attributeAt: 'for' put: 'sel3';
-						with: 'Payment Type:'.
-					html select
-						class: 'form-control';
-						id: 'sel3';
-						with: [ html option: 'Dollar'.
-							html option: 'Euro' ] ].
+				html render: self currency.
 			html unorderedList
 				class: 'list-inline pull-right';
 				with: [ html listItem: [ html render: (ERComponentButton previousButton id: 'prev5') ].
@@ -302,10 +295,9 @@ ERAdministrationRegisterView >> formStep6: html [
 ERAdministrationRegisterView >> gender: html [
 	html label: 'Gender:'.
 	html div class: 'form-group'; with: [ 
-		html label class: 'radio-inline'; with:[
-			html radioButton name: 'optRadio'; checked: true	; with: 'Female']. 
-		html label class: 'radio-inline'; with:[
-			html radioButton name: 'optRadio'; with: 'Male'	].]
+		self listGender do: [:each | 
+			html render: each
+			 ]]
 ]
 
 { #category : #initialization }
@@ -414,6 +406,16 @@ ERAdministrationRegisterView >> lastName: anObject [
 ]
 
 { #category : #accessing }
+ERAdministrationRegisterView >> listGender [
+	^ listGender
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> listGender: anObject [
+	listGender := anObject 
+]
+
+{ #category : #accessing }
 ERAdministrationRegisterView >> listOfDays [
 	^ listOfDays
 ]
@@ -494,11 +496,20 @@ ERAdministrationRegisterView >> organizationProvince: anObject [
 	organizationProvince := anObject
 ]
 
+{ #category : #accessing }
+ERAdministrationRegisterView >> paymentType [
+	^ paymentType
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> paymentType: anObject [
+	paymentType :=anObject
+]
+
 { #category : #rendering }
 ERAdministrationRegisterView >> polo: html [
 	html div class: 'form-group'; with: [ 
-		html render: (ERTextSelectComponent id: 'sel1' label: 'Tshirt Size:' listOption: #('XS' 'S' 'M' 'L' 'XL' 'XXL' 'XXXL' 'XXXXL')).
-		 ]
+		html render: tShirtSize ]
 ]
 
 { #category : #accessing }
@@ -553,28 +564,38 @@ ERAdministrationRegisterView >> renderContentOn: html [
 						html div class: 'wizard'; with:[
 							html div class: 'wizard-inner'; with: [ 
 								html unorderedList class: 'nav nav-tabs';  attributeAt: 'role' put: 'tablist'; with: [ 
-									self itemListRegister: html.
-									self itemListPersonalInformation: html.
-									self itemListConferenceOptions: html.
-									self itemListAfiliationInformation: html.
-									self itemListAditiaonalInformation: html.
-									self itemListPaymentRegister: html.
-									self itemListComplete: html.
+									self renderItems: html.
 								 ]].
 							html render: self messageComponent.
 							html form method: 'post'; id: 'formRegister'; name: 'formRegister'; attributeAt: 'role' put: 'form'; with: [ 
 								html div class: 'tab-content'; with: [ 
-									self formStep1: html.
-									self formStep2: html.
-									self formStep3: html.
-									self formStep4: html.
-									self formStep5: html. 
-									self formStep6: html. 
+									self renderForms: html. 
 								 	html div class: 'tab-pane'; attributeAt: 'role' put: 'tabpanel'; id: 'complete'; with: [ 
 										html heading level3; with: 'Complete'.
 										html paragraph: 'You have successfully completed all steps.' ].
 									html div class: 'clearfix'.
 									]	]]]]]]]
+]
+
+{ #category : #rendering }
+ERAdministrationRegisterView >> renderForms: html [
+	self formStep1: html.
+	self formStep2: html.
+	self formStep3: html.
+	self formStep4: html.
+	self formStep5: html. 
+	self formStep6: html.
+]
+
+{ #category : #rendering }
+ERAdministrationRegisterView >> renderItems: html [
+	self itemListRegister: html.
+	self itemListPersonalInformation: html.
+	self itemListConferenceOptions: html.
+	self itemListAfiliationInformation: html.
+	self itemListAditiaonalInformation: html.
+	self itemListPaymentRegister: html.
+	self itemListComplete: html.
 ]
 
 { #category : #accessing }
@@ -615,4 +636,14 @@ ERAdministrationRegisterView >> step4 [
 						add: self organizationCity ;
 						add: self organizationProvince ;
 						add: self organizationPostal ;yourself ))
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> tShirtSize [
+	^ tShirtSize
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> tShirtSize: aObject [
+	 tShirtSize := aObject 
 ]

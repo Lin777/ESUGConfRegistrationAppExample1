@@ -20,6 +20,16 @@ ERTextSelectComponent class >> id: aId label: aLabel listOption: aList [
 ]
 
 { #category : #'as yet unclassified' }
+ERTextSelectComponent class >> id: aId label: aLabel listOption: aList callback: aBlock [
+	^ self new
+		id: aId;
+		label: aLabel;
+		listOptions: aList;
+		callback: aBlock;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 ERTextSelectComponent class >> id: aId listOption: aList [
 	^ self new
 		id: aId;
@@ -69,10 +79,14 @@ ERTextSelectComponent >> listOptions: anObject [
 
 { #category : #rendering }
 ERTextSelectComponent >> renderContentOn: html [
-		html div class: 'form-group'; with: [ 
-			html label attributeAt: 'for' put: self id; with: self label.
-			html select class: 'form-control'; id: self id; "callback: self callback;" with: [ 
-					self listOptions 
-						do: [ :each | 
-							html option: each .].]].
+	html div
+		class: 'form-group';
+		with: [ html label
+				attributeAt: 'for' put: self id;
+				with: self label.
+			html select
+				class: 'form-control';
+				id: self id;
+				list: self listOptions;
+				callback: self callback]
 ]

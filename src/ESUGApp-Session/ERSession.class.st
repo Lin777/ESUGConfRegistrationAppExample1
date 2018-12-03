@@ -72,7 +72,7 @@ ERSession >> unregistered [
 ERSession >> updateRoot: anHtmlRoot [
 
  super updateRoot: anHtmlRoot.
- anHtmlRoot title: ERLibrary  applicationName.
+ anHtmlRoot title: ERLibrary applicationName.
 ]
 
 { #category : #accessing }

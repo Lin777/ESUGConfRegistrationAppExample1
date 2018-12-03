@@ -5,8 +5,10 @@ Class {
 		'name',
 		'address',
 		'city',
+		'country',
 		'provinceState',
-		'postalZipCode'
+		'postalZipCode',
+		'membershipType'
 	],
 	#category : #'ESUGApp-Models'
 }
@@ -42,9 +44,29 @@ ERAfiliation >> city: anObject [
 	city := anObject
 ]
 
+{ #category : #accessing }
+ERAfiliation >> country [
+	^ country
+]
+
+{ #category : #accessing }
+ERAfiliation >> country: anObject [
+	country := anObject
+]
+
 { #category : #initialization }
 ERAfiliation >> initialize [
 	super initialize
+]
+
+{ #category : #accessing }
+ERAfiliation >> membershipType [
+	^ membershipType
+]
+
+{ #category : #accessing }
+ERAfiliation >> membershipType: anObject [
+	membershipType := anObject
 ]
 
 { #category : #accessing }

@@ -70,21 +70,7 @@ ERTestModels >> defaultStore [
 ]
 
 { #category : #tests }
-ERTestModels >> setUp [
-	store := self defaultStore.
-	SDActiveRecord setStore: store.
-	"only want to warm up test models, not anything else that might be in this image"
-	SDFooObject warmUp.
-	database := ERSandstoneDatabase new.
-	ERUser withAllSubclasses do: [ :each | each warmUp ].
-	ERAfiliation warmUp .
-	ERCoupon warmUp .
-	ERPrice warmUp .
-	ERConference warmUp .
-	ERDaysAssist warmUp.
-	ERInvoice warmUp .
-	ERAccount warmUp .
-	
+ERTestModels >> initializeModelsResource [
 	user1 := ERUser testUser: 'user1'.
 	user2 := ERUser testUser: 'user2'.
 	
@@ -103,6 +89,24 @@ ERTestModels >> setUp [
 	invoiceWithCoupon := ERInvoice testInvoiceWithCoupon: couponGold .
 	invoiceWtihoutCoupon := ERInvoice testInvoiceWithoutCoupon .
 	
+]
+
+{ #category : #tests }
+ERTestModels >> setUp [
+	store := self defaultStore.
+	SDActiveRecord setStore: store.
+	SDFooObject warmUp.
+	database := ERSandstoneDatabase new.
+	ERUser withAllSubclasses do: [ :each | each warmUp ].
+	ERAfiliation warmUp .
+	ERCoupon warmUp .
+	ERPrice warmUp .
+	ERConference warmUp .
+	ERDaysAssist warmUp.
+	ERInvoice warmUp .
+	ERAccount warmUp .
+	
+	self initializeModelsResource.
 ]
 
 { #category : #running }

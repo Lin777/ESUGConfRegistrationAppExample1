@@ -9,10 +9,25 @@ Class {
 	#instVars : [
 		'email',
 		'password',
-		'rol'
+		'role'
 	],
 	#category : #'ESUGApp-Models'
 }
+
+{ #category : #accessing }
+ERUser class >> asAdmin [
+	^ self new role: 'admin'; yourself 
+]
+
+{ #category : #accessing }
+ERUser class >> asGroupManager [
+	^ self new role: 'groupManager'; yourself 
+]
+
+{ #category : #accessing }
+ERUser class >> asStudentVolunter [
+	^ self new role: 'studentVolunter'; yourself 
+]
 
 { #category : #'as yet unclassified' }
 ERUser class >> email: aEmail password: aPassword [
@@ -47,7 +62,7 @@ ERUser >> email: anObject [
 { #category : #initialization }
 ERUser >> initialize [
 	super initialize.
-	rol := 'attendee'.
+	role := 'attendee'.
 	
 ]
 
@@ -63,10 +78,10 @@ ERUser >> password: anObject [
 
 { #category : #accessing }
 ERUser >> role [
-	^ rol
+	^ role
 ]
 
 { #category : #accessing }
 ERUser >> role: anObject [
-	rol := anObject
+	role := anObject
 ]

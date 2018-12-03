@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'list'
 	],
-	#category : #'ESUGApp-Views'
+	#category : #'ESUGApp-Components'
 }
 
 { #category : #accessing }

@@ -87,3 +87,17 @@ ERRegisterAttendeeController >> register [
 			^ aUser ].
 	^ nil
 ]
+
+{ #category : #'tools registry' }
+ERRegisterAttendeeController >> registerAsGroupManager [
+	| user |
+	user := self session database findUserByEmail: aUser email.
+	user
+		ifNil: [ self aUser: (self session database addUser: aUser).
+				self affiliationInfo: (self session database addAffiliationInfo: affiliationInfo).
+			anAccount user: aUser.
+			anAccount afiliation: affiliationInfo.
+			anAccount := self session database addAccount: anAccount.
+			^ aUser ].
+	^ nil
+]
