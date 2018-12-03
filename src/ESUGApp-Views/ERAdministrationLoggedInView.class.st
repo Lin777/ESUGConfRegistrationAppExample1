@@ -9,28 +9,6 @@ Class {
 	#category : #'ESUGApp-Views'
 }
 
-{ #category : #rendering }
-ERAdministrationLoggedInView >> example [
-"value
-
-	| menuOptions |
-	
-	menuOptions := OrderedCollection new.
-	
-	menuOptions add: self homeMenu.
-	self isUserAdmin ifTrue: [ menuOptions add: self configurationMenu ].
-	mainView isRegistrationOpen ifTrue: [
-		self isUserAttendee ifTrue: [ menuOptions add: self personalRegistrationMenu ].
-		self isUserGroupManager ifTrue: [ menuOptions add: self groupManagerRegistrationMenu ]].
-	
-	menuOptions 
-		add: self administrationMenu;
-		add: self logoutMenu.
-		
-	^ menuOptions
-	"
-]
-
 { #category : #accessing }
 ERAdministrationLoggedInView >> footer [
 	^ footer
@@ -41,19 +19,77 @@ ERAdministrationLoggedInView >> footer: anObject [
 	footer := anObject
 ]
 
-{ #category : #rendering }
-ERAdministrationLoggedInView >> getPrivilegesAsUserType [
-	| role |
-	role := self session user role.
-	role = 'attendee' ifTrue: [ ^ #('Home' 'My Registration' 'Admin' 'Logout') ].
-	role = 'groupManager' ifTrue: [ ^ #('Home' 'Group registration' 'Admin' 'Logout') ].
-	role = 'admin' ifTrue: [ ^ #('Home' 'Configuration' 'Admin' 'Logout') ]
+{ #category : #accessing }
+ERAdministrationLoggedInView >> getItemByRole [
+	self isAttendee ifTrue: [ 
+		^ ERNavBarItem new
+				label: 'MY REGISTRATION';
+				iconName: 'registration';
+				callback: [ self pageContent: nil ]].
+			
+	self isAdmin ifTrue: [ 
+		^ ERNavBarItem new
+				label: 'CONFIGURATION';
+				iconName: 'configuration';
+				callback: [ self pageContent: nil ]].
+			
+	self isGroupManager ifTrue: [ 
+		^ ERNavBarItem new
+				label: 'GROUP REGISTRATION';
+				iconName: 'groupRegistration';
+				callback: [ self pageContent: nil ] ].
+]
+
+{ #category : #accessing }
+ERAdministrationLoggedInView >> initialize [
+	super initialize .
+	self initializeNavBarComponent.
+	self pageContent: ERPageContentHome new.
 	
 ]
 
 { #category : #accessing }
+ERAdministrationLoggedInView >> initializeNavBarComponent [
+	| itemNavbar |
+	itemNavbar := self getItemByRole.
+	navBarComponent := ERNavBarComponentWithBootstrap new.
+	navBarComponent optionList
+		add:
+			(ERNavBarItem new
+				label: 'HOME';
+				iconName: 'home';
+				callback: [ self pageContent: ERPageContentHome new ]);
+		add: (itemNavbar );
+		add: (ERNavBarItem new
+				label: 'ADMIN';
+				iconName: 'admin';
+				callback: [ self pageContent: ERPageContentAdmin new ]);
+		add: (ERNavBarItem new
+				label: 'LOGOUT';
+				iconName: 'Logout';
+				callback: [ self session logout. self answer: true ]).
+	
+		
+]
+
+{ #category : #rendering }
+ERAdministrationLoggedInView >> isAdmin [
+	^ self session user role = 'admin'
+]
+
+{ #category : #rendering }
+ERAdministrationLoggedInView >> isAttendee [
+	^ self session user role = 'attendee'
+]
+
+{ #category : #rendering }
+ERAdministrationLoggedInView >> isGroupManager [
+	^ self session user role = 'groupManager'
+]
+
+{ #category : #accessing }
 ERAdministrationLoggedInView >> navBarComponent [
-	^ navBarComponent
+	^ navBarComponent 
 ]
 
 { #category : #accessing }
@@ -73,58 +109,7 @@ ERAdministrationLoggedInView >> pageContent: anObject [
 
 { #category : #rendering }
 ERAdministrationLoggedInView >> renderContentOn: html [
-	html div
-		class: 'wrapper';
-		with: [ html navigation
-				id: 'sidebar';
-				with: [ html div
-						class: 'sidebar-header';
-						with: [ html heading
-								level3;
-								id: 'esug';
-								with: 'ESUG' ].
-					html unorderedList
-						class: 'list-unstyled components';
-						with: [ html paragraph id:'userSessionEmail'; with: self session user email.
-							html
-								listItem: [ html anchor
-										url: '#menu';
-										with: 'Home' ].
-							html listItem
-								class: 'active';
-								with: [ html anchor
-										url: '#';
-										with: 'Attendees' ].
-							html
-								listItem: [ html anchor
-										url: '#account';
-										with: 'Acount' ] ] ].
-			html div
-				id: 'content';
-				with: [ html navigation
-						class: 'navbar1 navbar-default';
-						with: [ html div
-								class: 'container-fluid';
-								with: [ html div
-										class: 'navbar-header';
-										with: [ html button
-												type: 'button';
-												id: 'sidebarCollapse';
-												class: 'btn btn-primary navbar-btn';
-												with: [ html icon class: 'glyphicon glyphicon-align-left' ] ].
-									html div
-										class: 'collapse navbar-collapse';
-										id: 'bs-example-navbar-collapse-1';
-										with: [ html unorderedList
-												class: 'nav navbar-nav navbar-right';
-												with: [ html listItem: [ html anchor: 'Manage Attendees' ] ] ] ] ].
-					html div
-						class: 'panel panel-default';
-						with: [ html div
-								class: 'panel-body';
-								with: [ html div
-										class: 'page-header';
-										with: [ html heading
-												level1;
-												with: 'List of Attendees' ] ] ] ] ]
+	html render: self navBarComponent .
+	html render: self pageContent .
+	"html render: self footer."
 ]

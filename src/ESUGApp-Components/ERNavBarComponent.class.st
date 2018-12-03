@@ -17,8 +17,8 @@ ERNavBarComponent >> addEntry: aString withAction: aBlock [
 ERNavBarComponent >> initialize [
 	super initialize.
 	self optionList: OrderedCollection new.
-	self initializeOptionList
-
+	"self initializeOptionList
+"
 ]
 
 { #category : #adding }

@@ -3,10 +3,21 @@ Class {
 	#superclass : #WASession,
 	#instVars : [
 		'user',
-		'database'
+		'database',
+		'account'
 	],
 	#category : #'ESUGApp-Session'
 }
+
+{ #category : #accessing }
+ERSession >> account [
+	^ account
+]
+
+{ #category : #accessing }
+ERSession >> account: anObject [
+	account := anObject
+]
 
 { #category : #accessing }
 ERSession >> database [
@@ -41,15 +52,14 @@ ERSession >> isLoggedIn [
 
 { #category : #actions }
 ERSession >> login: aUser [
- 
- self user: aUser.
-
+	self user: aUser.
+	self account: (self database getAccountByUser: aUser)
 ]
 
 { #category : #actions }
 ERSession >> logout [
-
- self user: nil.
+	self user: nil.
+	self account: nil
 ]
 
 { #category : #actions }

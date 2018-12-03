@@ -41,7 +41,7 @@ ERMainView >> navigation: anObject [
 
 { #category : #rendering }
 ERMainView >> renderContentOn: html [
-	html render: self navigation .
+	html render: self navigation.
 	html render: self content.
-	html render: self footer .
+	html render: self footer.
 ]

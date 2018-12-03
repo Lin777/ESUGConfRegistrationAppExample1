@@ -113,6 +113,6 @@ ERSandstoneDatabase >> validateUserLogin: aUser [
 	| user |
 	user := self findUserByEmail: aUser email.
 	(user notNil and: [ user password = aUser password ])
-		ifTrue: [ ^ aUser ]
+		ifTrue: [ ^ user ]
 		ifFalse: [ ^ nil ]
 ]

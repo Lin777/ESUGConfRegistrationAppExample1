@@ -45,9 +45,6 @@ ERNavBarItem >> renderContentOn: html [
 	html anchor
 		class: 'nav-link';
 		callback: self callback;
-		with: [ html icon
-				class: 'material-icons';
-				with: [html text: self iconName].
-			html text: self label ].
-	html html: '</li>'
+		with: [html text: self label.].
+	html html: '</li>'.
 ]

@@ -35,6 +35,12 @@ ERAdministrationPageContentView >> afiliationInfo: anObject [
 	afiliationInfo := anObject
 ]
 
+{ #category : #hooks }
+ERAdministrationPageContentView >> children [
+ 
+ ^ Array with: loginComponent ; with: registerComponent ; with: registerAsGroupComponent 
+]
+
 { #category : #accessing }
 ERAdministrationPageContentView >> daysAssist [
 	^ daysAssist
