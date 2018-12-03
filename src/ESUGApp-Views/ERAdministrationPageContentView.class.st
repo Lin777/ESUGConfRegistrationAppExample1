@@ -545,7 +545,7 @@ ERAdministrationPageContentView >> initializeRegisterAsGroupManagerComponent [
 						callback: [ :value | self afiliationInfo city: value ]);
 				organizationCountry:
 					(ERTextSelectComponent
-						id: 'organizationCountry'
+						id: 'organizationCountryGM'
 						label: 'Country:'
 						listOption: ERAdministrationContactInformationRegister countries
 						callback:
@@ -577,6 +577,8 @@ ERAdministrationPageContentView >> initializeRegisterAsGroupManagerComponent [
 				callback: [ self registerAsGroupManager ]);
 		messageComponent:
 			(ERComponentAlert warningAlert id: 'registerAsGroupManagerAlert');
+			messageComponent: (ERComponentAlert warningAlert
+		id: 'registerAsGroupManagerAlert');
 		yourself
 ]
 

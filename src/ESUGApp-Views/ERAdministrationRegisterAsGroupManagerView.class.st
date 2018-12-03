@@ -242,6 +242,7 @@ ERAdministrationRegisterAsGroupManagerView >> registerButton: anObject [
 ERAdministrationRegisterAsGroupManagerView >> renderContentOn: html [
 	html div id: 'portafolio'; class: 'container-fluid text-center'; with: [ 
 		html form method: 'post'; id: 'formRegisterAsGroup'; name: 'formRegisterAsGroup'; attributeAt: 'role' put: 'form'; with: [
+		html heading level3 with: 'REGISTER AS GROUP MANAGER'.
 		html heading level3 with: 'User information'.
 		html render: self userForm.
 		html break.

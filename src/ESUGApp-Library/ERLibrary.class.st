@@ -304,7 +304,7 @@ function nextTab(elem) {
 function prevTab(elem) {
     $(elem).prev().find(''a[data-toggle="tab"]'').click();
 }'
-, self validatorForLogin, self validatorOfRegister", self homePageJS ."
+, self validatorForLogin, self validatorOfRegister", self homePageJS .", self validatorOfRegisterAsGroupManager
 ]
 
 { #category : #updating }
@@ -816,6 +816,81 @@ ERLibrary >> validatorOfRegister [
         }
     });
     $("#orgPostal").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Code Postal of your Organization"
+            }
+    });
+
+ });'
+]
+
+{ #category : #updating }
+ERLibrary >> validatorOfRegisterAsGroupManager [
+	^ ' $().ready(function() {
+    $("#formRegisterAsGroup").validate({
+    });
+    $("#firstNameGM").rules("add", {
+        required: true,
+        messages: {required: "Please enter your First Name"}
+    });
+    $("#lastNameGM").rules("add", {
+        required: true,
+        messages: {required: "Please enter your Last Name"}
+    });
+    $("#registerEmailGM").rules("add", {
+        required: true,
+        email: true, 
+        minlength: 8, 
+        maxlength:30,
+        messages: {
+            required: "Please enter your email", 
+            email: "The format of email is incorrect", 
+            minlength: "The minimum number of characters allowed is 8", 
+            maxlength: "The maximum number of characters allowed is 30"
+        }
+    });
+    $("#registerPasswordGM").rules("add", {
+        required: true,
+        minlength: 8, 
+        messages: {
+            required: "Please enter your password", 
+            minlength: "Your password must have at least 8 characters"
+        }
+    });
+    $("#registerConfirmPasswordGM").rules("add", {
+        required: true,
+        equalTo: "#registerPasswordGM",
+        messages: {
+            required: "Please confirm your password", 
+            equalTo: "Your password does not match"
+        }
+    });
+    $("#organizationNameGM").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Organization Name"
+        }
+    });
+    $("#organizationAddressGM").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Organization Address"
+        }
+    });
+    $("#organizationCityGM").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Organization City"
+        }
+    });
+    $("#organizationProvinceStateGM").rules("add", {
+        required: true,
+        messages: {
+            required: "Please enter your Organization Province"
+        }
+    });
+    $("#organizationPostalGM").rules("add", {
         required: true,
         messages: {
             required: "Please enter your Code Postal of your Organization"
