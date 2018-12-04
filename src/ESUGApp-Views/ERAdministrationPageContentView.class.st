@@ -489,7 +489,7 @@ ERAdministrationPageContentView >> initializeRegisterAsGroupManagerComponent [
 	registerAsGroupComponent := ERAdministrationRegisterAsGroupManagerView
 		new
 		userComponent:
-			(ERAdministrationUserRegister new
+			(ERTemplateUserRegister new
 				firstName:
 					(ERTextInputComponent
 						id: 'firstNameGM'
@@ -589,34 +589,48 @@ ERAdministrationPageContentView >> initializeRegisterAsGroupManagerComponent [
 { #category : #initialization }
 ERAdministrationPageContentView >> initializeRegisterComponent [
 	registerComponent := ERAdministrationRegisterView new
-		firstName: self getFirstName ;
-		lastName: self getLastName ;
-		registerEmail: self getRegisterEmail ;
-		registerPassword: self getRegisterPassword ;
-		registerConfirmPassword: self getRegisterConfirmPassword;
-		contactAddress: self getContactAddress ;
-		contactCity: self getContactCity ;
-		contactProvince: self getContactProvince ;
-		contactPostal: self getContactPostal ;
-		contactFacebook: self getContactFacebook ;
-		contactTwitter: self getContactTwitter ;
-		contactHomePage: self getContactHomePage ;
-		organizationName: self getOrganizationName ;
-		organizationAddress: self getOrganizationAddress ;
-		organizationCity: self getOrganizationCity ;
-		organizationProvince: self getOrganizationProvince ;
-		organizationPostal: self getOrganizationPostal ;
-		registerButton: self getRegisterButton;
-		listOfDays: self getListOfDays;
-		listOfFoodPreference: self getListOfFoodPreference ;
-		additionalText: self getContactAdditionalText ;
-		keywords: self getContactKeywords ;
+		userInformation:
+			(ERTemplateUserRegister new
+				firstName: self getFirstName;
+				lastName: self getLastName;
+				registerEmail: self getRegisterEmail;
+				registerPassword: self getRegisterPassword;
+				registerConfirmPassword: self getRegisterConfirmPassword);
+		userContactInformation:
+			(ERTemplateContactInformationRegister new
+				contactAddress: self getContactAddress;
+				contactCity: self getContactCity;
+				contactCountry: self getContactCity;
+				"Cambiar a Country"
+					contactFacebook: self getContactFacebook;
+				contactHomePage: self getContactHomePage;
+				contactProvince: self getContactProvince;
+				contactPostal: self getContactPostal;
+				contactTwitter: self getContactTwitter);
+		affiliationInformation:
+			(ERTemplateAffiliationInformationRegister new
+				membershipType: nil;
+				organizationAddress: self getOrganizationAddress;
+				organizationCity: self getOrganizationCity;
+				organizationCountry: nil;
+				organizationName: self getOrganizationName;
+				organizationProvince: self getOrganizationProvince;
+				organizationPostal: self getOrganizationPostal);
+		additionalInformation:
+			(ERTemplateAdditionalInformationRegister new
+				additionalText: self getContactAdditionalText;
+				keywords: self getContactKeywords);
+		conferenceOptions:
+			(ERTemplateConferenceOptionsRegister new
+				listGender: self getRadioButtonForGender;
+				listOfDays: self getListOfDays;
+				listOfFoodPreference: self getListOfFoodPreference;
+				tShirtSize: self getTShirtSize);
 		messageComponent: self getMessageRegister;
-		tShirtSize: self getTShirtSize;
 		paymentType: self getPaymentType;
 		currency: self getCurrencyType;
-		listGender: self getRadioButtonForGender;
-		yourself .
+		registerButton: self getRegisterButton;
+		yourself
 ]
 
 { #category : #accessing }

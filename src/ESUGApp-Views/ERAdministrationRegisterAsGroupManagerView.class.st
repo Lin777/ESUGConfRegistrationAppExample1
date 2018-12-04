@@ -170,7 +170,7 @@ ERAdministrationRegisterAsGroupManagerView >> initializeMessageComponent [
 
 { #category : #initialization }
 ERAdministrationRegisterAsGroupManagerView >> initializeUserComponent [
-	userComponent := ERAdministrationUserRegister new
+	userComponent := ERTemplateUserRegister new
 		firstName:
 			(ERTextInputComponent
 				id: 'firstNameGM'

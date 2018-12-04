@@ -1,6 +1,6 @@
 Class {
-	#name : #ERAdministrationUserRegister,
-	#superclass : #WAComponent,
+	#name : #ERTemplateUserRegister,
+	#superclass : #Object,
 	#instVars : [
 		'firstName',
 		'lastName',
@@ -8,55 +8,55 @@ Class {
 		'registerPassword',
 		'registerConfirmPassword'
 	],
-	#category : #'ESUGApp-Views'
+	#category : #'ESUGApp-Templates'
 }
 
 { #category : #accessing }
-ERAdministrationUserRegister >> firstName [
+ERTemplateUserRegister >> firstName [
 	^ firstName
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> firstName: anObject [
+ERTemplateUserRegister >> firstName: anObject [
 	firstName := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> lastName [
+ERTemplateUserRegister >> lastName [
 	^ lastName
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> lastName: anObject [
+ERTemplateUserRegister >> lastName: anObject [
 	lastName := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> registerConfirmPassword [
+ERTemplateUserRegister >> registerConfirmPassword [
 	^ registerConfirmPassword
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> registerConfirmPassword: anObject [
+ERTemplateUserRegister >> registerConfirmPassword: anObject [
 	registerConfirmPassword := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> registerEmail [
+ERTemplateUserRegister >> registerEmail [
 	^ registerEmail
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> registerEmail: anObject [
+ERTemplateUserRegister >> registerEmail: anObject [
 	registerEmail := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> registerPassword [
+ERTemplateUserRegister >> registerPassword [
 	^ registerPassword
 ]
 
 { #category : #accessing }
-ERAdministrationUserRegister >> registerPassword: anObject [
+ERTemplateUserRegister >> registerPassword: anObject [
 	registerPassword := anObject
 ]

@@ -2,35 +2,13 @@ Class {
 	#name : #ERAdministrationRegisterView,
 	#superclass : #WAComponent,
 	#instVars : [
-		'additionalText',
-		'checkboxFood',
-		'contactAdditionalText',
-		'contactAddress',
-		'contactCity',
-		'contactFacebook',
-		'contactHomePage',
-		'contactKeywords',
-		'contactPostal',
-		'contactProvince',
-		'contactTwitter',
+		'userInformation',
+		'userContactInformation',
+		'conferenceOptions',
+		'affiliationInformation',
+		'additionalInformation',
 		'currency',
-		'daysAssist',
-		'firstName',
-		'keywords',
-		'lastName',
-		'listGender',
-		'listOfDays',
-		'listOfFoodPreference',
-		'tShirtSize',
-		'registerPassword',
-		'registerEmail',
-		'registerConfirmPassword',
 		'messageComponent',
-		'organizationAddress',
-		'organizationCity',
-		'organizationName',
-		'organizationPostal',
-		'organizationProvince',
 		'paymentType',
 		'registerButton'
 	],
@@ -38,114 +16,39 @@ Class {
 }
 
 { #category : #accessing }
-ERAdministrationRegisterView >> additionalText [
-	^ additionalText
+ERAdministrationRegisterView >> additionalInformation [
+	^ additionalInformation
 ]
 
 { #category : #accessing }
-ERAdministrationRegisterView >> additionalText: anObject [
-	additionalText := anObject
+ERAdministrationRegisterView >> additionalInformation: anObject [
+	additionalInformation := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> affiliationInformation [
+	^ affiliationInformation
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> affiliationInformation: anObject [
+	affiliationInformation := anObject
 ]
 
 { #category : #accessing }
 ERAdministrationRegisterView >> checkboxFood [
 	^ (ERForm new
-				list: self listOfFoodPreference )
+				list: self conferenceOptions listOfFoodPreference )
 ]
 
 { #category : #accessing }
-ERAdministrationRegisterView >> checkboxFood: anObject [
-	checkboxFood := anObject
+ERAdministrationRegisterView >> conferenceOptions [
+	^ conferenceOptions
 ]
 
 { #category : #accessing }
-ERAdministrationRegisterView >> contactAdditionalText [
-	^ contactAdditionalText
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactAdditionalText: anObject [
-	contactAdditionalText := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactAddress [
-	^ contactAddress
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactAddress: anObject [
-	contactAddress := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactCity [
-	^ contactCity
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactCity: anObject [
-	contactCity := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactFacebook [
-	^ contactFacebook
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactFacebook: anObject [
-	contactFacebook := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactHomePage [
-	^ contactHomePage
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactHomePage: anObject [
-	contactHomePage := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactKeywords [
-	^ contactKeywords
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactKeywords: anObject [
-	contactKeywords := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactPostal [
-	^ contactPostal
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactPostal: anObject [
-	contactPostal := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactProvince [
-	^ contactProvince
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactProvince: anObject [
-	contactProvince := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactTwitter [
-	^ contactTwitter
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> contactTwitter: anObject [
-	contactTwitter := anObject
+ERAdministrationRegisterView >> conferenceOptions: anObject [
+	conferenceOptions := anObject
 ]
 
 { #category : #rendering }
@@ -161,17 +64,7 @@ ERAdministrationRegisterView >> currency: anObject [
 { #category : #accessing }
 ERAdministrationRegisterView >> daysAssist [
 	^ (ERForm new
-				list: self listOfDays )
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> firstName [
-	^ firstName
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> firstName: anObject [
-	firstName := anObject
+				list: self conferenceOptions listOfDays )
 ]
 
 { #category : #rendering }
@@ -246,8 +139,8 @@ ERAdministrationRegisterView >> formStep5: html [
 		attributeAt: 'role' put: 'tabpanel';
 		id: 'step5';
 		with: [ html break.
-			html render: self keywords.
-			html render: self additionalText.
+			html render: self additionalInformation keywords.
+			html render: self additionalInformation additionalText.
 			html unorderedList
 				class: 'list-inline pull-right';
 				with: [ html listItem: [ html render: (ERComponentButton previousButton id: 'prev4') ].
@@ -295,7 +188,7 @@ ERAdministrationRegisterView >> formStep6: html [
 ERAdministrationRegisterView >> gender: html [
 	html label: 'Gender:'.
 	html div class: 'form-group'; with: [ 
-		self listGender do: [:each | 
+		self conferenceOptions listGender do: [:each | 
 			html render: each
 			 ]]
 ]
@@ -386,57 +279,6 @@ html render: (ERTab class: 'active' url: 'step1' title: 'Registration' icon: 'gl
 ]
 
 { #category : #accessing }
-ERAdministrationRegisterView >> keywords [
-	^ keywords
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> keywords: anObject [
-	keywords := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> lastName [
-	^ lastName
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> lastName: anObject [
-	lastName := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> listGender [
-	^ listGender
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> listGender: anObject [
-	listGender := anObject 
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> listOfDays [
-	^ listOfDays
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> listOfDays: anObject [
-	listOfDays := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> listOfFoodPreference [
-	^ listOfFoodPreference
-	
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> listOfFoodPreference: anObject [
-	listOfFoodPreference := anObject
-]
-
-{ #category : #accessing }
 ERAdministrationRegisterView >> messageComponent [
 	^ messageComponent
 ]
@@ -444,56 +286,6 @@ ERAdministrationRegisterView >> messageComponent [
 { #category : #accessing }
 ERAdministrationRegisterView >> messageComponent: anObject [
 	messageComponent := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationAddress [
-	^ organizationAddress
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationAddress: anObject [
-	organizationAddress := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationCity [
-	^ organizationCity
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationCity: anObject [
-	organizationCity := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationName [
-	^ organizationName
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationName: anObject [
-	organizationName := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationPostal [
-	^ organizationPostal
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationPostal: anObject [
-	organizationPostal := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationProvince [
-	^ organizationProvince
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> organizationProvince: anObject [
-	organizationProvince := anObject
 ]
 
 { #category : #accessing }
@@ -509,7 +301,7 @@ ERAdministrationRegisterView >> paymentType: anObject [
 { #category : #rendering }
 ERAdministrationRegisterView >> polo: html [
 	html div class: 'form-group'; with: [ 
-		html render: tShirtSize ]
+		html render: self conferenceOptions tShirtSize ]
 ]
 
 { #category : #accessing }
@@ -520,36 +312,6 @@ ERAdministrationRegisterView >> registerButton [
 { #category : #accessing }
 ERAdministrationRegisterView >> registerButton: anObject [
 	registerButton := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> registerConfirmPassword [
-	^ registerConfirmPassword
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> registerConfirmPassword: anObject [
-	registerConfirmPassword := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> registerEmail [
-	^ registerEmail
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> registerEmail: anObject [
-	registerEmail := anObject
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> registerPassword [
-	^ registerPassword
-]
-
-{ #category : #accessing }
-ERAdministrationRegisterView >> registerPassword: anObject [
-	registerPassword := anObject
 ]
 
 { #category : #rendering }
@@ -603,11 +365,11 @@ ERAdministrationRegisterView >> step1 [
 	^ (ERForm new
 				list:
 					(OrderedCollection new
-						add: self firstName;
-						add: self lastName;
-						add: self registerEmail ;
-						add: self registerPassword;
-						add: self registerConfirmPassword;
+						add: self userInformation firstName;
+						add: self userInformation lastName;
+						add: self userInformation registerEmail ;
+						add: self userInformation registerPassword;
+						add: self userInformation registerConfirmPassword;
 						yourself))
 ]
 
@@ -616,13 +378,13 @@ ERAdministrationRegisterView >> step2 [
 	^ (ERForm new
 				list:
 					(OrderedCollection new
-						add: self contactAddress ;
-						add: self contactCity ;
-						add: self contactProvince;
-						add: self contactPostal;
-						add: self contactFacebook ;
-						add: self contactTwitter ;
-						add: self contactHomePage;
+						add: self userContactInformation contactAddress ;
+						add: self userContactInformation contactCity ;
+						add: self userContactInformation contactProvince;
+						add: self userContactInformation contactPostal;
+						add: self userContactInformation contactFacebook ;
+						add: self userContactInformation contactTwitter ;
+						add: self userContactInformation contactHomePage;
 						yourself))
 ]
 
@@ -631,19 +393,29 @@ ERAdministrationRegisterView >> step4 [
 	^ (ERForm new
 				list:
 					(OrderedCollection new
-						add: self organizationName ;
-						add: self organizationAddress;
-						add: self organizationCity ;
-						add: self organizationProvince ;
-						add: self organizationPostal ;yourself ))
+						add: self affiliationInformation organizationName ;
+						add: self affiliationInformation organizationAddress;
+						add: self affiliationInformation organizationCity ;
+						add: self affiliationInformation organizationProvince ;
+						add: self affiliationInformation organizationPostal ;yourself ))
 ]
 
 { #category : #accessing }
-ERAdministrationRegisterView >> tShirtSize [
-	^ tShirtSize
+ERAdministrationRegisterView >> userContactInformation [
+	^ userContactInformation
 ]
 
 { #category : #accessing }
-ERAdministrationRegisterView >> tShirtSize: aObject [
-	 tShirtSize := aObject 
+ERAdministrationRegisterView >> userContactInformation: anObject [
+	userContactInformation := anObject
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> userInformation [
+	^ userInformation
+]
+
+{ #category : #accessing }
+ERAdministrationRegisterView >> userInformation: anObject [
+	userInformation := anObject
 ]
