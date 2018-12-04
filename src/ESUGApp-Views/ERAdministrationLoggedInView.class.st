@@ -9,6 +9,12 @@ Class {
 	#category : #'ESUGApp-Views'
 }
 
+{ #category : #rendering }
+ERAdministrationLoggedInView >> children [
+ 
+ ^ Array with: navBarComponent  ; with: pageContent ; with: footer 
+]
+
 { #category : #accessing }
 ERAdministrationLoggedInView >> footer [
 	^ footer
@@ -37,7 +43,7 @@ ERAdministrationLoggedInView >> getItemByRole [
 		^ ERNavBarItem new
 				label: 'GROUP REGISTRATION';
 				iconName: 'groupRegistration';
-				callback: [ self pageContent: nil ] ].
+				callback: [ self pageContent: ERPageContentGroupRegistration new ] ].
 ]
 
 { #category : #accessing }
@@ -45,6 +51,7 @@ ERAdministrationLoggedInView >> initialize [
 	super initialize .
 	self initializeNavBarComponent.
 	self pageContent: ERPageContentHome new.
+	self footer: ERAdministrationFooterView new.
 	
 ]
 
@@ -111,5 +118,5 @@ ERAdministrationLoggedInView >> pageContent: anObject [
 ERAdministrationLoggedInView >> renderContentOn: html [
 	html render: self navBarComponent .
 	html render: self pageContent .
-	"html render: self footer."
+	html render: self footer.
 ]

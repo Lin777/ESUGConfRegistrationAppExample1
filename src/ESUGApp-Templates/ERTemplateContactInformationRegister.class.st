@@ -1,6 +1,6 @@
 Class {
-	#name : #ERAdministrationContactInformationRegister,
-	#superclass : #WAComponent,
+	#name : #ERTemplateContactInformationRegister,
+	#superclass : #Object,
 	#instVars : [
 		'contactAddress',
 		'contactCity',
@@ -11,11 +11,11 @@ Class {
 		'contactFacebook',
 		'contactHomePage'
 	],
-	#category : #'ESUGApp-Views'
+	#category : #'ESUGApp-Templates'
 }
 
 { #category : #'as yet unclassified' }
-ERAdministrationContactInformationRegister class >> countries [
+ERTemplateContactInformationRegister class >> countries [
 	  ^ #('Select Country' 'United States' 'United Kingdom' 'Afghanistan' 'Albania' 'Algeria' 'American Samoa' 'Andorra' 'Angola' 'Anguilla'
 'Antarctica' 'Antigua and Barbuda' 'Argentina' 'Armenia' 'Aruba' 'Australia' 'Austria' 'Azerbaijan' 'Bahamas' 'Bahrain' 'Bangladesh'
 'Barbados' 'Belarus' 'Belgium' 'Belize' 'Benin' 'Bermuda' 'Bhutan' 'Bolivia' 'Bosnia and Herzegovina' 'Botswana' 'Bouvet Island'
@@ -45,81 +45,81 @@ ERAdministrationContactInformationRegister class >> countries [
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactAddress [
+ERTemplateContactInformationRegister >> contactAddress [
 	^ contactAddress
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactAddress: anObject [
+ERTemplateContactInformationRegister >> contactAddress: anObject [
 	contactAddress := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactCity [
+ERTemplateContactInformationRegister >> contactCity [
 	^ contactCity
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactCity: anObject [
+ERTemplateContactInformationRegister >> contactCity: anObject [
 	contactCity := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactCountry [
+ERTemplateContactInformationRegister >> contactCountry [
 	^ contactCountry
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactCountry: anObject [
+ERTemplateContactInformationRegister >> contactCountry: anObject [
 	contactCountry := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactFacebook [
+ERTemplateContactInformationRegister >> contactFacebook [
 	^ contactFacebook
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactFacebook: anObject [
+ERTemplateContactInformationRegister >> contactFacebook: anObject [
 	contactFacebook := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactHomePage [
+ERTemplateContactInformationRegister >> contactHomePage [
 	^ contactHomePage
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactHomePage: anObject [
+ERTemplateContactInformationRegister >> contactHomePage: anObject [
 	contactHomePage := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactPostal [
+ERTemplateContactInformationRegister >> contactPostal [
 	^ contactPostal
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactPostal: anObject [
+ERTemplateContactInformationRegister >> contactPostal: anObject [
 	contactPostal := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactProvince [
+ERTemplateContactInformationRegister >> contactProvince [
 	^ contactProvince
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactProvince: anObject [
+ERTemplateContactInformationRegister >> contactProvince: anObject [
 	contactProvince := anObject
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactTwitter [
+ERTemplateContactInformationRegister >> contactTwitter [
 	^ contactTwitter
 ]
 
 { #category : #accessing }
-ERAdministrationContactInformationRegister >> contactTwitter: anObject [
+ERTemplateContactInformationRegister >> contactTwitter: anObject [
 	contactTwitter := anObject
 ]

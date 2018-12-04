@@ -43,6 +43,17 @@ ERUser class >> hashPassword: aString [
 
 ]
 
+{ #category : #initialization }
+ERUser class >> initialize [
+	"self initialize"
+	|user account|
+	user := ERUser asAdmin email: 'admin@esug.org'; password: (ERUser hashPassword: '12345678') asString.
+	user := user save.
+	account := ERAccount new firstName: 'Admin'; lastName: 'Admin'; user: user.
+	account save.
+	
+]
+
 { #category : #tests }
 ERUser class >> testUser: aString [ 
 	^ (self new) email: (aString, '@gmail.com'); password: (ERUser hashPassword: '12345678') asString; role: 'attendee'; yourself .

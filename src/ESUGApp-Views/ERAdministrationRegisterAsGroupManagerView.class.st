@@ -111,7 +111,7 @@ ERAdministrationRegisterAsGroupManagerView >> initialize [
 
 { #category : #initialization }
 ERAdministrationRegisterAsGroupManagerView >> initializeAffiliationComponent [
-	affiliationComponent := ERAdministrationAffiliationInformationRegister new organizationName: (ERTextInputComponent
+	affiliationComponent := ERTemplateAffiliationInformationRegister new organizationName: (ERTextInputComponent
 		id: 'organizationNameGM'
 		name: 'organizationNameGM'
 		type: 'text'
@@ -132,7 +132,7 @@ ERAdministrationRegisterAsGroupManagerView >> initializeAffiliationComponent [
 	organizationCountry: (ERTextSelectComponent
 		id: 'organizationCountry'
 		label: 'Country:'
-		listOption: (ERAdministrationContactInformationRegister countries ) 
+		listOption: (ERTemplateContactInformationRegister countries ) 
 		callback: [ :selectedObject | self affiliation organizationCountry: selectedObject  ]);
 	organizationProvince: (ERTextInputComponent
 		id: 'organizationProvinceStateGM'
@@ -244,6 +244,7 @@ ERAdministrationRegisterAsGroupManagerView >> renderContentOn: html [
 		html form method: 'post'; id: 'formRegisterAsGroup'; name: 'formRegisterAsGroup'; attributeAt: 'role' put: 'form'; with: [
 		html heading level3 with: 'REGISTER AS GROUP MANAGER'.
 		html heading level3 with: 'User information'.
+		html render: self messageComponent .
 		html render: self userForm.
 		html break.
 		html heading level3 with: 'Affiliation Information'.

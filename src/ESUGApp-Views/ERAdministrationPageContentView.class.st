@@ -527,7 +527,7 @@ ERAdministrationPageContentView >> initializeRegisterAsGroupManagerComponent [
 						label: 'Confirm Password'
 						callback: [ :value |  ]));
 		affiliationComponent:
-			(ERAdministrationAffiliationInformationRegister new
+			(ERTemplateAffiliationInformationRegister new
 				organizationName:
 					(ERTextInputComponent
 						id: 'organizationNameGM'
@@ -553,7 +553,7 @@ ERAdministrationPageContentView >> initializeRegisterAsGroupManagerComponent [
 					(ERTextSelectComponent
 						id: 'organizationCountryGM'
 						label: 'Country:'
-						listOption: ERAdministrationContactInformationRegister countries
+						listOption: ERTemplateContactInformationRegister countries
 						callback:
 							[ :selectedObject | self afiliationInfo country: selectedObject ]);
 				organizationProvince:
@@ -583,8 +583,6 @@ ERAdministrationPageContentView >> initializeRegisterAsGroupManagerComponent [
 				callback: [ self registerAsGroupManager ]);
 		messageComponent:
 			(ERComponentAlert warningAlert id: 'registerAsGroupManagerAlert');
-			messageComponent: (ERComponentAlert warningAlert
-		id: 'registerAsGroupManagerAlert');
 		yourself
 ]
 
@@ -672,7 +670,7 @@ ERAdministrationPageContentView >> registerAsGroupManager [
 		anAccount: self account;
 		yourself).
 	anUser := controller registerAsGroupManager .
-	anUser ifNil: [ self messageComponent errorMessage: 'This email is already registered' ]
+	anUser ifNil: [ self registerAsGroupComponent messageComponent errorMessage: 'This email is already registered' ]
 	ifNotNil: [ self answer: anUser  ]
 ]
 
