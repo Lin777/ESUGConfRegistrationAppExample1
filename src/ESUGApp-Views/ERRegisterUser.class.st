@@ -2,6 +2,14 @@ Class {
 	#name : #ERRegisterUser,
 	#superclass : #WAComponent,
 	#instVars : [
+		'userInformation',
+		'userContactInformation',
+		'conferenceOptions',
+		'affiliationInformation',
+		'additionalInformation',
+		'currency',
+		'paymentType',
+		'registerButton',
 		'user',
 		'afiliationInfo',
 		'daysAssist',
@@ -24,6 +32,26 @@ ERRegisterUser >> account: anObject [
 ]
 
 { #category : #accessing }
+ERRegisterUser >> additionalInformation [
+	^ additionalInformation
+]
+
+{ #category : #accessing }
+ERRegisterUser >> additionalInformation: anObject [
+	additionalInformation := anObject
+]
+
+{ #category : #accessing }
+ERRegisterUser >> affiliationInformation [
+	^ affiliationInformation
+]
+
+{ #category : #accessing }
+ERRegisterUser >> affiliationInformation: anObject [
+	affiliationInformation := anObject
+]
+
+{ #category : #accessing }
 ERRegisterUser >> afiliationInfo [
 	^ afiliationInfo
 ]
@@ -31,6 +59,26 @@ ERRegisterUser >> afiliationInfo [
 { #category : #accessing }
 ERRegisterUser >> afiliationInfo: anObject [
 	afiliationInfo := anObject
+]
+
+{ #category : #accessing }
+ERRegisterUser >> conferenceOptions [
+	^ conferenceOptions
+]
+
+{ #category : #accessing }
+ERRegisterUser >> conferenceOptions: anObject [
+	conferenceOptions := anObject
+]
+
+{ #category : #accessing }
+ERRegisterUser >> currency [
+	^ currency
+]
+
+{ #category : #accessing }
+ERRegisterUser >> currency: anObject [
+	currency := anObject
 ]
 
 { #category : #accessing }
@@ -164,11 +212,11 @@ ERRegisterUser >> getCountries [
 
 { #category : #initialization }
 ERRegisterUser >> getCountry [
-	^ (ERTextSelectComponent
+	^ ERTextSelectComponent
 		id: 'countries'
 		label: 'Country'
 		listOption: self getCountries
-		callback: [ :selectedOption | account country: selectedOption ])
+		callback: [ :selectedOption | account country: selectedOption ]
 ]
 
 { #category : #initialization }
@@ -383,6 +431,39 @@ ERRegisterUser >> getTShirtSize [
 		callback: [ :selectedObject | account polosize: selectedObject ])
 ]
 
+{ #category : #initialization }
+ERRegisterUser >> initialize [
+	super initialize.
+	self initializeUserInformation.
+	self initializeContactInformation.
+	self initializeConferenceOptions.
+	self initializeAffiliationInformation.
+	self initializeAdditionalInformation.
+]
+
+{ #category : #initialization }
+ERRegisterUser >> initializeContactInformation [
+	userContactInformation := ERTemplateContactInformationRegister new
+		contactAddress: self getContactAddress;
+		contactCity: self getContactCity;
+		contactCountry: self getCountry ;
+		contactFacebook: self getContactFacebook ;
+		contactHomePage: self getContactHomePage ;
+		contactTwitter: self getContactTwitter ;
+		contactProvince: self getContactProvince
+		contact
+]
+
+{ #category : #initialization }
+ERRegisterUser >> initializeUserInformation [
+	userInformation := ERTemplateUserRegister new
+		firstName: self getFirstName;
+		lastName: self getLastName;
+		registerPassword: self getRegisterPassword;
+		registerConfirmPassword: self getRegisterConfirmPassword;
+		registerEmail: self getRegisterEmail.
+]
+
 { #category : #accessing }
 ERRegisterUser >> invoice [
 	^ invoice
@@ -403,6 +484,16 @@ ERRegisterUser >> messageComponent: anObject [
 	messageComponent := anObject
 ]
 
+{ #category : #accessing }
+ERRegisterUser >> paymentType [
+	^ paymentType
+]
+
+{ #category : #accessing }
+ERRegisterUser >> paymentType: anObject [
+	paymentType := anObject
+]
+
 { #category : #initialization }
 ERRegisterUser >> registerAttendee [
 	| controller anUser|
@@ -410,6 +501,16 @@ ERRegisterUser >> registerAttendee [
 	anUser := controller register.
 	anUser ifNil: [  messageComponent errorMessage: 'This email is already registered' ]
 	ifNotNil: [ self answer: anUser  ]
+]
+
+{ #category : #accessing }
+ERRegisterUser >> registerButton [
+	^ registerButton
+]
+
+{ #category : #accessing }
+ERRegisterUser >> registerButton: anObject [
+	registerButton := anObject
 ]
 
 { #category : #accessing }
@@ -435,4 +536,24 @@ ERRegisterUser >> user [
 { #category : #accessing }
 ERRegisterUser >> user: anObject [
 	user := anObject
+]
+
+{ #category : #accessing }
+ERRegisterUser >> userContactInformation [
+	^ userContactInformation
+]
+
+{ #category : #accessing }
+ERRegisterUser >> userContactInformation: anObject [
+	userContactInformation := anObject
+]
+
+{ #category : #accessing }
+ERRegisterUser >> userInformation [
+	^ userInformation
+]
+
+{ #category : #accessing }
+ERRegisterUser >> userInformation: anObject [
+	userInformation := anObject
 ]
