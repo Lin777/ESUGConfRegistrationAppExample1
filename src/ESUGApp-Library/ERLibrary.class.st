@@ -466,7 +466,7 @@ footer {
 
 { #category : #updating }
 ERLibrary >> selectorsToInclude [
-	^ Array with: 'esugCss' "with: 'esugJs'"
+	^ Array with: 'esugCss' with: 'esugJs'
 	"For Bootstrap"
 	"For MDL""
 	Array with: 'mdlCss'"
