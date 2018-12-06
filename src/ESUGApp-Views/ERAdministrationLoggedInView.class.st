@@ -75,8 +75,6 @@ ERAdministrationLoggedInView >> initializeNavBarComponent [
 				label: 'LOGOUT';
 				iconName: 'Logout';
 				callback: [ self session logout. self answer: true ]).
-	
-		
 ]
 
 { #category : #rendering }

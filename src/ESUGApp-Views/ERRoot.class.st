@@ -36,14 +36,19 @@ ERRoot >> go [
 
 "
  | loginAnswer user |
- loginAnswer := self call: ERAdministrationPageContentView new.
+ loginAnswer := self call: ERLogin new.
  loginAnswer = #registerUser
-  ifTrue: [user := self call: ERRegisterComponent new]
+  ifTrue: [user := self call: ERRegisterUser new]
   ifFalse: [user := loginAnswer].
  loginAnswer = #registerUserAsGroupManager
 ifTrue: [ user := self call: ERRegisterAsGroupManagerComponent new ]
 ifFalse: [ user := loginAnswer ].
  user ifNotNil: [
   self session login: user.
-  self call: ERAdministrationLoggedInView new]."
+  self call: ERHome new]."
+]
+
+{ #category : #running }
+ERRoot >> initialize [
+	super initialize
 ]

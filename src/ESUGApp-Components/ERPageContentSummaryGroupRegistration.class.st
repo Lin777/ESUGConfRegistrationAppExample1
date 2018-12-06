@@ -10,6 +10,15 @@ Class {
 	#category : #'ESUGApp-Components'
 }
 
+{ #category : #hooks }
+ERPageContentSummaryGroupRegistration >> children [
+	^ Array
+		with: modifyAffiliationButton;
+		with: registerAttendeeButton;
+		with: payButton;
+		with: generateInvoiceButton
+]
+
 { #category : #accessing }
 ERPageContentSummaryGroupRegistration >> generateInvoiceButton [
 	^ generateInvoiceButton
@@ -70,10 +79,8 @@ ERPageContentSummaryGroupRegistration >> renderContentOn: html [
 		html heading level2; with: 'Group Manager Short Description'.
 		html heading level5; with: [ html paragraph with: 'Organization name: ', self session account afiliation name1.
 			html paragraph with: 'Payment status: No available. The group has no members' ].
-		
 		html render: self modifyAffiliationButton .
 		html render: self registerAttendeeButton .
 		html render: self payButton .
-		html render: self generateInvoiceButton . 
-		].
+		html render: self generateInvoiceButton . ].
 ]

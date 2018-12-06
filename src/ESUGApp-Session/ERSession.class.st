@@ -83,6 +83,8 @@ ERSession >> updateRoot: anHtmlRoot [
 
  super updateRoot: anHtmlRoot.
  anHtmlRoot title: ERLibrary applicationName.
+ anHtmlRoot beHtml5.
+	    anHtmlRoot stylesheet url: (WAUrl absolute: 'https://code.getmdl.io/1.3.0/material.blue-red.min.css').
 ]
 
 { #category : #accessing }

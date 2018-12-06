@@ -52,13 +52,6 @@ ERAdministrationPageContentView >> daysAssist: anObject [
 ]
 
 { #category : #initialization }
-ERAdministrationPageContentView >> getButtonLogin [
-	^ ERComponentButton loginButton
-		id: 'loginbutton';
-		callback: [ self loginUser ]
-]
-
-{ #category : #initialization }
 ERAdministrationPageContentView >> getContactAdditionalText [
 	^ ERTextAreaComponent new
 		label: 'Additional text';
@@ -284,6 +277,13 @@ ERAdministrationPageContentView >> getListOfFoodPreference [
 		yourself
 ]
 
+{ #category : #initialization }
+ERAdministrationPageContentView >> getLoginButton [
+	^ ERComponentButton loginButton
+		id: 'loginbutton';
+		callback: [ self loginUser ]
+]
+
 { #category : #'as yet unclassified' }
 ERAdministrationPageContentView >> getLoginController [
 	^ ERLoginController new
@@ -481,7 +481,7 @@ ERAdministrationPageContentView >> initializeLoginComponent [
 		messageComponent: self getMessageLogin;
 		emailComp: self getEmailLogin;
 		passComp: self getPasswordLogin;
-		buttonComp: self getButtonLogin.
+		buttonComp: self getLoginButton.
 ]
 
 { #category : #initialization }

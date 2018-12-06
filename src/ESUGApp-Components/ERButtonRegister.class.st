@@ -3,7 +3,9 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'id',
-		'callback'
+		'callback',
+		'label',
+		'type'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -28,6 +30,16 @@ ERButtonRegister >> id: anObject [
 	id := anObject
 ]
 
+{ #category : #accessing }
+ERButtonRegister >> label [
+	^ label
+]
+
+{ #category : #accessing }
+ERButtonRegister >> label: anObject [
+	label := anObject
+]
+
 { #category : #rendering }
 ERButtonRegister >> renderContentOn: html [
 	html button
@@ -37,4 +49,14 @@ ERButtonRegister >> renderContentOn: html [
 		class: 'btn btn-primary next-step';
 		callback: self callback;
 		with: 'Save and continue'
+]
+
+{ #category : #accessing }
+ERButtonRegister >> type [
+	^ type
+]
+
+{ #category : #accessing }
+ERButtonRegister >> type: anObject [
+	type := anObject
 ]

@@ -29,12 +29,16 @@ BaselineOfESUGApp >> setUpDependencies: spec [
 				loads: 'tests';
 				repository: 'github://SeasideSt/Parasol/repository' ].
 	spec
+		baseline: 'MaterialDesignLite'
+		with: [ spec
+				repository: 'github://DuneSt/MaterialDesignLite:master/src' ].
+	spec
 		project: 'SandstoneDb'
 		with: [ spec
 				className: 'ConfigurationOfSandstoneDb';
 				version: #stable;
-				repository: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main' ].
-"			
+				repository: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main' ]
+	"			
 		Gofer new
     url: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main';
     package: 'ConfigurationOfSandstoneDb';

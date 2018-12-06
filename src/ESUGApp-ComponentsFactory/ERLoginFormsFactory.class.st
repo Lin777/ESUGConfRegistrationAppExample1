@@ -8,13 +8,6 @@ Class {
 }
 
 { #category : #initialization }
-ERLoginFormsFactory >> getButtonLogin [
-	^ ERComponentButton loginButton
-		id: 'loginbutton';
-		callback: [ self loginUser ]
-]
-
-{ #category : #initialization }
 ERLoginFormsFactory >> getEmailLogin [
 	^ (ERTextInputComponent
 				id: 'email'
@@ -22,6 +15,13 @@ ERLoginFormsFactory >> getEmailLogin [
 				type: 'text'
 				label: 'Email address'
 				callback: [ :value | self user email: value asString ])
+]
+
+{ #category : #initialization }
+ERLoginFormsFactory >> getLoginButton [
+	^ ERComponentButton loginButton
+		id: 'loginbutton';
+		callback: [ self loginUser ]
 ]
 
 { #category : #initialization }

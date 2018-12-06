@@ -12,6 +12,79 @@ ERLibrary class >> applicationName [
 ]
 
 { #category : #updating }
+ERLibrary >> bootstrapJs [
+^ '$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href=''#myPage'']").on(''click'', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery''s animate() method to add smooth page scroll
+      $(''html, body'').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+});
+
+$(document).ready(function () {
+    //Initialize tooltips
+    $(''.nav-tabs > li a[title]'').tooltip();
+
+    //Wizard
+    $(''a[data-toggle="tab"]'').on(''show.bs.tab'', function (e) {
+
+        var $target = $(e.target);
+
+        if ($target.parent().hasClass(''disabled'')) {
+            return false;
+        }
+    });
+
+    $(".next-step").click(function (e) {
+		if($("#formRegister").valid()){
+        var $active = $(''.wizard .nav-tabs li.active'');
+        $active.next().removeClass(''disabled'');
+        nextTab($active);
+		}
+    });
+    $(".prev-step").click(function (e) {
+
+        var $active = $(''.wizard .nav-tabs li.active'');
+        prevTab($active);
+
+    });
+});
+
+function nextTab(elem) {
+    $(elem).next().find(''a[data-toggle="tab"]'').click();
+}
+function prevTab(elem) {
+    $(elem).prev().find(''a[data-toggle="tab"]'').click();
+}'
+]
+
+{ #category : #updating }
 ERLibrary >> esugCss [
 	^ '
 body {
@@ -235,76 +308,7 @@ self styleForHomePage ."
 
 { #category : #updating }
 ERLibrary >> esugJs [
-	^ '$(document).ready(function(){
-  // Add smooth scrolling to all links in navbar + footer link
-  $(".navbar a, footer a[href=''#myPage'']").on(''click'', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery''s animate() method to add smooth page scroll
-      $(''html, body'').animate({
-        scrollTop: $(hash).offset().top
-      }, 900, function(){
-
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-
-  $(window).scroll(function() {
-    $(".slideanim").each(function(){
-      var pos = $(this).offset().top;
-
-      var winTop = $(window).scrollTop();
-        if (pos < winTop + 600) {
-          $(this).addClass("slide");
-        }
-    });
-  });
-});
-
-$(document).ready(function () {
-    //Initialize tooltips
-    $(''.nav-tabs > li a[title]'').tooltip();
-
-    //Wizard
-    $(''a[data-toggle="tab"]'').on(''show.bs.tab'', function (e) {
-
-        var $target = $(e.target);
-
-        if ($target.parent().hasClass(''disabled'')) {
-            return false;
-        }
-    });
-
-    $(".next-step").click(function (e) {
-		if($("#formRegister").valid()){
-        var $active = $(''.wizard .nav-tabs li.active'');
-        $active.next().removeClass(''disabled'');
-        nextTab($active);
-		}
-    });
-    $(".prev-step").click(function (e) {
-
-        var $active = $(''.wizard .nav-tabs li.active'');
-        prevTab($active);
-
-    });
-});
-
-function nextTab(elem) {
-    $(elem).next().find(''a[data-toggle="tab"]'').click();
-}
-function prevTab(elem) {
-    $(elem).prev().find(''a[data-toggle="tab"]'').click();
-}'
-, self validatorForLogin, self validatorOfRegister", self homePageJS .", self validatorOfRegisterAsGroupManager
+	^ self bootstrapJs, self validatorForLogin, self validatorOfRegister", self homePageJS .", self validatorOfRegisterAsGroupManager
 ]
 
 { #category : #updating }
@@ -370,9 +374,102 @@ REGISTER
 ]
 
 { #category : #updating }
+ERLibrary >> mdlCss [
+	^ '* {
+	overflow-x: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background-image: url(''../assets/img/profile_city.jpg'');
+	background-size: cover;
+	background-position: top center;
+}
+
+#login-conatiner{
+	margin: auto;
+}
+
+.mdl-card, .mdl-card__supporting-text {
+    overflow: inherit !important;
+}
+
+
+.mdl-card {
+    overflow: visible !important;
+    z-index: auto !important;
+}
+
+
+#login-fab {
+	border-radius: 50%;
+    height: 56px;
+    margin: auto;
+    min-width: 56px;
+    width: 56px;
+    overflow: hidden;
+    background: rgba(158,158,158,.2);
+    box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+    position: absolute;
+    top: -30px;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+
+#lock-icon{
+	line-height: 56px;
+}
+
+#login-button {
+  width: 100%;
+  height: 40px;
+  min-width: initial;
+}
+
+#card-heading{
+	text-align: center;
+    font-weight: 600;
+    font-size: 32px;
+    height: 40px;
+    padding-top: 40px;
+    color: #092e44
+}
+
+#forgotpassword{
+	float: right;
+}
+
+
+#footer{
+ background-color:transparent;
+ color:white
+}
+
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin: 0;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+	color: white;
+}
+'
+]
+
+{ #category : #updating }
 ERLibrary >> selectorsToInclude [
- 
- ^ Array with: 'esugCss' with: 'esugJs'
+	^ Array with: 'esugCss' "with: 'esugJs'"
+	"For Bootstrap"
+	"For MDL""
+	Array with: 'mdlCss'"
 ]
 
 { #category : #updating }

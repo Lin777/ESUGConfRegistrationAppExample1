@@ -1,75 +1,50 @@
 Class {
-	#name : #ERRegisterFormsFactory,
-	#superclass : #Object,
+	#name : #ERRegisterUser,
+	#superclass : #WAComponent,
 	#instVars : [
 		'user',
+		'afiliationInfo',
+		'daysAssist',
 		'account',
-		'affiliation',
-		'daysAssist'
+		'invoice',
+		'registerComponent',
+		'messageComponent'
 	],
-	#category : #'ESUGApp-ComponentsFactory'
+	#category : #'ESUGApp-Views'
 }
 
 { #category : #accessing }
-ERRegisterFormsFactory >> account [
+ERRegisterUser >> account [
 	^ account
 ]
 
 { #category : #accessing }
-ERRegisterFormsFactory >> account: anObject [
+ERRegisterUser >> account: anObject [
 	account := anObject
 ]
 
-{ #category : #initialization }
-ERRegisterFormsFactory >> additionalInformation [
-	^ ERTemplateAdditionalInformationRegister new
-				additionalText: self getContactAdditionalText;
-				keywords: self getContactKeywords; yourself 
+{ #category : #accessing }
+ERRegisterUser >> afiliationInfo [
+	^ afiliationInfo
 ]
 
 { #category : #accessing }
-ERRegisterFormsFactory >> affiliation [
-	^ affiliation
+ERRegisterUser >> afiliationInfo: anObject [
+	afiliationInfo := anObject
 ]
 
 { #category : #accessing }
-ERRegisterFormsFactory >> affiliation: anObject [
-	affiliation := anObject
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> affiliationInformation [
-	^ ERTemplateAffiliationInformationRegister new
-				membershipType: self getMembershipType ;
-				organizationAddress: self getOrganizationAddress;
-				organizationCity: self getOrganizationCity;
-				organizationCountry: self getCountry;
-				organizationName: self getOrganizationName;
-				organizationProvince: self getOrganizationProvince;
-				organizationPostal: self getOrganizationPostal; yourself 
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> conferenceOptions [
-	^ ERTemplateConferenceOptionsRegister new
-				listGender: self getRadioButtonForGender;
-				listOfDays: self getListOfDays;
-				listOfFoodPreference: self getListOfFoodPreference;
-				tShirtSize: self getTShirtSize; yourself 
-]
-
-{ #category : #accessing }
-ERRegisterFormsFactory >> daysAssist [
+ERRegisterUser >> daysAssist [
 	^ daysAssist
 ]
 
 { #category : #accessing }
-ERRegisterFormsFactory >> daysAssist: anObject [
+ERRegisterUser >> daysAssist: anObject [
 	daysAssist := anObject
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactAdditionalText [
+ERRegisterUser >> getContactAdditionalText [
 	^ ERTextAreaComponent new
 		label: 'Additional text';
 		id: 'addInfoAddText';
@@ -78,7 +53,7 @@ ERRegisterFormsFactory >> getContactAdditionalText [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactAddress [
+ERRegisterUser >> getContactAddress [
 	^ ERTextInputComponent
 		id: 'contactAddress'
 		name: 'contactAddress'
@@ -88,7 +63,7 @@ ERRegisterFormsFactory >> getContactAddress [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactCity [
+ERRegisterUser >> getContactCity [
 	^ ERTextInputComponent
 		id: 'contactCity'
 		name: 'contactCity'
@@ -98,7 +73,7 @@ ERRegisterFormsFactory >> getContactCity [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactFacebook [
+ERRegisterUser >> getContactFacebook [
 	^ ERTextInputComponent
 		id: 'contactFacebook'
 		name: 'contactFacebook'
@@ -108,7 +83,7 @@ ERRegisterFormsFactory >> getContactFacebook [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactHomePage [
+ERRegisterUser >> getContactHomePage [
 	^ ERTextInputComponent
 		id: 'contactHomePage'
 		name: 'contactHomePage'
@@ -118,7 +93,7 @@ ERRegisterFormsFactory >> getContactHomePage [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactKeywords [
+ERRegisterUser >> getContactKeywords [
 	^ ERTextInputComponent new
 		id: 'addInfoKeywords';
 		name: 'addInfoKeywords';
@@ -128,7 +103,7 @@ ERRegisterFormsFactory >> getContactKeywords [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactPostal [
+ERRegisterUser >> getContactPostal [
 	^ ERTextInputComponent
 		id: 'contactPostal'
 		name: 'contactPostal'
@@ -138,7 +113,7 @@ ERRegisterFormsFactory >> getContactPostal [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactProvince [
+ERRegisterUser >> getContactProvince [
 	^ ERTextInputComponent
 		id: 'contactProvince'
 		name: 'contactProvince'
@@ -148,7 +123,7 @@ ERRegisterFormsFactory >> getContactProvince [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getContactTwitter [
+ERRegisterUser >> getContactTwitter [
 	^ ERTextInputComponent
 		id: 'contactTwitter'
 		name: 'contactTwitter'
@@ -158,7 +133,7 @@ ERRegisterFormsFactory >> getContactTwitter [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getCountries [
+ERRegisterUser >> getCountries [
 	  ^ #('Select Country' 'United States' 'United Kingdom' 'Afghanistan' 'Albania' 'Algeria' 'American Samoa' 'Andorra' 'Angola' 'Anguilla'
 'Antarctica' 'Antigua and Barbuda' 'Argentina' 'Armenia' 'Aruba' 'Australia' 'Austria' 'Azerbaijan' 'Bahamas' 'Bahrain' 'Bangladesh'
 'Barbados' 'Belarus' 'Belgium' 'Belize' 'Benin' 'Bermuda' 'Bhutan' 'Bolivia' 'Bosnia and Herzegovina' 'Botswana' 'Bouvet Island'
@@ -188,44 +163,25 @@ ERRegisterFormsFactory >> getCountries [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getCountry [
+ERRegisterUser >> getCountry [
 	^ (ERTextSelectComponent
 		id: 'countries'
 		label: 'Country'
 		listOption: self getCountries
-		callback: [ :selectedOption | self account country: selectedOption ])
+		callback: [ :selectedOption | account country: selectedOption ])
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getCountry: anID [
-	^ (ERTextSelectComponent
-		id: anID
-		label: 'Country'
-		listOption: self getCountries
-		callback: [ :selectedOption | self affiliation country: selectedOption ])
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> getCurrencyType [
+ERRegisterUser >> getCurrencyType [
 	^ (ERTextSelectComponent
 		id: 'currencyType'
 		label: 'Currency Type: '
 		listOption: #('Euro' 'Dollar')
-		callback: [ :selectedOption | self account paymentCurrency: selectedOption ])
+		callback: [ :selectedOption | account paymentCurrency: selectedOption ])
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getEmailLogin [
-	^ (ERTextInputComponent
-				id: 'email'
-				name: 'email'
-				type: 'text'
-				label: 'Email address'
-				callback: [ :value | self user email: value asString ])
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> getFirstName [
+ERRegisterUser >> getFirstName [
 	^ ERTextInputComponent
 		id: 'firstName'
 		name: 'firstName'
@@ -235,7 +191,7 @@ ERRegisterFormsFactory >> getFirstName [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getLastName [
+ERRegisterUser >> getLastName [
 	^ ERTextInputComponent
 		id: 'lastName'
 		name: 'lastName'
@@ -245,7 +201,7 @@ ERRegisterFormsFactory >> getLastName [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getListOfDays [
+ERRegisterUser >> getListOfDays [
 	^ OrderedCollection new
 		add:
 			(ERCheckBox new
@@ -276,7 +232,7 @@ ERRegisterFormsFactory >> getListOfDays [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getListOfFoodPreference [
+ERRegisterUser >> getListOfFoodPreference [
 	^ OrderedCollection new
 		add:
 			(ERCheckBox new
@@ -294,93 +250,71 @@ ERRegisterFormsFactory >> getListOfFoodPreference [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getLoginController [
-	^ ERLoginController new
-		email: self user email;
-		password: self user password;
-		yourself.
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> getMembershipType [
-	^ ERTextSelectComponent
-		id: 'organizationMembership'
-		label: 'Membership Type:'
-		listOption: #('Industrial' 'Other' 'Professor / Reseacher' 'Student')
-		callback: [ :selectedObject | self affiliation membershipType: selectedObject ]; yourself .
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> getMessageLogin [
-	^ (ERComponentAlert warningAlert id: 'loginAlert')
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> getMessageRegister [
+ERRegisterUser >> getMessageRegister [
 	^ (ERComponentAlert warningAlert id: 'registerAlert')
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getOrganizationAddress [
+ERRegisterUser >> getOrganizationAddress [
 	^ ERTextInputComponent
 		id: 'orgAddress'
 		name: 'orgAddress'
 		type: 'text'
 		label: 'Address'
-		callback: [ :value | self affiliation address: (value asString ) ]
+		callback: [ :value | self afiliationInfo address: (value asString ) ]
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getOrganizationCity [
+ERRegisterUser >> getOrganizationCity [
 	^ ERTextInputComponent
 		id: 'orgCity'
 		name: 'orgCity'
 		type: 'text'
 		label: 'City'
-		callback: [ :value | self affiliation city: (value asString ) ]
+		callback: [ :value | self afiliationInfo city: (value asString ) ]
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getOrganizationName [
+ERRegisterUser >> getOrganizationName [
 	^ ERTextInputComponent
 		id: 'orgName'
 		name: 'orgName'
 		type: 'text'
 		label: 'Organization Name'
-		callback: [ :value | self affiliation name: (value asString ) ]
+		callback: [ :value | self afiliationInfo name: (value asString ) ]
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getOrganizationPostal [
+ERRegisterUser >> getOrganizationPostal [
 	^ ERTextInputComponent
 		id: 'orgPostal'
 		name: 'orgPostal'
 		type: 'text'
 		label: 'Postal/ZipCode'
-		callback: [ :value | self affiliation postalZipCode: (value asString ) ]
+		callback: [ :value | self afiliationInfo postalZipCode: (value asString ) ]
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getOrganizationProvince [
+ERRegisterUser >> getOrganizationProvince [
 	^ ERTextInputComponent
 		id: 'orgProvince'
 		name: 'orgProvince'
 		type: 'text'
 		label: 'Province/State'
-		callback: [ :value | self affiliation provinceState: (value asString ) ]
+		callback: [ :value | self afiliationInfo provinceState: (value asString ) ]
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getPaymentType [
+ERRegisterUser >> getPaymentType [
 	^ (ERTextSelectComponent
 		id: 'paymentType'
 		label: 'Payment Type: '
 		listOption: #('Bank transfer' 'Credit Card')
-		callback: [ :selectedOption | self account paymentType: selectedOption ])
+		callback: [ :selectedOption | account paymentType: selectedOption ])
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getRadioButtonForGender [
+ERRegisterUser >> getRadioButtonForGender [
 	^ OrderedCollection new
 		add:
 			(ERRadioButtonComponents new
@@ -394,14 +328,14 @@ ERRegisterFormsFactory >> getRadioButtonForGender [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getRegisterButton [
+ERRegisterUser >> getRegisterButton [
 	^ ERButtonRegister new
 		id: 'registerAttendee';
 		callback: [ self registerAttendee ]
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getRegisterConfirmPassword [
+ERRegisterUser >> getRegisterConfirmPassword [
 	^ ERTextInputComponent
 		id: 'confirmPassword'
 		name: 'confirmPassword'
@@ -410,7 +344,7 @@ ERRegisterFormsFactory >> getRegisterConfirmPassword [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getRegisterController [
+ERRegisterUser >> getRegisterController [
 	^ ERRegisterAttendeeController new
 		aUser: self user;
 		affiliationInfo: self afiliationInfo;
@@ -421,7 +355,7 @@ ERRegisterFormsFactory >> getRegisterController [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getRegisterEmail [
+ERRegisterUser >> getRegisterEmail [
 	^ ERTextInputComponent
 		id: 'registerEmail'
 		name: 'registerEmail'
@@ -431,7 +365,7 @@ ERRegisterFormsFactory >> getRegisterEmail [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getRegisterPassword [
+ERRegisterUser >> getRegisterPassword [
 	^ ERTextInputComponent
 		id: 'registerPassword'
 		name: 'registerPassword'
@@ -441,44 +375,64 @@ ERRegisterFormsFactory >> getRegisterPassword [
 ]
 
 { #category : #initialization }
-ERRegisterFormsFactory >> getTShirtSize [
+ERRegisterUser >> getTShirtSize [
 	^ (ERTextSelectComponent
 		id: 'sel1'
 		label: 'Tshirt Size:'
 		listOption: #('XS' 'S' 'M' 'L' 'XL' 'XXL' 'XXXL' 'XXXXL')
-		callback: [ :selectedObject | self account polosize: selectedObject ])
+		callback: [ :selectedObject | account polosize: selectedObject ])
 ]
 
 { #category : #accessing }
-ERRegisterFormsFactory >> user [
+ERRegisterUser >> invoice [
+	^ invoice
+]
+
+{ #category : #accessing }
+ERRegisterUser >> invoice: anObject [
+	invoice := anObject
+]
+
+{ #category : #accessing }
+ERRegisterUser >> messageComponent [
+	^ messageComponent
+]
+
+{ #category : #accessing }
+ERRegisterUser >> messageComponent: anObject [
+	messageComponent := anObject
+]
+
+{ #category : #initialization }
+ERRegisterUser >> registerAttendee [
+	| controller anUser|
+	controller := self getRegisterController.
+	anUser := controller register.
+	anUser ifNil: [  messageComponent errorMessage: 'This email is already registered' ]
+	ifNotNil: [ self answer: anUser  ]
+]
+
+{ #category : #accessing }
+ERRegisterUser >> registerComponent [
+	^ registerComponent
+]
+
+{ #category : #accessing }
+ERRegisterUser >> registerComponent: anObject [
+	registerComponent := anObject
+]
+
+{ #category : #rendering }
+ERRegisterUser >> renderContentOn: html [
+	html heading: 'Welcome'
+]
+
+{ #category : #accessing }
+ERRegisterUser >> user [
 	^ user
 ]
 
 { #category : #accessing }
-ERRegisterFormsFactory >> user: anObject [
+ERRegisterUser >> user: anObject [
 	user := anObject
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> userContactInformation [
-			^ ERTemplateContactInformationRegister new
-				contactAddress: self getContactAddress;
-				contactCity: self getContactCity;
-				contactCountry: (self getCountry: 'userCountry' );
-				contactFacebook: self getContactFacebook;
-				contactHomePage: self getContactHomePage;
-				contactProvince: self getContactProvince;
-				contactPostal: self getContactPostal;
-				contactTwitter: self getContactTwitter; yourself 
-]
-
-{ #category : #initialization }
-ERRegisterFormsFactory >> userInformation [
-	^ ERTemplateUserRegister new
-				firstName: self getFirstName;
-				lastName: self getLastName;
-				registerEmail: self getRegisterEmail;
-				registerPassword: self getRegisterPassword;
-				registerConfirmPassword: self getRegisterConfirmPassword;
-				yourself .
 ]
