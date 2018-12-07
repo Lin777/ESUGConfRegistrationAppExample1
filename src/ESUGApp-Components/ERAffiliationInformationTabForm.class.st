@@ -12,7 +12,6 @@ ERAffiliationInformationTabForm >> formId [
 { #category : #rendering }
 ERAffiliationInformationTabForm >> renderFormOn: html [
 	html mdlTable
-		style: 'border: inset 0pt';
 		shadow: 2;
 		with: [ html
 				tableBody: [ html

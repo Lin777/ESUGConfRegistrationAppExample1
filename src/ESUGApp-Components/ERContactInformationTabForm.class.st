@@ -12,7 +12,6 @@ ERContactInformationTabForm >> formId [
 { #category : #rendering }
 ERContactInformationTabForm >> renderFormOn: html [
 	html mdlTable
-		style: 'border: inset 0pt';
 		shadow: 2;
 		with: [ html
 				tableBody: [ html

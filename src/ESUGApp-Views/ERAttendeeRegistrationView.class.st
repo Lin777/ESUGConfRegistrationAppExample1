@@ -53,12 +53,23 @@ ERAttendeeRegistrationView >> initializeTabForms [
 ]
 
 { #category : #rendering }
+ERAttendeeRegistrationView >> recoverAssistant [
+	"Do something to recover attendee"
+	self attendee: nil
+]
+
+{ #category : #rendering }
 ERAttendeeRegistrationView >> renderPageOn: html [
-	html html: '<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+	html form
+		method: 'post';
+		id: 'registerForm';
+		with: [ html
+				html:
+					'<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                       <div class="mdl-grid mdl-grid--no-spacing">'.
-	self renderTabNames: html.
-	self renderTabs: html.
-		html html: '</div> </div>'
+			self renderTabNames: html.
+			self renderTabs: html.
+			html html: '</div> </div>' ]
 ]
 
 { #category : #rendering }

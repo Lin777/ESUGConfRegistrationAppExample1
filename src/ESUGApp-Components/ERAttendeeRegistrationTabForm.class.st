@@ -41,7 +41,7 @@ ERAttendeeRegistrationTabForm >> createCheckboxField: aName [
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createCheckboxField: aName for: aSymbol [
-	^  ERCheckboxFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString ]
+	^  ERCheckboxFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value]
 ]
 
 { #category : #building }
@@ -51,7 +51,7 @@ ERAttendeeRegistrationTabForm >> createPasswordField: aName [
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createPasswordField: aName for: aSymbol [
-	^ (self createTextField: aName for: aSymbol) forPassword
+	^ (ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: (ERUserAccount hashPassword: value asString) . Transcript show: value]) forPassword
 ]
 
 { #category : #building }
@@ -61,12 +61,12 @@ ERAttendeeRegistrationTabForm >> createRadioField: aName for: aSymbol list: aLis
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createSelectField: aName for: aSymbol list: aList [
-	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString ] list: aList 
+	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] list: aList 
 ]
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createTextAreaField: aName for: aSymbol [
-	^  ERTextAreaFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString ]
+	^  ERTextAreaFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .Transcript show: value]
 ]
 
 { #category : #building }
@@ -76,7 +76,7 @@ ERAttendeeRegistrationTabForm >> createTextField: aName [
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createTextField: aName for: aSymbol [
-	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString ]
+	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value]
 ]
 
 { #category : #accessing }
@@ -132,10 +132,7 @@ ERAttendeeRegistrationTabForm >> previousTabFrom: anObject [
 
 { #category : #rendering }
 ERAttendeeRegistrationTabForm >> renderContentOn: html [
-	html form
-		method: 'post';
-		id: self formId;
-		with: [ self renderFormOn: html ]
+	self renderFormOn: html
 ]
 
 { #category : #rendering }

@@ -49,6 +49,7 @@ ERButtonLabel >> renderContentOn: html [
 		raised;
 		accentColor;
 		rippleEffect;
+		type: 'submit';
 		with: self label;
 		class: self class1;
 		callback: self callback.
