@@ -23,13 +23,13 @@ ExampleMDL class >> initialize [
 { #category : #running }
 ExampleMDL >> go [
 	| loginAnswer user |
-	loginAnswer := self call: ERLoginWithMDL new.
+	loginAnswer := self call: ERLoginView  new.
 	loginAnswer = #registerUser
-		ifTrue: [ user := self call: ERRegisterUser new ]
-		ifFalse: [ loginAnswer = #registerUserAsGroupManager
-				ifTrue: [ user := self call: ERRegisterUser new ]
+		ifTrue: [ user := self call: ERAttendeeRegistrationView new ]
+		"ifFalse: [ loginAnswer = #registerUserAsGroupManager
+				ifTrue: [ user := self call: ERView new ]
 				ifFalse: [ user := loginAnswer ].
 			user
 				ifNotNil: [ self session login: user.
-					self call: ERHome new ] ]
+					self call: ERView new ] ]"
 ]

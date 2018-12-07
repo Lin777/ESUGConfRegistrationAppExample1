@@ -25,6 +25,15 @@ ERAdministrationPageContentView >> account: anObject [
 	account := anObject
 ]
 
+{ #category : #components }
+ERAdministrationPageContentView >> additionalContactInfoTextArea [
+	^ ERTextAreaComponent new
+		label: 'Additional text';
+		id: 'addInfoAddText';
+		name: 'addInfoAddText';
+		callback: [ :value | self account additionalText: (value asString) ]
+]
+
 { #category : #accessing }
 ERAdministrationPageContentView >> afiliationInfo [
 	^ afiliationInfo
@@ -39,6 +48,37 @@ ERAdministrationPageContentView >> afiliationInfo: anObject [
 ERAdministrationPageContentView >> children [
  
  ^ Array with: loginComponent ; with: registerComponent ; with: registerAsGroupComponent 
+]
+
+{ #category : #components }
+ERAdministrationPageContentView >> contactAddressTextInput [
+	^ ERTextInputComponent
+		id: 'contactAddress'
+		name: 'contactAddress'
+		type: 'text'
+		label: 'Address'
+		callback: [ :value | self account address: (value asString) ]
+]
+
+{ #category : #components }
+ERAdministrationPageContentView >> contactCityTextInput [
+	^ ERTextInputComponent
+		id: 'contactCity'
+		name: 'contactCity'
+		type: 'text'
+		label: 'City'
+		callback: [ :value | self account city: (value asString)]
+]
+
+{ #category : #components }
+ERAdministrationPageContentView >> dayCheckBoxList [
+	^ ERAssistance availableDays
+		collect: [ :daySymbol | 
+			ERCheckBox new
+				id: daySymbol asString;
+				label: daySymbol asString capitalized , ' (dd/mm/aa)';
+				callback: [ :value | 
+					self daysAssist day: daySymbol attent: value ] ].
 ]
 
 { #category : #accessing }
@@ -140,7 +180,7 @@ ERAdministrationPageContentView >> getContactTwitter [
 		callback: [ :value | self account twitter: (value asString ) ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #components }
 ERAdministrationPageContentView >> getCountries [
 	  ^ #('Select Country' 'United States' 'United Kingdom' 'Afghanistan' 'Albania' 'Algeria' 'American Samoa' 'Andorra' 'Angola' 'Anguilla'
 'Antarctica' 'Antigua and Barbuda' 'Argentina' 'Armenia' 'Aruba' 'Australia' 'Austria' 'Azerbaijan' 'Bahamas' 'Bahrain' 'Bangladesh'
@@ -179,7 +219,7 @@ ERAdministrationPageContentView >> getCountry [
 		callback: [ :selectedOption | account country: selectedOption ])
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #components }
 ERAdministrationPageContentView >> getCurrencyType [
 	^ (ERTextSelectComponent
 		id: 'currencyType'
