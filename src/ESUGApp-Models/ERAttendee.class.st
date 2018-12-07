@@ -168,6 +168,11 @@ ERAttendee >> city: anObject [
 	city := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+ERAttendee >> confirmPassword: aString [
+	"self password = ERUserAccount hashPassword: aString"
+]
+
 { #category : #accessing }
 ERAttendee >> country [
 	^ country

@@ -16,6 +16,16 @@ ERCheckboxFieldLabel class >> label: aString callback: aBlock [
 	^ instance
 ]
 
+{ #category : #'instance creation' }
+ERCheckboxFieldLabel class >> label: aString callback: aBlock id: anId [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance callback: aBlock.
+	instance id: anId .
+	^ instance
+]
+
 { #category : #accessing }
 ERCheckboxFieldLabel >> callback [
 	^ callback

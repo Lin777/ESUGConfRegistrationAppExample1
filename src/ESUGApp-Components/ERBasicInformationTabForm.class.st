@@ -19,7 +19,7 @@ ERBasicInformationTabForm >> renderFormOn: html [
 						tableRow: [ html mdlTableCell: [ html render: (self createTextField: 'Last Name' for: #lastName:) ] ];
 						tableRow: [ html mdlTableCell: [ html render: (self createTextField: 'Email' for: #email:) ] ];
 						tableRow: [ html mdlTableCell: [ html render: (self createPasswordField: 'Password' for: #password:) ] ];
-						tableRow: [ html mdlTableCell: [ html render: (self createPasswordField: 'Confirm Password') ] ] ].
+						tableRow: [ html mdlTableCell: [ html render: (self createPasswordField: 'Confirm Password' for: #confirmPassword:) ] ] ].
 			"html mdlButton
 				id: 'next-step';
 				with: 'Next'" ]

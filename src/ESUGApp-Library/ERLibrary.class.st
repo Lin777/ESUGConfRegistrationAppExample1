@@ -308,7 +308,7 @@ self styleForHomePage ."
 
 { #category : #updating }
 ERLibrary >> esugJs [
-	^ self bootstrapJs, self validatorForLogin, self validatorOfRegister", self homePageJS .", self validatorOfRegisterAsGroupManager
+	^ "self bootstrapJs, self validatorForLogin, "self validatorOfRegister", self homePageJS ., self validatorOfRegisterAsGroupManager"
 ]
 
 { #category : #updating }
@@ -466,7 +466,7 @@ footer {
 
 { #category : #updating }
 ERLibrary >> selectorsToInclude [
-	^ Array with: 'esugCss' with: 'esugJs'
+	^ Array "with: 'esugCss' "with: 'esugJs'
 	"For Bootstrap"
 	"For MDL""
 	Array with: 'mdlCss'"
@@ -814,7 +814,7 @@ ERLibrary >> validatorOfRegister [
         required: true,
         messages: {required: "Please enter your Last Name"}
     });
-    $("#registerEmail").rules("add", {
+    $("#email").rules("add", {
         required: true,
         email: true, 
         minlength: 8, 
@@ -826,7 +826,7 @@ ERLibrary >> validatorOfRegister [
             maxlength: "The maximum number of characters allowed is 30"
         }
     });
-    $("#registerPassword").rules("add", {
+    $("#password").rules("add", {
         required: true,
         minlength: 8, 
         messages: {
@@ -842,40 +842,43 @@ ERLibrary >> validatorOfRegister [
             equalTo: "Your password does not match"
         }
     });
-    $("#contactAddress").rules("add", {
+    $("#address").rules("add", {
         required: true,
         messages: {
             required: "Please enter your contact Address"
         }
     });
-    $("#contactCity").rules("add", {
+    $("#country").rules(  
+
+    );
+    $("#city").rules("add", {
         required: true,
         messages: {
             required: "Please enter your contact City"
         }
     });
-    $("#contactProvince").rules("add", {
+    $("#province").rules("add", {
         required: true,
         messages: {
             required: "Please enter your contact Province/State"
         }
     });
-    $("#contactPostal").rules("add", {
+    $("#postal").rules("add", {
         required: true,
         messages: {
             required: "Please enter your contact Postal/ZipCode"
         }
     });
     
-    /*$("#contactFacebook").rules("add", {
+    /*$("#facebookURL").rules("add", {
         required: true,
         messages: {}
     });
-    $("#contactTwitter").rules("add", {
+    $("#twitterURL").rules("add", {
         required: true,
         messages: {}
     });
-    $("#contactHomePage").rules("add", {
+    $("#homePage").rules("add", {
         required: true,
         messages: {}
     });
@@ -894,7 +897,7 @@ ERLibrary >> validatorOfRegister [
             required: "Please enter your Organization Name"
         }
     });
-    $("#orgAddress").rules("add", {
+    $("#orgAddress1").rules("add", {
         required: true,
         messages: {
             required: "Please enter your Organization Address"
@@ -906,6 +909,9 @@ ERLibrary >> validatorOfRegister [
             required: "Please enter your Organization City"
         }
     });
+    $("#orgCountry").rules(
+
+    );
     $("#orgProvince").rules("add", {
         required: true,
         messages: {

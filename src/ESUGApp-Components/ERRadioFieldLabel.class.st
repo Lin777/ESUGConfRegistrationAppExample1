@@ -27,6 +27,17 @@ ERRadioFieldLabel class >> label: aString list: aList listValues: aListValues [
 	^ instance
 ]
 
+{ #category : #'as yet unclassified' }
+ERRadioFieldLabel class >> label: aString list: aList listValues: aListValues id: anId [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance list: aList.
+	instance listValues: aListValues.
+	instance id: anId.
+	^ instance
+]
+
 { #category : #accessing }
 ERRadioFieldLabel >> list [
 	^ list

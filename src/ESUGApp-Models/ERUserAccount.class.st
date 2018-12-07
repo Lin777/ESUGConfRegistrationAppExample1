@@ -14,7 +14,7 @@ Class {
 ERUserAccount class >> hashPassword: aString [
 
  ^ aString 
-  ifEmpty: [0] 
+  ifEmpty: [0 asString] 
   ifNotEmpty: [(GRPlatform current secureHashFor: aString) asString].
 
 ]

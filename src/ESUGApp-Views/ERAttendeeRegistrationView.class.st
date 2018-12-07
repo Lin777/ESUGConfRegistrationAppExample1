@@ -21,6 +21,8 @@ ERAttendeeRegistrationView class >> initialize [
 		addLibrary: MDLLibrary;
 		addLibrary: CssForRegisterFormsMDL;
 		addLibrary: CssForLoginMDL;
+		addLibrary: ERJQValidateForm ;
+		addLibrary: ERLibrary ;
 		preferenceAt: #sessionClass put: ERSession
 ]
 
@@ -62,7 +64,7 @@ ERAttendeeRegistrationView >> recoverAssistant [
 ERAttendeeRegistrationView >> renderPageOn: html [
 	html form
 		method: 'post';
-		id: 'registerForm';
+		id: 'formRegister';
 		with: [ html
 				html:
 					'<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
