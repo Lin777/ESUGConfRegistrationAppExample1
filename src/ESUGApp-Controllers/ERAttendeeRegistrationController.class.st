@@ -27,14 +27,13 @@ ERAttendeeRegistrationController >> initialize [
 { #category : #action }
 ERAttendeeRegistrationController >> save [
 	| attendeeResult |
-	attendeeResult := self findUserByEmail: attendee userAccount email.
+	attendeeResult := self
+		findUserByEmail: attendee userAccount email.
 	attendeeResult
-		ifNil: [ 
-			|user|
+		ifNil: [ | user |
 			user := self attendee userAccount save.
 			self attendee userAccount: user.
 			attendeeResult := self attendee save.
-			^ attendeeResult ].
+			^ attendeeResult userAccount ].
 	^ nil
-	
 ]

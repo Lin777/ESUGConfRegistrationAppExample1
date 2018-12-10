@@ -78,12 +78,12 @@ ERComponentAlert >> renderContentOn: html [
 
 { #category : #accessing }
 ERComponentAlert >> role [
-	^ rol
+	^ role
 ]
 
 { #category : #accessing }
 ERComponentAlert >> role: anObject [
-	rol := anObject
+	role := anObject
 ]
 
 { #category : #accessing }

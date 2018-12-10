@@ -40,5 +40,6 @@ BaselineOfESUGApp >> setUpDependencies: spec [
 		with: [ spec
 				className: 'ConfigurationOfSandstoneDb';
 				version: #stable;
-				repository: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main' ]
+				repository: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main' ].
+			
 ]

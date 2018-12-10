@@ -22,7 +22,7 @@ ERTestWithParasol >> defaultStore [
 
 { #category : #registerTests }
 ERTestWithParasol >> firstStepSuccesfull [
-	| firstName lastName email password confirmPassword next1 actions |
+	"| firstName lastName email password confirmPassword next1 actions |
 	
 	actions := BPActions driver: driver .
 	
@@ -43,28 +43,28 @@ ERTestWithParasol >> firstStepSuccesfull [
 	password sendKeys: '12345678'.
 	confirmPassword sendKeys: '12345678'.
 	next1 click .
-
+"
 ]
 
 { #category : #accessing }
 ERTestWithParasol >> setUp [
-	self warmUpModels .
+	"self warmUpModels .
 	userRegistered := ERUser testUser: 'registeredUser'.
 	serverAdaptor := (Smalltalk at: #ZnZincServerAdaptor) startOn: 8080.
 	driver := BPRemoteWebDriver withCapabilities: BPDesiredCapabilities chrome.
-	driver get: self baseURL 
+	driver get: self baseURL "
 ]
 
 { #category : #accessing }
 ERTestWithParasol >> tearDown [
-	self tearDownModels .
+	"self tearDownModels .
 	driver quit.
-	serverAdaptor stop.
+	serverAdaptor stop."
 ]
 
 { #category : #'as yet unclassified' }
 ERTestWithParasol >> tearDownModels [
-	ERAfiliation do: [ :each | [each delete] on: Error do: [] ].
+	"ERAfiliation do: [ :each | [each delete] on: Error do: [] ].
 	ERAfiliation coolDown .
 	
 	ERAccount do: [ :each | [each delete] on: Error do: [] ].
@@ -91,7 +91,7 @@ ERTestWithParasol >> tearDownModels [
 	ERAccount  do: [:each | [each delete] on: Error do: [] ].
 	ERAccount  allSubclassesDo: [ :each | each coolDown ].
 	
-	Smalltalk garbageCollectMost 
+	Smalltalk garbageCollectMost "
 ]
 
 { #category : #tests }
@@ -543,7 +543,7 @@ ERTestWithParasol >> testRegisterUserSuccesfull [
 
 { #category : #accessing }
 ERTestWithParasol >> warmUpModels [
-	store := self defaultStore.
+	"store := self defaultStore.
 	SDActiveRecord setStore: store.
 	SDFooObject warmUp.
 	ERUser withAllSubclasses do: [ :each | each warmUp ].
@@ -553,6 +553,6 @@ ERTestWithParasol >> warmUpModels [
 	ERConference warmUp .
 	ERAssistance warmUp.
 	ERInvoice warmUp .
-	ERAccount warmUp .
+	ERAccount warmUp ."
 	
 ]
