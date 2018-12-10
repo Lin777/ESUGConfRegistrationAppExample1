@@ -40,6 +40,7 @@ ERCheckboxFieldLabel >> callback: anObject [
 ERCheckboxFieldLabel >> renderContentOn: html [
 		html mdlCheckboxContainer
 		rippleEffect;
+		style: self percent;
 		for: self id;
 		with: [ html mdlCheckbox
 				value: true;

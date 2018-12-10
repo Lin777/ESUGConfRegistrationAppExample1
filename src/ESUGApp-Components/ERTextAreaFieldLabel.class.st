@@ -42,7 +42,7 @@ ERTextAreaFieldLabel >> callback: anObject [
 ERTextAreaFieldLabel >> initialize [
 	super initialize.
 	textType := 'text'.
-	lines := 3.
+	lines := 13.
 ]
 
 { #category : #accessing }
@@ -59,6 +59,7 @@ ERTextAreaFieldLabel >> lines: anObject [
 ERTextAreaFieldLabel >> renderContentOn: html [ 	
 	html mdlTextFieldContainer
 		floatingLabel;
+		style: self percent;
 		with: [ html mdlTextFieldLabel
 				for: self id;
 				with: self label.

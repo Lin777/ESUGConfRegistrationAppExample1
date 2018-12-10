@@ -7,6 +7,11 @@ Class {
 	#category : #'ESUGApp-Components'
 }
 
+{ #category : #initialization }
+ERComponentLabel >> initialize [
+	super initialize.
+]
+
 { #category : #accessing }
 ERComponentLabel >> label [
 	^ label

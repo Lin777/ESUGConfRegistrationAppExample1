@@ -11,13 +11,8 @@ ERAdditionalInformationTabForm >> formId [
 
 { #category : #rendering }
 ERAdditionalInformationTabForm >> renderFormOn: html [
-	html mdlTable
-		shadow: 2;
-		with: [ html
-				tableBody: [ html
-						tableRow: [ html mdlTableCell: [ html render: (self createTextField: 'Keywords ' for: #keywords:) ] ];
-						tableRow: [ html mdlTableCell: [ html render: (self createTextAreaField: 'Additional text' for: #additionalText:) ] ].
-						] ]
+	html render: (self createTextField: 'Keywords ' for: #keywords:).
+	html render: (self createTextAreaField: 'Additional text' for: #additionalText:)
 ]
 
 { #category : #accessing }

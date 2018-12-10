@@ -41,11 +41,4 @@ BaselineOfESUGApp >> setUpDependencies: spec [
 				className: 'ConfigurationOfSandstoneDb';
 				version: #stable;
 				repository: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main' ]
-	"			
-		Gofer new
-    url: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main';
-    package: 'ConfigurationOfSandstoneDb';
-    load.
-
-(Smalltalk at: #ConfigurationOfSandstoneDb) load."
 ]

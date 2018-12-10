@@ -30,8 +30,8 @@ ERAttendeeRegistrationTabForm >> attendee: anObject [
 ]
 
 { #category : #building }
-ERAttendeeRegistrationTabForm >> createButtonField: aName with: aBlock [
-	^  ERButtonLabel label: aName callback: aBlock 
+ERAttendeeRegistrationTabForm >> createButtonField: aName with: aBlock id: anId [
+	^  ERButtonLabel label: aName callback: aBlock id: anId type: 'submit'
 ]
 
 { #category : #building }
@@ -60,6 +60,11 @@ ERAttendeeRegistrationTabForm >> createSelectField: aName for: aSymbol list: aLi
 ]
 
 { #category : #building }
+ERAttendeeRegistrationTabForm >> createSelectField: aName for: aSymbol list: aList percent: aNumber [
+	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] list: aList id: (self idFromSymbol: aSymbol) percent: aNumber  
+]
+
+{ #category : #building }
 ERAttendeeRegistrationTabForm >> createTextAreaField: aName for: aSymbol [
 	^  ERTextAreaFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .Transcript show: value] id: (self idFromSymbol: aSymbol )
 ]
@@ -72,6 +77,11 @@ ERAttendeeRegistrationTabForm >> createTextField: aName [
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createTextField: aName for: aSymbol [
 	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] id: (self idFromSymbol: aSymbol )
+]
+
+{ #category : #building }
+ERAttendeeRegistrationTabForm >> createTextField: aName for: aSymbol percent: aNumber [
+	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] id: (self idFromSymbol: aSymbol ) percent: aNumber 
 ]
 
 { #category : #accessing }

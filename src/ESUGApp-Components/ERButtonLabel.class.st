@@ -3,7 +3,8 @@ Class {
 	#superclass : #ERComponentLabel,
 	#instVars : [
 		'callback',
-		'class'
+		'class',
+		'type'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -24,6 +25,17 @@ ERButtonLabel class >> label: aString callback: aBlock id: anId [
 	instance label: aString.
 	instance callback: aBlock.
 	instance id: anId.
+	^ instance
+]
+
+{ #category : #'instance creation' }
+ERButtonLabel class >> label: aString callback: aBlock id: anId type: aType [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance callback: aBlock.
+	instance id: anId.
+	instance type: aType .
 	^ instance
 ]
 
@@ -50,17 +62,31 @@ ERButtonLabel >> class: anObject [
 { #category : #rendering }
 ERButtonLabel >> initialize [
 	super initialize .
-	class := ''
+	class := ''.
+	type := 'button'
 ]
 
 { #category : #rendering }
 ERButtonLabel >> renderContentOn: html [
-	html mdlButton
+	"html render: button .
+	"	html mdlButton
 		raised;
 		accentColor;
 		rippleEffect;
-		type: 'submit';
-		with: self label;
+		colored;
+		type: self type;
+		id: self id;
 		class: self class1;
-		callback: self callback.
+		callback: self callback;
+		with: self label.
+]
+
+{ #category : #accessing }
+ERButtonLabel >> type [
+	^ type
+]
+
+{ #category : #accessing }
+ERButtonLabel >> type: anObject [
+	type := anObject
 ]

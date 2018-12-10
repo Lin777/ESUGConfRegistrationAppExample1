@@ -215,7 +215,7 @@ ERAttendee >> facebookURL: anObject [
 
 { #category : #accessing }
 ERAttendee >> firstName [
-	^ firstName
+	^ userAccount firstName
 ]
 
 { #category : #accessing }
@@ -235,7 +235,7 @@ ERAttendee >> foodPreference: anObject [
 
 { #category : #initialization }
 ERAttendee >> friday: aBoolean [
-	self attendance at: 'friday' put: aBoolean 
+	self attendance at: #friday put: aBoolean 
 ]
 
 { #category : #accessing }
@@ -262,7 +262,7 @@ ERAttendee >> homePage: anObject [
 ERAttendee >> initialize [
 	super initialize.
 	userAccount := ERUserAccount new.
-	self attendance: { 'monday'->true . 'tuesday' -> true . 'wednesday' -> true . 'thursday' -> true . 'friday' -> true}
+	self attendance: (Dictionary newFrom: {'monday'->true . 'tuesday' -> true . 'wednesday' -> true . 'thursday' -> true . 'friday' -> true})
 ]
 
 { #category : #accessing }
@@ -277,7 +277,7 @@ ERAttendee >> keywords: anObject [
 
 { #category : #accessing }
 ERAttendee >> lastName [
-	^ lastName
+	^ userAccount lastName
 ]
 
 { #category : #accessing }
@@ -297,7 +297,7 @@ ERAttendee >> membershipType: anObject [
 
 { #category : #initialization }
 ERAttendee >> monday: aBoolean [
-	self attendance at: 'monday' put: aBoolean 
+	self attendance at: #monday put: aBoolean 
 ]
 
 { #category : #accessing }
@@ -372,7 +372,7 @@ ERAttendee >> orgProvince: anObject [
 
 { #category : #accessing }
 ERAttendee >> password [
-	^ password
+	^ userAccount password
 ]
 
 { #category : #accessing }
@@ -422,7 +422,7 @@ ERAttendee >> province: anObject [
 
 { #category : #initialization }
 ERAttendee >> thursday: aBoolean [
-	self attendance at: 'thursday' put: aBoolean 
+	self attendance at: #thursday put: aBoolean 
 ]
 
 { #category : #accessing }
@@ -437,7 +437,7 @@ ERAttendee >> tshirtSize: anObject [
 
 { #category : #initialization }
 ERAttendee >> tuesday: aBoolean [
-	self attendance at: 'tuesday' put: aBoolean 
+	self attendance at: #tuesday put: aBoolean 
 ]
 
 { #category : #accessing }
@@ -462,5 +462,5 @@ ERAttendee >> userAccount: aUserAccount [
 
 { #category : #initialization }
 ERAttendee >> wednesday: aBoolean [
-	self attendance at: 'wednesday' put: aBoolean 
+	self attendance at: #wednesday put: aBoolean 
 ]

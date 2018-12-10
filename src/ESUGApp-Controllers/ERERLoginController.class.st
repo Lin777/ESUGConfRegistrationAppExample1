@@ -21,6 +21,7 @@ ERERLoginController >> user [
 { #category : #rendering }
 ERERLoginController >> validateLogin [
 	| aUser |
+	Transcript show: 'login pasa'.
 	aUser := self session database
 		validateUserLogin: self user.
 	^ aUser

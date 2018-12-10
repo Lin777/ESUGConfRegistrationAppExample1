@@ -27,6 +27,17 @@ ERTextFieldLabel class >> label: aString callback: aBlock id: anId [
 	^ instance
 ]
 
+{ #category : #'instance creation' }
+ERTextFieldLabel class >> label: aString callback: aBlock id: anId percent: aNumber [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance callback: aBlock.
+	instance id: anId.
+	instance percent: aNumber .
+	^ instance
+]
+
 { #category : #accessing }
 ERTextFieldLabel >> callback [
 	^ callback
@@ -52,13 +63,14 @@ ERTextFieldLabel >> initialize [
 ERTextFieldLabel >> renderContentOn: html [
 	html mdlTextFieldContainer
 		floatingLabel;
+		style: self percent;
 		with: [ html mdlTextFieldLabel
 				for: self id;
 				with: self label.
 			html mdlTextFieldInput
 				id: self id;
 				type: self textType;
-				callback: self callback. ]
+				callback: self callback.]
 ]
 
 { #category : #accessing }

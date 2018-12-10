@@ -62,6 +62,7 @@ ERRadioFieldLabel >> listValues: anObject [
 ERRadioFieldLabel >> renderContentOn: html [
 	html div
 		style: 'display: inline-block; width: 150px;';
+		style: self percent;
 		with: [ html radioGroup
 				callback: [ :value | value crLog ];
 				selected: true;

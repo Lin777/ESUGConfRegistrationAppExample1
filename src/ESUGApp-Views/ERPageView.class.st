@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'pageController',
 		'title',
-		'icon'
+		'icon',
+		'id'
 	],
 	#category : #'ESUGApp-Views'
 }
@@ -34,6 +35,16 @@ ERPageView >> icon: anObject [
 ]
 
 { #category : #accessing }
+ERPageView >> id [
+	^ id
+]
+
+{ #category : #accessing }
+ERPageView >> id: anObject [
+	id := anObject
+]
+
+{ #category : #accessing }
 ERPageView >> pageController [
 	^ pageController
 ]
@@ -50,8 +61,11 @@ ERPageView >> renderContentOn: html [
 			(ERContainerView
 				title: self title
 				icon: self icon
-				content: [ self renderPageOn: html ]).
+				content: [self renderPageOn: html]
+				id: self id).
 	html render: ERFooterView new
+
+	
 ]
 
 { #category : #rendering }

@@ -1,6 +1,6 @@
 Class {
 	#name : #ERContainerView,
-	#superclass : #WAComponent,
+	#superclass : #ERComponent,
 	#instVars : [
 		'content',
 		'title',
@@ -16,6 +16,17 @@ ERContainerView class >> title: aString icon: anIcon content: aBlock [
 	instance title: aString.
 	instance iconPage: anIcon .
 	instance content: aBlock .
+	^ instance
+]
+
+{ #category : #'as yet unclassified' }
+ERContainerView class >> title: aString icon: anIcon content: aBlock id: anId [
+	| instance |
+	instance := self new.
+	instance title: aString.
+	instance iconPage: anIcon .
+	instance content: aBlock .
+	instance id: anId .
 	^ instance
 ]
 
@@ -42,8 +53,8 @@ ERContainerView >> iconPage: anObject [
 { #category : #rendering }
 ERContainerView >> renderContentOn: html [ 
 	html html: '
-	<div  class="mdl-layout mdl-js-layout">
-        <div id="login-conatiner" class="mdl-card mdl-shadow--16dp">
+<br><br><br>        
+<div id="', self id,'" class="mdl-card mdl-shadow--16dp">
   <div class="mdl-card__supporting-text">
         <div id="login-fab" class="mdl-color--red mdl-color-text--white">
 					<i id="lock-icon" class="material-icons">', self iconPage,'</i>

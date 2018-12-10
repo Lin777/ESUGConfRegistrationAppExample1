@@ -29,6 +29,18 @@ ERSelectFieldLabel class >> label: aString callback: aBlock list: aList id: anId
 	^ instance
 ]
 
+{ #category : #'as yet unclassified' }
+ERSelectFieldLabel class >> label: aString callback: aBlock list: aList id: anId percent: aNumber [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance callback: aBlock.
+	instance list: aList.
+	instance id: anId .
+	instance percent: aNumber .
+	^ instance
+]
+
 { #category : #accessing }
 ERSelectFieldLabel >> callback [
 	^ callback
@@ -53,6 +65,7 @@ ERSelectFieldLabel >> list: anObject [
 ERSelectFieldLabel >> renderContentOn: html [
 	html mdlTextFieldContainer
 		floatingLabel;
+		style: self percent;
 		with: [ html mdlTextFieldLabel
 				with: self label.
 			html select
