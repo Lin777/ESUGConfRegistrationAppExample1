@@ -45,6 +45,11 @@ ERAttendeeRegistrationTabForm >> createCheckboxField: aName for: aSymbol [
 ]
 
 { #category : #building }
+ERAttendeeRegistrationTabForm >> createPasswordField: aName [
+		^ (self createTextField: aName) forPassword.
+]
+
+{ #category : #building }
 ERAttendeeRegistrationTabForm >> createPasswordField: aName for: aSymbol [
 	^ (ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: (ERUserAccount hashPassword: value asString)] id: (self idFromSymbol: aSymbol) ) forPassword
 ]
