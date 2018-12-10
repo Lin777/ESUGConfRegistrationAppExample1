@@ -19,6 +19,14 @@ ERUserAccount class >> admin [
 	^ instance
 ]
 
+{ #category : #actions }
+ERUserAccount class >> findUserByEmail: aString [ 
+	|anAttendee|
+ 	anAttendee := (ERAttendee find: [ :each | each userAccount email = aString]).
+	anAttendee ifNotNil: [ ^ anAttendee userAccount ].
+	^ nil
+]
+
 { #category : #accessing }
 ERUserAccount class >> groupManager [
 	| instance |

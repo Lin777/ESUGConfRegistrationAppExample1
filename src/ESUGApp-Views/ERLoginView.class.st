@@ -32,13 +32,13 @@ ERLoginView >> initialize [
 	icon := 'person'.
 	messageComponent := (ERComponentAlert warningAlert id: 'loginAlert').
 	id := 'login'.
-	pageController := ERERLoginController new
+	pageController := ERLoginController new
 ]
 
 { #category : #rendering }
 ERLoginView >> loginUser [
 	| userValidate  |
-	userValidate := pageController validateLogin.
+	userValidate := self controller validateLogin.
 	userValidate notNil
 		ifTrue: [ self answer: userValidate ]
 		ifFalse:
@@ -54,7 +54,7 @@ ERLoginView >> registerUser [
 { #category : #rendering }
 ERLoginView >> renderFieldsLogin: html [
 	html render: (ERTextFieldLabel label: 'Email' callback: [ :value | self controller user email: value asString ]).
-	html render: ((ERTextFieldLabel label: 'Password' callback: [ :value | self controller user email: value asString ] )textType: 'password').
+	html render: ((ERTextFieldLabel label: 'Password' callback: [ :value | self controller user password: (ERUserAccount hashPassword: value) asString ] )textType: 'password').
 ]
 
 { #category : #rendering }
@@ -63,7 +63,7 @@ ERLoginView >> renderLoginButton: html [
 		render:
 			((ERButtonLabel
 				label: 'Login'
-				callback: [ self controller validateLogin ]
+				callback: [ self loginUser  ]
 				id: 'login-button' type: 'submit') class: ' mdl-color-text--white')
 ]
 
