@@ -84,7 +84,7 @@ ERTestModels >> initializeModelsResource [
 	
 	conference := (ERConference testConference: 'ESUG_2019' prices: (OrderedCollection new add: (self addPrice1); add: (self addPrice2); yourself)) .
 	
-	daysAssist := ERDaysAssist testDaysAssistAllDays .
+	daysAssist := ERAssistance testDaysAssistAllDays .
 	
 	invoiceWithCoupon := ERInvoice testInvoiceWithCoupon: couponGold .
 	invoiceWtihoutCoupon := ERInvoice testInvoiceWithoutCoupon .
@@ -102,7 +102,7 @@ ERTestModels >> setUp [
 	ERCoupon warmUp .
 	ERPrice warmUp .
 	ERConference warmUp .
-	ERDaysAssist warmUp.
+	ERAssistance warmUp.
 	ERInvoice warmUp .
 	ERAccount warmUp .
 	
@@ -123,8 +123,8 @@ ERTestModels >> tearDown [
 	ERCoupon do: [ :each | [each delete] on: Error do: [] ].
 	ERCoupon coolDown .
 	
-	ERDaysAssist  do: [ :each | [each delete] on: Error do: [] ].
-	ERDaysAssist coolDown .
+	ERAssistance  do: [ :each | [each delete] on: Error do: [] ].
+	ERAssistance coolDown .
 	
 	ERInvoice   do: [ :each | [each delete] on: Error do: [] ].
 	ERInvoice coolDown .

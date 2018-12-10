@@ -31,6 +31,15 @@ ERRegisterUser >> account: anObject [
 	account := anObject
 ]
 
+{ #category : #initialization }
+ERRegisterUser >> additionalContactInfoTextArea [
+	^ ERTextAreaComponent new
+		label: 'Additional text';
+		id: 'addInfoAddText';
+		name: 'addInfoAddText';
+		callback: [ :value | self account additionalText: (value asString) ]
+]
+
 { #category : #accessing }
 ERRegisterUser >> additionalInformation [
 	^ additionalInformation
@@ -71,6 +80,26 @@ ERRegisterUser >> conferenceOptions: anObject [
 	conferenceOptions := anObject
 ]
 
+{ #category : #initialization }
+ERRegisterUser >> contactAddressTextInput [
+	^ ERTextInputComponent
+		id: 'contactAddress'
+		name: 'contactAddress'
+		type: 'text'
+		label: 'Address'
+		callback: [ :value | self account address: (value asString) ]
+]
+
+{ #category : #initialization }
+ERRegisterUser >> contactCityTextInput [
+	^ ERTextInputComponent
+		id: 'contactCity'
+		name: 'contactCity'
+		type: 'text'
+		label: 'City'
+		callback: [ :value | self account city: (value asString)]
+]
+
 { #category : #accessing }
 ERRegisterUser >> currency [
 	^ currency
@@ -79,6 +108,37 @@ ERRegisterUser >> currency [
 { #category : #accessing }
 ERRegisterUser >> currency: anObject [
 	currency := anObject
+]
+
+{ #category : #initialization }
+ERRegisterUser >> dayCheckBoxList [
+	^ OrderedCollection new
+		add:
+			(ERCheckBox new
+				id: 'monday';
+				label: 'Monday (dd/mm/aa)';
+				callback: [ :value | self daysAssist monday: value ]);
+		add:
+			(ERCheckBox new
+				id: 'tuesday';
+				label: 'Tuesday (dd/mm/aa)';
+				callback: [ :value | self daysAssist tuesday: value ]);
+		add:
+			(ERCheckBox new
+				id: 'wednesday';
+				label: 'Wednesday (dd/mm/aa)';
+				callback: [ :value | self daysAssist wednesday: value ]);
+		add:
+			(ERCheckBox new
+				id: 'thursday';
+				label: 'Thursday (dd/mm/aa)';
+				callback: [ :value | self daysAssist thursday: value ]);
+		add:
+			(ERCheckBox new
+				id: 'friday';
+				label: 'Friday (dd/mm/aa)';
+				callback: [ :value | self daysAssist friday: value ]);
+		yourself
 ]
 
 { #category : #accessing }
@@ -220,6 +280,15 @@ ERRegisterUser >> getCountry [
 ]
 
 { #category : #initialization }
+ERRegisterUser >> getCountry: anId callback: aBlock [
+	^ ERTextSelectComponent
+		id: anId
+		label: 'Country'
+		listOption: self getCountries
+		callback: aBlock 
+]
+
+{ #category : #initialization }
 ERRegisterUser >> getCurrencyType [
 	^ (ERTextSelectComponent
 		id: 'currencyType'
@@ -320,6 +389,15 @@ ERRegisterUser >> getOrganizationCity [
 		type: 'text'
 		label: 'City'
 		callback: [ :value | self afiliationInfo city: (value asString ) ]
+]
+
+{ #category : #initialization }
+ERRegisterUser >> getOrganizationMembership [
+	^  (ERTextSelectComponent
+						id: 'organizationMembership'
+						label: 'Membership Type:'
+						listOption: #('Industrial' 'Other' 'Professor / Reseacher' 'Student')
+						callback: [ :selectedObject | self afiliationInfo membershipType: selectedObject ])
 ]
 
 { #category : #initialization }
@@ -439,6 +517,29 @@ ERRegisterUser >> initialize [
 	self initializeConferenceOptions.
 	self initializeAffiliationInformation.
 	self initializeAdditionalInformation.
+]
+
+{ #category : #initialization }
+ERRegisterUser >> initializeAdditionalInformation [
+	additionalInformation := ERTemplateAdditionalInformationRegister new additionalText: self additionalContactInfoTextArea ; keywords: self getContactKeywords .
+]
+
+{ #category : #initialization }
+ERRegisterUser >> initializeAffiliationInformation [
+	affiliationInformation := ERTemplateAffiliationInformationRegister
+		new
+		membershipType: self getOrganizationMembership;
+		organizationAddress: self getOrganizationAddress;
+		organizationCity: self getOrganizationCity;
+		organizationCountry: (self getCountry: 'orgCountry' callback: [ nil ]);
+		organizationName: self getOrganizationName;
+		organizationPostal: self getOrganizationPostal;
+		organizationProvince: self getOrganizationProvince
+]
+
+{ #category : #initialization }
+ERRegisterUser >> initializeConferenceOptions [
+	conferenceOptions := ERTemplateConferenceOptionsRegister new listGender: self  getRadioButtonForGender ; listOfDays: self dayCheckBoxList ; listOfFoodPreference: self getListOfFoodPreference ; tShirtSize: self getTShirtSize .
 ]
 
 { #category : #initialization }

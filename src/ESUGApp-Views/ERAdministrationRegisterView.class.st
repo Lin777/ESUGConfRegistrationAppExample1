@@ -35,6 +35,10 @@ ERAdministrationRegisterView >> affiliationInformation: anObject [
 	affiliationInformation := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+ERAdministrationRegisterView >> buildRegistrationFrom [
+]
+
 { #category : #accessing }
 ERAdministrationRegisterView >> checkboxFood [
 	^ (ERForm new

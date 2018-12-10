@@ -7,9 +7,10 @@ Class {
 	#name : #ERUser,
 	#superclass : #SDActiveRecord,
 	#instVars : [
+		'firstName',
+		'lastName',
 		'email',
-		'password',
-		'role'
+		'password'
 	],
 	#category : #'ESUGApp-Models'
 }

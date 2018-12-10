@@ -76,8 +76,8 @@ ERTestWithParasol >> tearDownModels [
 	ERCoupon do: [ :each | [each delete] on: Error do: [] ].
 	ERCoupon coolDown .
 	
-	ERDaysAssist  do: [ :each | [each delete] on: Error do: [] ].
-	ERDaysAssist coolDown .
+	ERAssistance  do: [ :each | [each delete] on: Error do: [] ].
+	ERAssistance coolDown .
 	
 	ERInvoice   do: [ :each | [each delete] on: Error do: [] ].
 	ERInvoice coolDown .
@@ -551,7 +551,7 @@ ERTestWithParasol >> warmUpModels [
 	ERCoupon warmUp .
 	ERPrice warmUp .
 	ERConference warmUp .
-	ERDaysAssist warmUp.
+	ERAssistance warmUp.
 	ERInvoice warmUp .
 	ERAccount warmUp .
 	
