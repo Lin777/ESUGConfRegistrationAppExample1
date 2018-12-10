@@ -1,11 +1,11 @@
 Class {
-	#name : #JQValidateForm,
+	#name : #ERJQValidateForm,
 	#superclass : #WAFileLibrary,
-	#category : #'ESUGApp-Library'
+	#category : #'ESUGApp-Library-MDL'
 }
 
 { #category : #updating }
-JQValidateForm >> updateRoot: anHtmlRoot [
+ERJQValidateForm >> updateRoot: anHtmlRoot [
 	"super updateRoot: anHtmlRoot."
 	anHtmlRoot javascript
 		url: 'https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js'

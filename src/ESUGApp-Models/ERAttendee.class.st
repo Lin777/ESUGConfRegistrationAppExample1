@@ -168,6 +168,11 @@ ERAttendee >> city: anObject [
 	city := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+ERAttendee >> confirmPassword: aString [
+	"self password = ERUserAccount hashPassword: aString"
+]
+
 { #category : #accessing }
 ERAttendee >> country [
 	^ country
@@ -215,7 +220,7 @@ ERAttendee >> firstName [
 
 { #category : #accessing }
 ERAttendee >> firstName: anObject [
-	firstName := anObject
+	userAccount firstName: anObject
 ]
 
 { #category : #accessing }
@@ -256,6 +261,7 @@ ERAttendee >> homePage: anObject [
 { #category : #initialization }
 ERAttendee >> initialize [
 	super initialize.
+	userAccount := ERUserAccount new.
 	self attendance: { 'monday'->true . 'tuesday' -> true . 'wednesday' -> true . 'thursday' -> true . 'friday' -> true}
 ]
 
@@ -276,7 +282,7 @@ ERAttendee >> lastName [
 
 { #category : #accessing }
 ERAttendee >> lastName: anObject [
-	lastName := anObject
+	userAccount lastName: anObject
 ]
 
 { #category : #accessing }
@@ -371,7 +377,7 @@ ERAttendee >> password [
 
 { #category : #accessing }
 ERAttendee >> password: anObject [
-	password := anObject
+	userAccount password: anObject
 ]
 
 { #category : #accessing }

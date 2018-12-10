@@ -18,6 +18,16 @@ ERTextAreaFieldLabel class >> label: aString callback: aBlock [
 	^ instance
 ]
 
+{ #category : #'instance creation' }
+ERTextAreaFieldLabel class >> label: aString callback: aBlock id: anId [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance callback: aBlock.
+	instance id: anId .
+	^ instance
+]
+
 { #category : #accessing }
 ERTextAreaFieldLabel >> callback [
 	^ callback

@@ -18,6 +18,17 @@ ERSelectFieldLabel class >> label: aString callback: aBlock list: aList [
 	^ instance
 ]
 
+{ #category : #'as yet unclassified' }
+ERSelectFieldLabel class >> label: aString callback: aBlock list: aList id: anId [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance callback: aBlock.
+	instance list: aList.
+	instance id: anId .
+	^ instance
+]
+
 { #category : #accessing }
 ERSelectFieldLabel >> callback [
 	^ callback
@@ -43,9 +54,9 @@ ERSelectFieldLabel >> renderContentOn: html [
 	html mdlTextFieldContainer
 		floatingLabel;
 		with: [ html mdlTextFieldLabel
-				for: self id;
 				with: self label.
 			html select
+				class: 'mdl-textfield__input';
 				id: self id;
 				list: self list;
 				callback: self callback. ]

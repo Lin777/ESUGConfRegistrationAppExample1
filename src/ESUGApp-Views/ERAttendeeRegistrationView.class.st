@@ -19,7 +19,10 @@ ERAttendeeRegistrationView class >> initialize [
 	(WAAdmin register: self asApplicationAt: 'Reg')
 		addLibrary: JQDeploymentLibrary;
 		addLibrary: MDLLibrary;
-		addLibrary: ERLibraryForMDL;
+		addLibrary: CssForRegisterFormsMDL;
+		addLibrary: CssForLoginMDL;
+		addLibrary: ERJQValidateForm ;
+		addLibrary: ERLibrary ;
 		preferenceAt: #sessionClass put: ERSession
 ]
 
@@ -31,9 +34,11 @@ ERAttendeeRegistrationView >> addTab: aAttendeeTabForm [
 	self tabs add: aAttendeeTabForm
 ]
 
-{ #category : #initialize }
+{ #category : #initialization }
 ERAttendeeRegistrationView >> initialize [
-	super initialize.
+	super initialize .
+	title := 'Registration'.
+	icon := 'assignment'.
 	pageController := ERAttendeeRegistrationController new.
 	self initializeTabForms.
 ]
@@ -46,31 +51,56 @@ ERAttendeeRegistrationView >> initializeTabForms [
 	self addTab: (ERAffiliationInformationTabForm on: self controller attendee).
 	self addTab: (ERAdditionalInformationTabForm on: self controller attendee).
 	self addTab: (ERPaymentInformationTabForm on: self controller attendee).
-	(self tabs at: 6) activate
+	(self tabs at: 1) activate
+]
+
+{ #category : #rendering }
+ERAttendeeRegistrationView >> recoverAssistant [
+	"Do something to recover attendee"
+	self attendee: nil
 ]
 
 { #category : #rendering }
 ERAttendeeRegistrationView >> renderPageOn: html [
-	html mdlLayout
-		fixedHeader;
+	html form
+		method: 'post';
+		id: 'formRegister';
 		with: [ html
-				mdlLayoutHeader: [ html mdlLayoutHeaderRow: [ html mdlLayoutTitle: self title ].
-					html mdlLayoutTabBar
-						rippleEffect;
-						with: [ tabs
-								do: [ :tab | 
-									html mdlLayoutTab
-										isActiveIf: tab isActive;
-										url: tab id;
-										with: tab tabName ] ] ].
-			html mdlLayoutDrawer: [ html mdlLayoutTitle: self title ].
-			html
-				mdlLayoutContent: [ tabs
-						do: [ :tab | 
-							html mdlLayoutTabPanel
-								isActiveIf: tab isActive;
-								id: tab id;
-								with: [ html render: tab ] ] ] ]
+				html:
+					'<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                      <div class="mdl-grid mdl-grid--no-spacing">'.
+			self renderTabNames: html.
+			self renderTabs: html.
+			html html: '</div> </div>' ]
+]
+
+{ #category : #rendering }
+ERAttendeeRegistrationView >> renderTabNames: html [
+	html div
+		class: 'mdl-tabs__tab-bar';
+		with: [ self tabs
+				do: [ :tab | 
+					|activeClass|
+					activeClass := ''.
+					tab isActive ifTrue: [ activeClass := ' is-active' ].
+					html anchor
+						url: ('#' , tab formId);
+						class: 'mdl-tabs__tab', activeClass ;
+						with: [html paragraph: (tab tabName) ]] ].
+]
+
+{ #category : #rendering }
+ERAttendeeRegistrationView >> renderTabs: html [
+	self tabs
+		do: [ :tab | 
+			|activeClass |		
+			activeClass := ''.
+			tab isActive ifTrue: [ activeClass := ' is-active' ].
+			
+			html div
+				class: 'mdl-tabs__panel', activeClass ;
+				id: tab formId;
+				with: [ html render: tab ] ].
 ]
 
 { #category : #accessing }

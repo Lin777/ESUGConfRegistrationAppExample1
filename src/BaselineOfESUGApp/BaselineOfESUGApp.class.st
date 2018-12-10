@@ -12,8 +12,6 @@ BaselineOfESUGApp >> baseline: spec [
 		do: [ self setUpDependencies: spec.
 			spec
 				package: 'ESUGApp-Components' with: [ spec requires: #('Parasol') ];
-				package: 'ESUGApp-ComponentsFactory' with: [ spec requires: #('Parasol') ];
-				package: 'ESUGApp-Templates' with: [ spec requires: #('Parasol') ];
 				package: 'ESUGApp-Library' with: [ spec requires: #('Parasol') ];
 				package: 'ESUGApp-Session' with: [ spec requires: #('Parasol') ];
 				package: 'ESUGApp-Views' with: [ spec requires: #('Parasol' 'ESUGApp-Components') ];

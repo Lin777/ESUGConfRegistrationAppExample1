@@ -3,7 +3,8 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'pageController',
-		'title'
+		'title',
+		'icon'
 	],
 	#category : #'ESUGApp-Views'
 }
@@ -23,6 +24,16 @@ ERPageView >> controller [
 ]
 
 { #category : #accessing }
+ERPageView >> icon [
+	^ icon
+]
+
+{ #category : #accessing }
+ERPageView >> icon: anObject [
+	icon := anObject
+]
+
+{ #category : #accessing }
 ERPageView >> pageController [
 	^ pageController
 ]
@@ -34,9 +45,13 @@ ERPageView >> pageController: anObject [
 
 { #category : #rendering }
 ERPageView >> renderContentOn: html [
-	html render: (ERAdministrationNavView new).
-	self renderPageOn: html.
-	html render: (ERAdministrationFooterView  new).
+	html
+		render:
+			(ERContainerView
+				title: self title
+				icon: self icon
+				content: [ self renderPageOn: html ]).
+	html render: ERFooterView new
 ]
 
 { #category : #rendering }

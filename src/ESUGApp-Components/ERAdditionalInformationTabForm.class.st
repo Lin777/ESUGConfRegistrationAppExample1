@@ -17,10 +17,7 @@ ERAdditionalInformationTabForm >> renderFormOn: html [
 				tableBody: [ html
 						tableRow: [ html mdlTableCell: [ html render: (self createTextField: 'Keywords ' for: #keywords:) ] ];
 						tableRow: [ html mdlTableCell: [ html render: (self createTextAreaField: 'Additional text' for: #additionalText:) ] ].
-						].
-			html mdlButton
-				id: 'next-step';
-				with: 'Next' ]
+						] ]
 ]
 
 { #category : #accessing }
