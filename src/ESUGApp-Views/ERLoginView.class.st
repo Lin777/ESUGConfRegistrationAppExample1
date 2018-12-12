@@ -53,8 +53,20 @@ ERLoginView >> registerUser [
 
 { #category : #rendering }
 ERLoginView >> renderFieldsLogin: html [
-	html render: (ERTextFieldLabel label: 'Email' callback: [ :value | self controller user email: value asString ] id: 'email').
-	html render: ((ERTextFieldLabel label: 'Password' callback: [ :value | self controller user password: (ERUserAccount hashPassword: value) asString ] id: 'password' ) forPassword ).
+	html
+		render:
+			(ERTextFieldLabel
+				label: 'Email'
+				callback: [ :value | self controller user email: value asString ]
+				id: 'emailLogin').
+	html
+		render:
+			(ERTextFieldLabel
+				label: 'Password'
+				callback: [ :value | 
+					self controller user
+						password: (ERUserAccount hashPassword: value) asString ]
+				id: 'passwordLogin') forPassword
 ]
 
 { #category : #rendering }
@@ -64,7 +76,7 @@ ERLoginView >> renderLoginButton: html [
 			((ERButtonLabel
 				label: 'Login'
 				callback: [ self loginUser  ]
-				id: 'login-button' type: 'submit') class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent mdl-color-text--white')
+				id: 'login-button' type: 'submit') forLoginButton )
 ]
 
 { #category : #rendering }
@@ -91,19 +103,17 @@ ERLoginView >> renderRegisterAsGroupManagerButton: html [
 		render:((ERButtonLabel
 				label: 'Group Manager'
 				callback: [ self answer: #registerUserAsGroupManager ]
-				id: 'register-button-as-group-manager' type: 'submit') class: 'mdl-button mdl-js-button mdl-button--primary').
+				id: 'register-button-as-group-manager' type: 'submit') forRegisterAsGroupManagerButton ).
 	
 			
 ]
 
 { #category : #rendering }
 ERLoginView >> renderRegisterButton: html [
-	|registerButton|
-	registerButton := (ERButtonLabel
+	 html
+		render: ((ERButtonLabel
 				label: 'Register'
 				callback: [ self registerUser ]
-				id: 'register-button' type: 'submit') class: 'mdl-button mdl-js-button mdl-color-text--accent'.
-	html
-		render: registerButton 
-			
+				id: 'register-button' type: 'submit') forRegisterButton).
+	
 ]

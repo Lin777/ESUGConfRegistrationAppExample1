@@ -4,11 +4,6 @@ Class {
 	#category : #'ESUGApp-Components'
 }
 
-{ #category : #accessing }
-ERConferenceOptionsTabForm >> formId [
-	^ 'conferenceOptionsForm'
-]
-
 { #category : #rendering }
 ERConferenceOptionsTabForm >> renderFormOn: html [
 	html html: '<br> <label>Days:</label> <br>'.
@@ -24,6 +19,11 @@ ERConferenceOptionsTabForm >> renderFormOn: html [
 	html render: (self createRadioField: 'Food: ' for: #foodPreference: list: ERAttendee foodPreferences listValues: #(false false true) ).
 	html render: (self createCheckboxField: 'Check if you will you go to the social Event' for: #attendSocialEvent:).
 	html render: (self createCheckboxField: 'Check if you want to be added to the Mailling List' for: #addedToMainList:)
+]
+
+{ #category : #accessing }
+ERConferenceOptionsTabForm >> tabId [
+	^ 'conferenceOptionsForm'
 ]
 
 { #category : #accessing }

@@ -4,11 +4,6 @@ Class {
 	#category : #'ESUGApp-Components'
 }
 
-{ #category : #accessing }
-ERPaymentInformationTabForm >> formId [
-	^ 'paymentInfoForm'
-]
-
 { #category : #rendering }
 ERPaymentInformationTabForm >> renderFormOn: html [
 	html html: '<br><p>Pay by transfer or pay/card. Pay in euros</p>
@@ -18,6 +13,11 @@ ERPaymentInformationTabForm >> renderFormOn: html [
 	html render: (self createTextField: 'Reduction Ticket Code: ' for: #coupon:).
 	html render: (self createSelectField: 'Payment Currency' for: #paymentCurrency: list: ERAttendee currencyTypes).
 	
+]
+
+{ #category : #accessing }
+ERPaymentInformationTabForm >> tabId [
+	^ 'paymentInfoForm'
 ]
 
 { #category : #accessing }

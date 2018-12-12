@@ -4,11 +4,6 @@ Class {
 	#category : #'ESUGApp-Components'
 }
 
-{ #category : #accessing }
-ERContactInformationTabForm >> formId [
-	^ 'contactInfoForm'
-]
-
 { #category : #rendering }
 ERContactInformationTabForm >> renderFormOn: html [
 	html render: (self createTextField: 'Address1' for: #address: percent: 49).
@@ -20,6 +15,11 @@ ERContactInformationTabForm >> renderFormOn: html [
 	html render: (self createTextField: 'Facebook URL' for: #facebookURL: percent:49).
 	html render: (self createTextField: 'Twitter URL' for: #twitterURL: percent:49).
 	html render: (self createTextField: 'Home Page URL' for: #homePage:).
+]
+
+{ #category : #accessing }
+ERContactInformationTabForm >> tabId [
+	^ 'contactInfoForm'
 ]
 
 { #category : #accessing }

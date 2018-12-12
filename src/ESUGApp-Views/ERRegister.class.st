@@ -52,38 +52,9 @@ ERRegister >> renderPageOn: html [
 		id: 'formRegister';
 		with: [
 			html render: messageComponent.
-			self renderTabNames: html.
-			self renderTabs: html ].
+			html render: (ERTabs new tabs: self tabs)
+			 ].
 	html html: '</div> </div>'
-]
-
-{ #category : #rendering }
-ERRegister >> renderTabNames: html [
-	html div
-		class: 'mdl-tabs__tab-bar';
-		with: [ self tabs
-				do: [ :tab | 
-					|activeClass|
-					activeClass := ''.
-					tab isActive ifTrue: [ activeClass := ' is-active' ].
-					html anchor
-						url: ('#' , 'tab-',tab formId);
-						class: 'mdl-tabs__tab', activeClass ;
-						with: [html paragraph: (tab tabName) ]] ].
-]
-
-{ #category : #rendering }
-ERRegister >> renderTabs: html [
-	self tabs
-		do: [ :tab | 
-			|activeClass |		
-			activeClass := ''.
-			tab isActive ifTrue: [ activeClass := ' is-active' ].
-			
-			html div
-				class: 'mdl-tabs__panel', activeClass ;
-				id: 'tab-',tab formId;
-				with: [ html render: tab ] ].
 ]
 
 { #category : #accessing }

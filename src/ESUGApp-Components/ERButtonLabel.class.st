@@ -40,11 +40,6 @@ ERButtonLabel class >> label: aString callback: aBlock id: anId type: aType [
 	^ instance
 ]
 
-{ #category : #rendering }
-ERButtonLabel >> asLoginButton [
-	style := [ ]
-]
-
 { #category : #accessing }
 ERButtonLabel >> callback [
 	^ callback
@@ -63,6 +58,26 @@ ERButtonLabel >> class1 [
 { #category : #accessing }
 ERButtonLabel >> class: anObject [
 	class := anObject
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forLoginButton [
+	self class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent mdl-color-text--white'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forRegisterAsGroupManagerButton [
+	self class: 'mdl-button mdl-js-button mdl-button--primary'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forRegisterButton [
+	self class: 'mdl-button mdl-js-button mdl-color-text--accent'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forTableButton [
+	self class: 'mdl-button mdl-js-button mdl-button--colored'
 ]
 
 { #category : #rendering }

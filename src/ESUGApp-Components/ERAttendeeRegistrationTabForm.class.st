@@ -1,12 +1,9 @@
 Class {
 	#name : #ERAttendeeRegistrationTabForm,
-	#superclass : #WAComponent,
+	#superclass : #ERTab,
 	#instVars : [
 		'nextTabFrom',
-		'previousTabFrom',
-		'attendee',
-		'active',
-		'id'
+		'previousTabFrom'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -17,16 +14,6 @@ ERAttendeeRegistrationTabForm class >> on: anAttendee [
 	form := self new.
 	form attendee: anAttendee.
 	^ form
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> activate [
-	active := true.
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> attendee: anObject [
-	attendee := anObject
 ]
 
 { #category : #building }
@@ -90,16 +77,6 @@ ERAttendeeRegistrationTabForm >> createTextField: aName for: aSymbol percent: aN
 ]
 
 { #category : #accessing }
-ERAttendeeRegistrationTabForm >> deactivate [
-	active := false.
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> formId [
-	^ self subclassResponsibility.
-]
-
-{ #category : #accessing }
 ERAttendeeRegistrationTabForm >> id [
 	^ id
 ]
@@ -112,17 +89,6 @@ ERAttendeeRegistrationTabForm >> id: anObject [
 { #category : #building }
 ERAttendeeRegistrationTabForm >> idFromSymbol: aSymbol [
 	^ (aSymbol substrings: ':') first 
-]
-
-{ #category : #initalize }
-ERAttendeeRegistrationTabForm >> initialize [
-	super initialize.
-	active := false.
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> isActive [
-	^ active.
 ]
 
 { #category : #accessing }
@@ -153,9 +119,4 @@ ERAttendeeRegistrationTabForm >> renderContentOn: html [
 { #category : #rendering }
 ERAttendeeRegistrationTabForm >> renderFormOn: html [
 	self subclassResponsibility.
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> tabName [
-	^ self subclassResponsibility.
 ]

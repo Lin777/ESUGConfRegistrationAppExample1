@@ -34,11 +34,6 @@ ERDoneTabForm >> callback: anObject [
 	callback := anObject
 ]
 
-{ #category : #accessing }
-ERDoneTabForm >> formId [
-	^ 'doneInfoForm'
-]
-
 { #category : #'as yet unclassified' }
 ERDoneTabForm >> registerAttendee [
 	|user|
@@ -54,6 +49,11 @@ ERDoneTabForm >> renderFormOn: html [
                    <p>You have successfully completed all steps.</p><br>'.
 	html render: (self createButtonField: 'Save Information' with: self callback id: 'registerButton').
 	html html: '<br><br><br><br><br><br><br><br><br>'
+]
+
+{ #category : #accessing }
+ERDoneTabForm >> tabId [
+	^ 'doneInfoForm'
 ]
 
 { #category : #accessing }

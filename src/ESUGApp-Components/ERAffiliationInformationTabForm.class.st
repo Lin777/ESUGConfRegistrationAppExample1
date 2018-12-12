@@ -4,11 +4,6 @@ Class {
 	#category : #'ESUGApp-Components'
 }
 
-{ #category : #accessing }
-ERAffiliationInformationTabForm >> formId [
-	^ 'affiliationInfoForm'
-]
-
 { #category : #rendering }
 ERAffiliationInformationTabForm >> renderFormOn: html [
 	html render: (self createTextField: 'Organization Name:' for: #orgName:).
@@ -19,6 +14,11 @@ ERAffiliationInformationTabForm >> renderFormOn: html [
 	html render: (self createTextField: 'Province/State' for: #orgProvince: percent: 49).
 	html render: (self createTextField: 'Postal/Zipcode' for: #orgPostal: percent: 49).
 	html render: (self createSelectField: 'Membership Type' for: #membershipType: list: ERAttendee membershipTypes).
+]
+
+{ #category : #accessing }
+ERAffiliationInformationTabForm >> tabId [
+	^ 'affiliationInfoForm'
 ]
 
 { #category : #accessing }
