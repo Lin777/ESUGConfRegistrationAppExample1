@@ -58,7 +58,7 @@ ERPageView >> pageController: anObject [
 ERPageView >> renderContentOn: html [
 	html
 		render:
-			(ERContainerView
+			(ERCardView
 				title: self title
 				icon: self icon
 				content: [self renderPageOn: html]

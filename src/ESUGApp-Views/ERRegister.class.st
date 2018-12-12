@@ -2,7 +2,8 @@ Class {
 	#name : #ERRegister,
 	#superclass : #ERPageView,
 	#instVars : [
-		'tabs'
+		'tabs',
+		'messageComponent'
 	],
 	#category : #'ESUGApp-Views'
 }
@@ -19,6 +20,7 @@ ERRegister >> addTab: aAttendeeTabForm [
 ERRegister >> initialize [
 	super initialize .
 	icon := 'assignment'.
+	messageComponent := (ERComponentAlert warningAlert id: 'registerAlert').
 	pageController := ERAttendeeRegistrationController new.
 	id := 'register'.
 	self initializeTabForms.
@@ -33,10 +35,10 @@ ERRegister >> initializeTabForms [
 ERRegister >> register [
 	|user|
 	user := pageController save.
-	user ifNotNil: [ 
-		self answer: user
-		 ]
-	
+	user notNil
+		ifTrue: [ self answer: user ]
+		ifFalse:
+			[ messageComponent errorMessage: 'This email is aleready registered' ]
 ]
 
 { #category : #rendering }
@@ -48,7 +50,9 @@ ERRegister >> renderPageOn: html [
 	html form
 		method: 'post';
 		id: 'formRegister';
-		with: [ self renderTabNames: html.
+		with: [
+			html render: messageComponent.
+			self renderTabNames: html.
 			self renderTabs: html ].
 	html html: '</div> </div>'
 ]

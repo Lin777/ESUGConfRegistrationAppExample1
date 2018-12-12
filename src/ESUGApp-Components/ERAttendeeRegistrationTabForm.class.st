@@ -61,17 +61,17 @@ ERAttendeeRegistrationTabForm >> createRadioField: aName for: aSymbol list: aLis
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createSelectField: aName for: aSymbol list: aList [
-	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] list: aList id: (self idFromSymbol: aSymbol) 
+	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] list: aList id: (self idFromSymbol: aSymbol) 
 ]
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createSelectField: aName for: aSymbol list: aList percent: aNumber [
-	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] list: aList id: (self idFromSymbol: aSymbol) percent: aNumber  
+	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] list: aList id: (self idFromSymbol: aSymbol) percent: aNumber  
 ]
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createTextAreaField: aName for: aSymbol [
-	^  ERTextAreaFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .Transcript show: value] id: (self idFromSymbol: aSymbol )
+	^  ERTextAreaFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] id: (self idFromSymbol: aSymbol )
 ]
 
 { #category : #building }
@@ -81,12 +81,12 @@ ERAttendeeRegistrationTabForm >> createTextField: aName [
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createTextField: aName for: aSymbol [
-	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] id: (self idFromSymbol: aSymbol )
+	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . ] id: (self idFromSymbol: aSymbol )
 ]
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createTextField: aName for: aSymbol percent: aNumber [
-	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] id: (self idFromSymbol: aSymbol ) percent: aNumber 
+	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] id: (self idFromSymbol: aSymbol ) percent: aNumber 
 ]
 
 { #category : #accessing }
@@ -151,7 +151,7 @@ ERAttendeeRegistrationTabForm >> renderContentOn: html [
 ]
 
 { #category : #rendering }
-ERAttendeeRegistrationTabForm >> renderFromOn: html [
+ERAttendeeRegistrationTabForm >> renderFormOn: html [
 	self subclassResponsibility.
 ]
 

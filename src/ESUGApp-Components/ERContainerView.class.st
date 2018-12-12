@@ -1,77 +1,35 @@
 Class {
 	#name : #ERContainerView,
-	#superclass : #ERComponent,
+	#superclass : #WAComponent,
 	#instVars : [
-		'content',
-		'title',
-		'iconPage'
+		'attendee'
 	],
 	#category : #'ESUGApp-Components'
 }
 
-{ #category : #'as yet unclassified' }
-ERContainerView class >> title: aString icon: anIcon content: aBlock [
-	| instance |
+{ #category : #accessing }
+ERContainerView class >> attendee: anAttendee [
+	|instance|
 	instance := self new.
-	instance title: aString.
-	instance iconPage: anIcon .
-	instance content: aBlock .
-	^ instance
-]
-
-{ #category : #'as yet unclassified' }
-ERContainerView class >> title: aString icon: anIcon content: aBlock id: anId [
-	| instance |
-	instance := self new.
-	instance title: aString.
-	instance iconPage: anIcon .
-	instance content: aBlock .
-	instance id: anId .
-	^ instance
+	instance attendee: anAttendee .
+	^ instance 
 ]
 
 { #category : #accessing }
-ERContainerView >> content [
-	^ content
-]
-
-{ #category : #accessing }
-ERContainerView >> content: anObject [
-	content := anObject
-]
-
-{ #category : #accessing }
-ERContainerView >> iconPage [
-	^ iconPage
-]
-
-{ #category : #accessing }
-ERContainerView >> iconPage: anObject [
-	iconPage := anObject
+ERContainerView >> attendee: anObject [
+	attendee := anObject
 ]
 
 { #category : #rendering }
-ERContainerView >> renderContentOn: html [ 
-	html html: '
-<br><br><br>        
-<div id="', self id,'" class="mdl-card mdl-shadow--16dp">
-  <div class="mdl-card__supporting-text">
-        <div id="login-fab" class="mdl-color--red mdl-color-text--white">
-					<i id="lock-icon" class="material-icons">', self iconPage,'</i>
-				</div>
-				<div id="card-heading">', self title ,'</div>'.
-		self content value.
-	html html: '
-	</div>
-	</div>'
+ERContainerView >> renderContentOn: html [
+	html html: '<main class="mdl-layout__content mdl-color--grey-100">
+          <div class="mdl-card mdl-card__supporting-text mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">'.
+  self renderContentPage: html.
+  html html: '</div>
+      </main>'.
 ]
 
-{ #category : #accessing }
-ERContainerView >> title [
-	^ title
-]
-
-{ #category : #accessing }
-ERContainerView >> title: anObject [
-	title := anObject
+{ #category : #rendering }
+ERContainerView >> renderContentPage: html [
+	self subclassResponsibility 
 ]

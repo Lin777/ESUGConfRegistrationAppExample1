@@ -35,5 +35,5 @@ EREsugWebApp >> go [
 				ifFalse: [ user := loginAnswer ] ].
 	user
 		ifNotNil: [ self session login: user.
-			self call: ERHomeView new ]
+			self call: ERPageLoggedView new ]
 ]

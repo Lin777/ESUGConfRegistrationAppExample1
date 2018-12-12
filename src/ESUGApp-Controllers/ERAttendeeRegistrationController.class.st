@@ -8,8 +8,21 @@ Class {
 }
 
 { #category : #accessing }
+ERAttendeeRegistrationController class >> attendee: anAtteendee [
+	|controller|
+	controller := self new.
+	controller attendee: anAtteendee .
+	^ controller 
+]
+
+{ #category : #accessing }
 ERAttendeeRegistrationController >> attendee [
 	^ attendee
+]
+
+{ #category : #accessing }
+ERAttendeeRegistrationController >> attendee: anObject [
+	attendee := anObject 
 ]
 
 { #category : #actions }
@@ -27,8 +40,7 @@ ERAttendeeRegistrationController >> initialize [
 { #category : #action }
 ERAttendeeRegistrationController >> save [
 	| attendeeResult |
-	attendeeResult := self
-		findUserByEmail: attendee userAccount email.
+	attendeeResult := ERUserAccount findUserByEmail: attendee userAccount email.
 	attendeeResult
 		ifNil: [ | user |
 			user := self attendee userAccount save.

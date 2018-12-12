@@ -53,8 +53,8 @@ ERLoginView >> registerUser [
 
 { #category : #rendering }
 ERLoginView >> renderFieldsLogin: html [
-	html render: (ERTextFieldLabel label: 'Email' callback: [ :value | self controller user email: value asString ]).
-	html render: ((ERTextFieldLabel label: 'Password' callback: [ :value | self controller user password: (ERUserAccount hashPassword: value) asString ] )textType: 'password').
+	html render: (ERTextFieldLabel label: 'Email' callback: [ :value | self controller user email: value asString ] id: 'email').
+	html render: ((ERTextFieldLabel label: 'Password' callback: [ :value | self controller user password: (ERUserAccount hashPassword: value) asString ] id: 'password' ) forPassword ).
 ]
 
 { #category : #rendering }
@@ -64,7 +64,7 @@ ERLoginView >> renderLoginButton: html [
 			((ERButtonLabel
 				label: 'Login'
 				callback: [ self loginUser  ]
-				id: 'login-button' type: 'submit') class: ' mdl-color-text--white')
+				id: 'login-button' type: 'submit') class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent mdl-color-text--white')
 ]
 
 { #category : #rendering }
@@ -88,10 +88,10 @@ ERLoginView >> renderPageOn: html [
 { #category : #rendering }
 ERLoginView >> renderRegisterAsGroupManagerButton: html [
    html
-		render:(ERButtonLabel
+		render:((ERButtonLabel
 				label: 'Group Manager'
 				callback: [ self answer: #registerUserAsGroupManager ]
-				id: 'register-button' type: 'submit').
+				id: 'register-button-as-group-manager' type: 'submit') class: 'mdl-button mdl-js-button mdl-button--primary').
 	
 			
 ]
@@ -102,7 +102,7 @@ ERLoginView >> renderRegisterButton: html [
 	registerButton := (ERButtonLabel
 				label: 'Register'
 				callback: [ self registerUser ]
-				id: 'register-button' type: 'submit').
+				id: 'register-button' type: 'submit') class: 'mdl-button mdl-js-button mdl-color-text--accent'.
 	html
 		render: registerButton 
 			

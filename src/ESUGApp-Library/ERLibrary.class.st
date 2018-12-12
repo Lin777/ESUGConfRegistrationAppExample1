@@ -12,20 +12,166 @@ ERLibrary class >> applicationName [
 ]
 
 { #category : #updating }
+ERLibrary >> alertCss [
+	^ '
+//alert
+.alert {
+  min-width: 150px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  @extend .shadow-1;
+  &:hover{
+    @extend .shadow-2;
+  }
+  &-success{
+    background-color: lighten(#5cb85c, 15%);
+    border-color: lighten(#5cb85c, 10%);
+    color: darken(#5cb85c, 15%);
+  }
+  &-warning{
+    background-color: lighten(#E2A41F, 15%);
+    border-color: lighten(#E2A41F, 10%);
+    color: darken(#E2A41F, 15%);
+  }
+  &-danger{
+    background-color: lighten(#d43f3a, 15%);
+    border-color: lighten(#d43f3a, 10%);
+    color: darken(#d43f3a, 15%);
+  }
+  p{
+    padding: 0;
+    margin: 0;
+  }
+  i{
+    padding-right: 5px;
+    vertical-align: middle;
+    font-size: 24px;
+  }
+  .close-alert{
+    -webkit-appearance: none;
+    position: relative;
+    float: right;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    color: inherit;
+    background: 0 0;
+    font-size: 21px;
+    line-height: 1;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255,255,255,.7);
+    filter: alpha(opacity=40);
+    opacity: .4;
+    &:hover{
+      filter: alpha(opacity=70);
+      opacity: .7;
+    }
+  }
+}
+
+.shadow-1{
+  box-shadow: 0 1px 3px rgba(#000, .12), 0 1px 2px rgba(#000, .24) ;
+}
+.shadow-2{
+  box-shadow: 0 3px 6px rgba(#000, .16), 0 3px 6px rgba(#000, .23) ;
+}
+'
+]
+
+{ #category : #updating }
+ERLibrary >> closeAlertJs [
+	^ '
+	$(".close-alert").click(function(e){
+  		$(this).parent().remove();
+		e.preventDefault();
+	});'
+]
+
+{ #category : #updating }
+ERLibrary >> cssForHomePage [
+	^ 'html, body {
+  font-family: ''Roboto'', ''Helvetica'', sans-serif;
+}
+
+.demo-layout .mdl-layout__header .mdl-layout__drawer-button {
+  color: white;
+}
+
+.demo-drawer {
+  border: none;
+}
+
+.demo-drawer-header {
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 16px;
+  height: 151px;
+}
+
+.demo-navigation {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.demo-layout .demo-navigation .mdl-navigation__link {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  font-weight: 500;
+}
+.demo-layout .demo-navigation .mdl-navigation__link:hover {
+  background-color: #0b7bfc;
+  color: white;
+}
+.active-link{
+  background-color: #0b7bfc;
+  color: white;
+}
+.demo-navigation .mdl-navigation__link .material-icons {
+  font-size: 24px;
+  color: white;
+  margin-right: 32px;
+}
+'
+]
+
+{ #category : #updating }
+ERLibrary >> esugCss [
+	^ self cssForHomePage , self alertCss 
+]
+
+{ #category : #updating }
 ERLibrary >> esugJs [
-	^ self validatorOfRegister
+	^ self validatorOfRegister, self validatorForLogin , self closeAlertJs 
 ]
 
 { #category : #updating }
 ERLibrary >> selectorsToInclude [
-	^ Array with: 'esugJs'
+	^ Array with: 'esugJs' with: 'esugCss'
 ]
 
 { #category : #updating }
 ERLibrary >> validatorForLogin [
-	^ '$(function(){
-    $("#loginbutton").on("click", function(){
-        $("#formLogin").validate();
+	^ ' $().ready(function() {
+	    $("#login-button").on("click", function(){
+        $("#loginForm").validate();
         $("#email").rules("add", {
             required: true,
             email: true, 

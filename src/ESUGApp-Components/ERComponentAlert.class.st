@@ -51,7 +51,7 @@ ERComponentAlert >> id: anObject [
 ERComponentAlert >> initialize [
 
  super initialize.
- self wasShown: true.
+ self wasShown: true
 ]
 
 { #category : #accessing }

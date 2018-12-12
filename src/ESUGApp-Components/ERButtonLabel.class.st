@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'callback',
 		'class',
-		'type'
+		'type',
+		'style'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -39,6 +40,11 @@ ERButtonLabel class >> label: aString callback: aBlock id: anId type: aType [
 	^ instance
 ]
 
+{ #category : #rendering }
+ERButtonLabel >> asLoginButton [
+	style := [ ]
+]
+
 { #category : #accessing }
 ERButtonLabel >> callback [
 	^ callback
@@ -63,17 +69,13 @@ ERButtonLabel >> class: anObject [
 ERButtonLabel >> initialize [
 	super initialize .
 	class := ''.
-	type := 'button'
+	type := 'button'.
+	style := [  ].
 ]
 
 { #category : #rendering }
 ERButtonLabel >> renderContentOn: html [
-	"html render: button .
-	"	html mdlButton
-		raised;
-		accentColor;
-		rippleEffect;
-		colored;
+	html mdlButton
 		type: self type;
 		id: self id;
 		class: self class1;
