@@ -22,7 +22,7 @@ Class {
 { #category : #tests }
 ERTestModels class >> testAttendee [
 	^ ERAttendee new
-		userAccount: self class testUserAccount;
+		userAccount: self testUserAccount;
 		orgName: 'testOrgName';
 		orgAddrees1: 'testAddress1';
 		orgAddrees2: 'testAddress2';
