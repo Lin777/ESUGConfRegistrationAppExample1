@@ -48,9 +48,24 @@ ERPageLoggedView >> content: anObject [
 
 { #category : #rendering }
 ERPageLoggedView >> initialize [
-	super initialize .
+	super initialize.
 	content := ERContainerHomeView new.
-	navbar := (ERMenuFactory availableItemsOfMenu: self itemList) createMenuForGroupManager .
+	self initializeNabvar
+]
+
+{ #category : #rendering }
+ERPageLoggedView >> initializeNabvar [
+	| menu |
+	menu := ERMenuFactory availableItemsOfMenu: self itemList.
+	self session user isAttendee
+		ifTrue: [ navbar := menu createMenuForAttendee ].
+	self session user isGroupManager
+		ifTrue: [ navbar := menu createMenuForGroupManager ].
+	self session user isAdmin
+		ifTrue: [ navbar := menu createMenuForAdmin ].
+	self session user isStudent 
+		ifTrue: [ navbar := menu createMenuForAdmin  ].
+	
 ]
 
 { #category : #rendering }

@@ -71,6 +71,26 @@ ERUserAccount >> initialize [
 	
 ]
 
+{ #category : #testing }
+ERUserAccount >> isAdmin [
+	^ self role = 'admin'
+]
+
+{ #category : #testing }
+ERUserAccount >> isAttendee [
+	^ self role = 'attendee'
+]
+
+{ #category : #testing }
+ERUserAccount >> isGroupManager [
+	^ self role = 'groupManager'
+]
+
+{ #category : #testing }
+ERUserAccount >> isStudent [
+	^ self role = 'student'
+]
+
 { #category : #accessing }
 ERUserAccount >> lastName [
 	^ lastName

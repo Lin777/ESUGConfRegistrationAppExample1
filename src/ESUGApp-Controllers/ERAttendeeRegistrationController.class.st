@@ -25,12 +25,6 @@ ERAttendeeRegistrationController >> attendee: anObject [
 	attendee := anObject 
 ]
 
-{ #category : #actions }
-ERAttendeeRegistrationController >> findUserByEmail: aString [ 
-
- ^ ERAttendee find: [ :each | each userAccount email = aString]
-]
-
 { #category : #initialize }
 ERAttendeeRegistrationController >> initialize [
 	super initialize.

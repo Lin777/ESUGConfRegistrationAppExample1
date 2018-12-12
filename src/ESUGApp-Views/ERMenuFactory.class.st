@@ -26,6 +26,11 @@ ERMenuFactory >> createAdminItem [
 ]
 
 { #category : #'as yet unclassified' }
+ERMenuFactory >> createConfigurationItem [
+	^ ERItemNav label: 'Configuration' icon: 'home' callback: (availableItemsOfMenu at: 'configuration')
+]
+
+{ #category : #'as yet unclassified' }
 ERMenuFactory >> createGroupManagerItem [
 	^ ERItemNav label: 'Group Registration' icon: 'group' callback: (availableItemsOfMenu at: 'groupRegistration')
 ]
@@ -42,13 +47,28 @@ ERMenuFactory >> createLogoutItem [
 
 { #category : #'as yet unclassified' }
 ERMenuFactory >> createMenuForAdmin [
-	
+	^ ERNavView new
+		listOptions:
+			(OrderedCollection new
+				add: self createHomeItem;
+				add: self createConfigurationItem ;
+				add: self createAdminItem;
+				add: self createLogoutItem;
+				yourself);
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
 ERMenuFactory >> createMenuForAttendee [
-
-	
+	^ ERNavView new
+		listOptions:
+			(OrderedCollection new
+				add: self createHomeItem;
+				add: self createMyRegistrationItem;
+				add: self createAdminItem;
+				add: self createLogoutItem;
+				yourself);
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -61,6 +81,11 @@ ERMenuFactory >> createMenuForGroupManager [
 				add: self createAdminItem;
 				add: self createLogoutItem;
 				yourself); yourself
+]
+
+{ #category : #'as yet unclassified' }
+ERMenuFactory >> createMyRegistrationItem [
+	^ ERItemNav label: 'My Registration' icon: 'home' callback: (availableItemsOfMenu at: 'myRegistration')
 ]
 
 { #category : #initialization }
