@@ -12,8 +12,6 @@ BaselineOfESUGApp >> baseline: spec [
 		do: [ self setUpDependencies: spec.
 			spec
 				package: 'ESUGApp-Components' with: [ spec requires: #('Seaside3' 'MaterialDesignLite') ];
-				package: 'ESUGApp-ComponentsFactory' with: [ spec requires: #('Seaside3' 'MaterialDesignLite') ];
-				package: 'ESUGApp-Templates' with: [ spec requires: #('Seaside3' 'MaterialDesignLite') ];
 				package: 'ESUGApp-Library' with: [ spec requires: #('Seaside3' 'MaterialDesignLite') ];
 				package: 'ESUGApp-Session' with: [ spec requires: #('Seaside3') ];
 				package: 'ESUGApp-Views' with: [ spec requires: #('Seaside3' 'MaterialDesignLite' 'ESUGApp-Components') ];
