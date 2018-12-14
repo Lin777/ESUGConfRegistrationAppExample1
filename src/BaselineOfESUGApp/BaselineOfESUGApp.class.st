@@ -31,7 +31,6 @@ BaselineOfESUGApp >> setUpDependencies: spec [
 	spec
 		baseline: 'Seaside3'
 		with: [ spec
-				loads: #('Core' 'JQuery' 'Zinc');
 				repository: 'github://SeasideSt/Seaside:v3.2.5/repository' ].
 	spec
 		baseline: 'Parasol'
