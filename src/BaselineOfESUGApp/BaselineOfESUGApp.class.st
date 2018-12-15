@@ -23,7 +23,7 @@ BaselineOfESUGApp >> baseline: spec [
 					with: [ spec requires: #('Seaside' 'ESUGApp-DB' 'ESUGApp-Models') ];
 				package: 'ESUGApp-Test'
 					with:
-						[ spec requires: #('Parasol' 'SandstoneDb' 'ESUGApp-Views' 'ESUGApp-DB' 'ESUGApp-Models') ] ]
+						[ spec requires: #( 'SandstoneDb' 'ESUGApp-Views' 'ESUGApp-DB' 'ESUGApp-Models') ] ]
 ]
 
 { #category : #baselines }
@@ -34,11 +34,11 @@ BaselineOfESUGApp >> setUpDependencies: spec [
 				versionString:'3.2.5';
 				loads: #('Core' 'JQuery' 'Zinc');
 				repository: 'github://SeasideSt/Seaside:v3.2.5/repository' ].
-	spec
+	"spec
 		baseline: 'Parasol'
 		with: [ spec
 				loads: 'tests';
-				repository: 'github://SeasideSt/Parasol/repository' ].
+				repository: 'github://SeasideSt/Parasol/repository' ]."
 	spec
 		baseline: 'MaterialDesignLite'
 		with: [ spec
