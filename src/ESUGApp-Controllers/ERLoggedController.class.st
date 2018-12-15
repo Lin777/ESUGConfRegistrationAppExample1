@@ -15,6 +15,7 @@ ERLoggedController >> getAttendee [
 { #category : #accessing }
 ERLoggedController >> initialize [
 	super initialize .
+	"Initialize use"
 	user := ERUserAccount new
 ]
 
