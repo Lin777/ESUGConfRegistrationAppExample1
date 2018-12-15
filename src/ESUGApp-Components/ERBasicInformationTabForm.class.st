@@ -5,24 +5,17 @@ Class {
 }
 
 { #category : #accessing }
-ERBasicInformationTabForm >> formId [
-	^ 'basicInfoForm'
+ERBasicInformationTabForm >> renderFormOn: html [
+	html render: (self createTextField: 'First Name' for: #firstName:).
+	html render: (self createTextField: 'Last Name' for: #lastName:).
+	html render: (self createTextField: 'Email' for: #email:).
+	html render: (self createPasswordField: 'Password' for: #password:).
+	html render: (self createPasswordField: 'Confirm Password' for: #confirmPassword:)
 ]
 
 { #category : #accessing }
-ERBasicInformationTabForm >> renderFormOn: html [
-	html mdlTable
-		shadow: 2;
-		with: [ html
-				tableBody: [ html
-						tableRow: [ html mdlTableCell: [ html render: (self createTextField: 'First Name' for: #firstName:) ] ];
-						tableRow: [ html mdlTableCell: [ html render: (self createTextField: 'Last Name' for: #lastName:) ] ];
-						tableRow: [ html mdlTableCell: [ html render: (self createTextField: 'Email' for: #email:) ] ];
-						tableRow: [ html mdlTableCell: [ html render: (self createPasswordField: 'Password' for: #password:) ] ];
-						tableRow: [ html mdlTableCell: [ html render: (self createPasswordField: 'Confirm Password' for: #confirmPassword:) ] ] ].
-			"html mdlButton
-				id: 'next-step';
-				with: 'Next'" ]
+ERBasicInformationTabForm >> tabId [
+	^ 'basicInfoForm'
 ]
 
 { #category : #accessing }

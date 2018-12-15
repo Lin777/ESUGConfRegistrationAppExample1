@@ -11,14 +11,16 @@ BaselineOfESUGApp >> baseline: spec [
 		for: #common
 		do: [ self setUpDependencies: spec.
 			spec
-				package: 'ESUGApp-Components' with: [ spec requires: #('Parasol') ];
-				package: 'ESUGApp-Library' with: [ spec requires: #('Parasol') ];
-				package: 'ESUGApp-Session' with: [ spec requires: #('Parasol') ];
-				package: 'ESUGApp-Views' with: [ spec requires: #('Parasol' 'ESUGApp-Components') ];
+				package: 'ESUGApp-Components' with: [ spec requires: #('Seaside' 'MaterialDesignLite') ];
+				package: 'ESUGApp-ComponentsFactory' with: [ spec requires: #('Seaside' 'MaterialDesignLite') ];
+				package: 'ESUGApp-Templates' with: [ spec requires: #('Seaside' 'MaterialDesignLite') ];
+				package: 'ESUGApp-Library' with: [ spec requires: #('Seaside' 'MaterialDesignLite') ];
+				package: 'ESUGApp-Session' with: [ spec requires: #('Seaside') ];
+				package: 'ESUGApp-Views' with: [ spec requires: #('Seaside' 'MaterialDesignLite' 'ESUGApp-Components') ];
 				package: 'ESUGApp-Models' with: [ spec requires: #('SandstoneDb') ];
 				package: 'ESUGApp-DB' with: [ spec requires: #('SandstoneDb' 'ESUGApp-Models') ];
 				package: 'ESUGApp-Controllers'
-					with: [ spec requires: #('Parasol' 'ESUGApp-DB' 'ESUGApp-Models') ];
+					with: [ spec requires: #('Seaside' 'ESUGApp-DB' 'ESUGApp-Models') ];
 				package: 'ESUGApp-Test'
 					with:
 						[ spec requires: #('Parasol' 'SandstoneDb' 'ESUGApp-Views' 'ESUGApp-DB' 'ESUGApp-Models') ] ]
@@ -26,6 +28,12 @@ BaselineOfESUGApp >> baseline: spec [
 
 { #category : #baselines }
 BaselineOfESUGApp >> setUpDependencies: spec [
+	spec
+		baseline: 'Seaside3'
+		with: [ spec
+				versionString:'3.2.5';
+				loads: #('Core' 'JQuery' 'Zinc');
+				repository: 'github://SeasideSt/Seaside:v3.2.5/repository' ].
 	spec
 		baseline: 'Parasol'
 		with: [ spec
@@ -41,11 +49,5 @@ BaselineOfESUGApp >> setUpDependencies: spec [
 				className: 'ConfigurationOfSandstoneDb';
 				version: #stable;
 				repository: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main' ]
-	"			
-		Gofer new
-    url: 'http://smalltalkhub.com/mc/gnaritas/SandstoneDb/main';
-    package: 'ConfigurationOfSandstoneDb';
-    load.
-
-(Smalltalk at: #ConfigurationOfSandstoneDb) load."
+	
 ]

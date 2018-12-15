@@ -1,12 +1,9 @@
 Class {
 	#name : #ERAttendeeRegistrationTabForm,
-	#superclass : #WAComponent,
+	#superclass : #ERTab,
 	#instVars : [
 		'nextTabFrom',
-		'previousTabFrom',
-		'attendee',
-		'active',
-		'id'
+		'previousTabFrom'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -17,21 +14,6 @@ ERAttendeeRegistrationTabForm class >> on: anAttendee [
 	form := self new.
 	form attendee: anAttendee.
 	^ form
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> activate [
-	active := true.
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> attendee: anObject [
-	attendee := anObject
-]
-
-{ #category : #building }
-ERAttendeeRegistrationTabForm >> createButtonField: aName with: aBlock [
-	^  ERButtonLabel label: aName callback: aBlock 
 ]
 
 { #category : #building }
@@ -61,32 +43,17 @@ ERAttendeeRegistrationTabForm >> createRadioField: aName for: aSymbol list: aLis
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createSelectField: aName for: aSymbol list: aList [
-	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] list: aList id: (self idFromSymbol: aSymbol) 
+	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] list: aList id: (self idFromSymbol: aSymbol) 
+]
+
+{ #category : #building }
+ERAttendeeRegistrationTabForm >> createSelectField: aName for: aSymbol list: aList percent: aNumber [
+	^  ERSelectFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] list: aList id: (self idFromSymbol: aSymbol) percent: aNumber  
 ]
 
 { #category : #building }
 ERAttendeeRegistrationTabForm >> createTextAreaField: aName for: aSymbol [
-	^  ERTextAreaFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .Transcript show: value] id: (self idFromSymbol: aSymbol )
-]
-
-{ #category : #building }
-ERAttendeeRegistrationTabForm >> createTextField: aName [
-	^ ERTextFieldLabel label: aName callback: [ :value |  ] 
-]
-
-{ #category : #building }
-ERAttendeeRegistrationTabForm >> createTextField: aName for: aSymbol [
-	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString . Transcript show: value] id: (self idFromSymbol: aSymbol )
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> deactivate [
-	active := false.
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> formId [
-	^ self subclassResponsibility.
+	^  ERTextAreaFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] id: (self idFromSymbol: aSymbol )
 ]
 
 { #category : #accessing }
@@ -97,22 +64,6 @@ ERAttendeeRegistrationTabForm >> id [
 { #category : #accessing }
 ERAttendeeRegistrationTabForm >> id: anObject [
 	id := anObject
-]
-
-{ #category : #building }
-ERAttendeeRegistrationTabForm >> idFromSymbol: aSymbol [
-	^ (aSymbol substrings: ':') first 
-]
-
-{ #category : #initalize }
-ERAttendeeRegistrationTabForm >> initialize [
-	super initialize.
-	active := false.
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> isActive [
-	^ active.
 ]
 
 { #category : #accessing }
@@ -141,11 +92,6 @@ ERAttendeeRegistrationTabForm >> renderContentOn: html [
 ]
 
 { #category : #rendering }
-ERAttendeeRegistrationTabForm >> renderFromOn: html [
+ERAttendeeRegistrationTabForm >> renderFormOn: html [
 	self subclassResponsibility.
-]
-
-{ #category : #accessing }
-ERAttendeeRegistrationTabForm >> tabName [
-	^ self subclassResponsibility.
 ]

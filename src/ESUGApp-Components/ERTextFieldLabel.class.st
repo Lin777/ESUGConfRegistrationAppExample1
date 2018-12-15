@@ -3,7 +3,8 @@ Class {
 	#superclass : #ERComponentLabel,
 	#instVars : [
 		'textType',
-		'callback'
+		'callback',
+		'value'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -22,6 +23,28 @@ ERTextFieldLabel class >> label: aString callback: aBlock id: anId [
 	| instance |
 	instance := self new.
 	instance label: aString.
+	instance callback: aBlock.
+	instance id: anId.
+	^ instance
+]
+
+{ #category : #'instance creation' }
+ERTextFieldLabel class >> label: aString callback: aBlock id: anId percent: aNumber [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance callback: aBlock.
+	instance id: anId.
+	instance percent: aNumber .
+	^ instance
+]
+
+{ #category : #'instance creation' }
+ERTextFieldLabel class >> label: aString callback: aBlock id: anId value: aValue [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance value: aValue .
 	instance callback: aBlock.
 	instance id: anId.
 	^ instance
@@ -52,13 +75,15 @@ ERTextFieldLabel >> initialize [
 ERTextFieldLabel >> renderContentOn: html [
 	html mdlTextFieldContainer
 		floatingLabel;
+		style: self percent;
 		with: [ html mdlTextFieldLabel
 				for: self id;
 				with: self label.
 			html mdlTextFieldInput
 				id: self id;
 				type: self textType;
-				callback: self callback. ]
+				value: self value1 ;
+				callback: self callback.]
 ]
 
 { #category : #accessing }
@@ -69,4 +94,14 @@ ERTextFieldLabel >> textType [
 { #category : #accessing }
 ERTextFieldLabel >> textType: anObject [
 	textType := anObject
+]
+
+{ #category : #accessing }
+ERTextFieldLabel >> value1 [
+	^ value
+]
+
+{ #category : #accessing }
+ERTextFieldLabel >> value: anObject [
+	value := anObject
 ]

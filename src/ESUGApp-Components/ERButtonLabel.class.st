@@ -3,7 +3,9 @@ Class {
 	#superclass : #ERComponentLabel,
 	#instVars : [
 		'callback',
-		'class'
+		'class',
+		'type',
+		'style'
 	],
 	#category : #'ESUGApp-Components'
 }
@@ -27,6 +29,17 @@ ERButtonLabel class >> label: aString callback: aBlock id: anId [
 	^ instance
 ]
 
+{ #category : #'instance creation' }
+ERButtonLabel class >> label: aString callback: aBlock id: anId type: aType [
+	| instance |
+	instance := self new.
+	instance label: aString.
+	instance callback: aBlock.
+	instance id: anId.
+	instance type: aType .
+	^ instance
+]
+
 { #category : #accessing }
 ERButtonLabel >> callback [
 	^ callback
@@ -47,20 +60,70 @@ ERButtonLabel >> class: anObject [
 	class := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forAcceptButton [
+	self class: 'mdl-button mdl-js-button mdl-button--colored'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forContentButton [
+	self class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forContentButtonAccent [
+	self class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forContentButtonColored [
+	self class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forLoginButton [
+	self class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent mdl-color-text--white'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forRegisterAsGroupManagerButton [
+	self class: 'mdl-button mdl-js-button mdl-button--primary'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forRegisterButton [
+	self class: 'mdl-button mdl-js-button mdl-color-text--accent'
+]
+
+{ #category : #'as yet unclassified' }
+ERButtonLabel >> forTableButton [
+	self class: 'mdl-button mdl-js-button mdl-button--colored'
+]
+
 { #category : #rendering }
 ERButtonLabel >> initialize [
 	super initialize .
-	class := ''
+	class := ''.
+	type := 'submit'.
+	style := [  ].
 ]
 
 { #category : #rendering }
 ERButtonLabel >> renderContentOn: html [
 	html mdlButton
-		raised;
-		accentColor;
-		rippleEffect;
-		type: 'submit';
-		with: self label;
+		type: self type;
+		id: self id;
 		class: self class1;
-		callback: self callback.
+		callback: self callback;
+		with: self label.
+]
+
+{ #category : #accessing }
+ERButtonLabel >> type [
+	^ type
+]
+
+{ #category : #accessing }
+ERButtonLabel >> type: anObject [
+	type := anObject
 ]

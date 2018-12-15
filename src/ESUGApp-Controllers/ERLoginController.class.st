@@ -1,43 +1,40 @@
 Class {
 	#name : #ERLoginController,
-	#superclass : #WAObject,
+	#superclass : #Object,
 	#instVars : [
-		'email',
-		'password',
-		'store',
-		'user1',
-		'user2'
+		'user'
 	],
 	#category : #'ESUGApp-Controllers'
 }
 
-{ #category : #accessing }
-ERLoginController >> email [
-	^ email
+{ #category : #initialization }
+ERLoginController >> initialize [
+	super initialize.
+	user := ERAttendee new.
 ]
 
 { #category : #accessing }
-ERLoginController >> email: anObject [
-	email := anObject
+ERLoginController >> user [
+	^ user
 ]
 
 { #category : #accessing }
-ERLoginController >> password [
-	^ password
-]
-
-{ #category : #accessing }
-ERLoginController >> password: anObject [
-	password := anObject
+ERLoginController >> user: anObject [
+	user := anObject
 ]
 
 { #category : #rendering }
 ERLoginController >> validateLogin [
 	| aUser |
-	aUser := self session database
-		validateUserLogin:
-			(ERUser new
-				email: self email;
-				password: self password).
+	aUser := self validateUserLogin: self user.
 	^ aUser
+]
+
+{ #category : #rendering }
+ERLoginController >> validateUserLogin: anObject [
+	| anUser |
+	anUser := ERUserAccount findUserByEmail: anObject email.
+	(anUser notNil and: [ anUser  password = anObject password ])
+		ifTrue: [ ^ anUser ]
+		ifFalse: [ ^ nil ]
 ]

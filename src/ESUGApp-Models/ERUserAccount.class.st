@@ -5,10 +5,35 @@ Class {
 		'firstName',
 		'lastName',
 		'email',
-		'password'
+		'password',
+		'role'
 	],
 	#category : #'ESUGApp-Models'
 }
+
+{ #category : #accessing }
+ERUserAccount class >> admin [
+	| instance |
+	instance := self new.
+	instance role: 'admin'.
+	^ instance
+]
+
+{ #category : #actions }
+ERUserAccount class >> findUserByEmail: aString [ 
+	|anAttendee|
+ 	anAttendee := (ERAttendee find: [ :each | each userAccount email = aString]).
+	anAttendee ifNotNil: [ ^ anAttendee userAccount ].
+	^ nil
+]
+
+{ #category : #accessing }
+ERUserAccount class >> groupManager [
+	| instance |
+	instance := self new.
+	instance role: 'groupManager'.
+	^ instance
+]
 
 { #category : #'as yet unclassified' }
 ERUserAccount class >> hashPassword: aString [
@@ -39,6 +64,33 @@ ERUserAccount >> firstName: anObject [
 	firstName := anObject
 ]
 
+{ #category : #initialization }
+ERUserAccount >> initialize [
+	super initialize.
+	role := 'attendee'
+	
+]
+
+{ #category : #testing }
+ERUserAccount >> isAdmin [
+	^ self role = 'admin'
+]
+
+{ #category : #testing }
+ERUserAccount >> isAttendee [
+	^ self role = 'attendee'
+]
+
+{ #category : #testing }
+ERUserAccount >> isGroupManager [
+	^ self role = 'groupManager'
+]
+
+{ #category : #testing }
+ERUserAccount >> isStudent [
+	^ self role = 'student'
+]
+
 { #category : #accessing }
 ERUserAccount >> lastName [
 	^ lastName
@@ -57,4 +109,14 @@ ERUserAccount >> password [
 { #category : #accessing }
 ERUserAccount >> password: anObject [
 	password := anObject
+]
+
+{ #category : #accessing }
+ERUserAccount >> role [
+	^ role
+]
+
+{ #category : #accessing }
+ERUserAccount >> role: anObject [
+	role := anObject
 ]
