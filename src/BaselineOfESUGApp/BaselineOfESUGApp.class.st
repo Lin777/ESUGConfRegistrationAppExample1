@@ -14,7 +14,8 @@ BaselineOfESUGApp >> baseline: spec [
 				package: 'ESUGApp-Components' with: [ spec requires: #('Seaside3' 'MaterialDesignLite') ];
 				
 				package: 'ESUGApp-Controllers' with: [ spec requires: #('Seaside3'  ) ];
-				package: 'ESUGApp-Views' with: [ spec requires: #('Seaside3' 'MaterialDesignLite' 'ESUGApp-Controllers') ];
+				package: 'ESUGApp-Components' with: [ spec requires: #('Seaside3' 'MaterialDesignLite') ];
+				package: 'ESUGApp-Views' with: [ spec requires: #('Seaside3' 'MaterialDesignLite' 'ESUGApp-Controllers' 'ESUGApp-Components') ];
 				package: 'ESUGApp-Library-MDL' with: [ spec requires: #('Seaside3' 'MaterialDesignLite') ];
 				package: 'ESUGApp-Session' with: [ spec requires: #('Seaside3') ];
 				package: 'ESUGApp-Models' with: [ spec requires: #('SandstoneDb') ];
