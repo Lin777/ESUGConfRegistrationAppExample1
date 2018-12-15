@@ -17,6 +17,11 @@ ERAttendeeRegistrationTabForm class >> on: anAttendee [
 ]
 
 { #category : #building }
+ERAttendeeRegistrationTabForm >> createButtonField: aName with: aBlock id: anId [
+	^  ERButtonLabel label: aName callback: aBlock id: anId type: 'submit'
+]
+
+{ #category : #building }
 ERAttendeeRegistrationTabForm >> createCheckboxField: aName [
 	^  ERCheckboxFieldLabel label: aName callback: [ :value |]
 ]
@@ -56,6 +61,21 @@ ERAttendeeRegistrationTabForm >> createTextAreaField: aName for: aSymbol [
 	^  ERTextAreaFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] id: (self idFromSymbol: aSymbol )
 ]
 
+{ #category : #building }
+ERAttendeeRegistrationTabForm >> createTextField: aName for: aSymbol percent: aNumber [
+	^  ERTextFieldLabel label: aName callback: [ :value | attendee perform: aSymbol with: value asString .] id: (self idFromSymbol: aSymbol ) percent: aNumber 
+]
+
+{ #category : #accessing }
+ERAttendeeRegistrationTabForm >> deactivate [
+	active := false.
+]
+
+{ #category : #accessing }
+ERAttendeeRegistrationTabForm >> formId [
+	^ self subclassResponsibility.
+]
+
 { #category : #accessing }
 ERAttendeeRegistrationTabForm >> id [
 	^ id
@@ -64,6 +84,17 @@ ERAttendeeRegistrationTabForm >> id [
 { #category : #accessing }
 ERAttendeeRegistrationTabForm >> id: anObject [
 	id := anObject
+]
+
+{ #category : #initalize }
+ERAttendeeRegistrationTabForm >> initialize [
+	super initialize.
+	active := false.
+]
+
+{ #category : #accessing }
+ERAttendeeRegistrationTabForm >> isActive [
+	^ active.
 ]
 
 { #category : #accessing }
@@ -94,4 +125,14 @@ ERAttendeeRegistrationTabForm >> renderContentOn: html [
 { #category : #rendering }
 ERAttendeeRegistrationTabForm >> renderFormOn: html [
 	self subclassResponsibility.
+]
+
+{ #category : #rendering }
+ERAttendeeRegistrationTabForm >> renderFromOn: html [
+	self subclassResponsibility.
+]
+
+{ #category : #accessing }
+ERAttendeeRegistrationTabForm >> tabName [
+	^ self subclassResponsibility.
 ]

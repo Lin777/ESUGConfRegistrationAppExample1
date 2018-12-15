@@ -22,6 +22,26 @@ ERPageLoggedView class >> asGroupManager [
 	^ self new 
 ]
 
+{ #category : #initialization }
+ERPageLoggedView class >> canBeRoot [
+	^ true
+]
+
+{ #category : #initialization }
+ERPageLoggedView class >> initialize [
+	"self initialize"
+
+	(WAAdmin register: self asApplicationAt: 'Home')
+		addLibrary: JQDeploymentLibrary;
+		addLibrary: MDLLibrary;
+		addLibrary: ERMaterialBlueRedMinCss ;
+		addLibrary: CssForLoginMDL;
+		addLibrary: CssForRegisterFormsMDL;
+		addLibrary: ERJQValidateForm ;
+		addLibrary: ERLibrary ;
+		preferenceAt: #sessionClass put: ERSession
+]
+
 { #category : #accessing }
 ERPageLoggedView >> content: anObject [
 	content := anObject

@@ -13,23 +13,20 @@ CssForLoginMDL >> esugLoginCss [
 }
 
 body {
-	background-image: url(''/files/CssForLoginMDL/profile_city.jpg'');
+	background-image: url(''/files/CssForRegisterFormsMDL/profile_city.jpg'');
 	background-size: cover;
 	background-position: top center;
-}
-
-#login-conatiner{
-	margin: auto;
 }
 
 .mdl-card, .mdl-card__supporting-text {
     overflow: inherit !important;
 }
 
-
-.mdl-card {
+#login {
     overflow: visible !important;
     z-index: auto !important;
+    margin: auto;
+
 }
 
 
@@ -79,18 +76,21 @@ body {
 }
 
 
-html {
-  min-height: 100%;
-  position: relative;
-}
-body {
-  margin: 0;
-}
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-	color: white;
+@media (max-width: 800px) and (min-width: 300px) {
+	#card-heading{
+		text-align: center;
+	    font-weight: 600;
+	    font-size: 25px;
+	    height: 40px;
+	    padding-top: 40px;
+	    color: #092e44
+	}
+	html, body {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
 }
 '
 ]
@@ -102,5 +102,5 @@ CssForLoginMDL >> profilecityJpg [
 
 { #category : #accessing }
 CssForLoginMDL >> selectorsToInclude [
-	^ Array new "with: 'esugLoginCss'"
+	^ Array with: 'esugLoginCss'
 ]
